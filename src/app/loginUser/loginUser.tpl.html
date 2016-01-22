@@ -1,30 +1,64 @@
-<div layout="column" layout-align="center center" class="solo-box">
-	<md-card class="basic-form">
-		<div>
-			<md-toolbar>
-			<div class="md-toolbar-tools" layout-align="center center">
-				<span class="md-flex">Iniciar Sesión</span>
-			</div>
-			</md-toolbar>
-		</div>
-		<div>
-			<form name="loginForm" ng-submit="model.loginUser(loginForm)" novalidate>
-				<md-input-container flex>
-				<label>Correo electrónico</label>
-				<input type="text" name="email" ng-model="model.user.email" ng-pattern="/^[A-Za-z0-9._%+]+@[A-Za-z0-9]+\.[A-Za-z]{1,5}$/" required>
-				
-				</md-input-container>
-				<p ng-show="loginForm.email.$invalid && !loginForm.email.$pristine" class="help-block">Ingresa un email valido.</p>
-				<md-input-container flex>
-				<label>Contraseña</label>
-				<input type="password" name="password" ng-model="model.user.password" required>
-				
-				</md-input-container>
-				<md-input-container flex>
-				<md-button class="md-raised primary-btn" >Ingresar</md-button>
-				</md-input-container>
-				
-			</form>
-		</div>
-	</md-card>
+<div class="account-container">
+    <div class="content clearfix">
+        <form name="loginForm" ng-submit="model.loginUser(loginForm)" novalidate>
+            <h1>Iniciar Sesión</h1>                        
+            <div class="row">
+                <div class="col-sm-12">
+                    <p>Por favor digita tus datos de usuario</p>
+                    <p ng-show="loginForm.email.$invalid && !loginForm.email.$pristine" class="help-block">Ingresa un email valido.</p>
+                    <div class="form-group input-group" for="username" >
+                        <label class="input-group-addon"><i class="fa icon-user fa-fw"></i></label>
+                        <input type="text" id="username" class="form-control" name="email" ng-model="model.user.email" ng-pattern="/^[A-Za-z0-9._%+]+@[A-Za-z0-9]+\.[A-Za-z]{1,5}$/" placeholder="Correo Electrónico" class="login username-field" required/>
+                    </div>
+                    <div class="form-group input-group" for="password">
+                        <label class="input-group-addon"><i class="fa icon-key fa-fw"></i></label>
+                        <input type="password" id="password" class="form-control" name="password" ng-model="model.user.password" placeholder="Contraseña" class="login password-field" required/>
+                    </div>
+                </div>
+            </div>
+            <div class="login-actions">
+                <span class="login-checkbox">
+<!--                    <input id="Field" name="Field" type="checkbox" class="field login-checkbox" ng-model="model.rememberMe" tabindex="4" />
+                    <label class="choice" for="Field">Recordar en este equipo.</label>-->
+                    <span class="login-extra">
+                        <a href="" ng-click="model.recoverPassword()">¿Olvidaste tu contraseña?</a>
+                    </span>
+                </span>
+                <button class="button btn btn-success btn-large">Ingresar</button>
+            </div>
+
+        </form>
+    </div>
 </div>
+
+<!--<div layout="column" layout-align="center center" class="solo-box">
+        <md-card class="basic-form">
+                <div>
+                        <md-toolbar>
+                        <div class="md-toolbar-tools" layout-align="center center">
+                                <span class="md-flex">Iniciar Sesión</span>
+                        </div>
+                        </md-toolbar>
+                </div>
+                <div>
+                        <form name="loginForm" ng-submit="model.loginUser(loginForm)" novalidate>
+                                <md-input-container flex>
+                                <label>Correo electrónico</label>
+                                <input type="text" name="email" ng-model="model.user.email" ng-pattern="/^[A-Za-z0-9._%+]+@[A-Za-z0-9]+\.[A-Za-z]{1,5}$/" required>
+                                
+                                </md-input-container>
+                                <p ng-show="loginForm.email.$invalid && !loginForm.email.$pristine" class="help-block">Ingresa un email valido.</p>
+                                <md-input-container flex>
+                                <label>Contraseña</label>
+                                <input type="password" name="password" ng-model="model.user.password" required>
+                                
+                                </md-input-container>
+                                <md-input-container flex>
+                                <md-button class="md-raised primary-btn" >Ingresar</md-button>
+                                </md-input-container>
+                                
+                        </form>
+                </div>
+        </md-card>
+</div>-->
+

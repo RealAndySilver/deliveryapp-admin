@@ -14,7 +14,6 @@ module.exports = function ( karma ) {
                 'vendor/angular-bootstrap/ui-bootstrap-tpls.min.js',
                 'vendor/angular-ui-router/release/angular-ui-router.js',
                 'vendor/hammerjs/hammer.min.js',
-                'vendor/angular-material/angular-material.min.js',
                 'vendor/angular-animate/angular-animate.min.js',
                 'vendor/angular-aria/angular-aria.min.js',
                 'vendor/jquery/dist/jquery.min.js',

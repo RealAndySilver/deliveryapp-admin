@@ -197,36 +197,71 @@ angular.module("home/home.tpl.html", []).run(["$templateCache", function($templa
 
 angular.module("loginUser/loginUser.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("loginUser/loginUser.tpl.html",
-    "<div layout=\"column\" layout-align=\"center center\" class=\"solo-box\">\n" +
-    "	<md-card class=\"basic-form\">\n" +
-    "		<div>\n" +
-    "			<md-toolbar>\n" +
-    "			<div class=\"md-toolbar-tools\" layout-align=\"center center\">\n" +
-    "				<span class=\"md-flex\">Iniciar Sesión</span>\n" +
-    "			</div>\n" +
-    "			</md-toolbar>\n" +
-    "		</div>\n" +
-    "		<div>\n" +
-    "			<form name=\"loginForm\" ng-submit=\"model.loginUser(loginForm)\" novalidate>\n" +
-    "				<md-input-container flex>\n" +
-    "				<label>Correo electrónico</label>\n" +
-    "				<input type=\"text\" name=\"email\" ng-model=\"model.user.email\" ng-pattern=\"/^[A-Za-z0-9._%+]+@[A-Za-z0-9]+\\.[A-Za-z]{1,5}$/\" required>\n" +
-    "				\n" +
-    "				</md-input-container>\n" +
-    "				<p ng-show=\"loginForm.email.$invalid && !loginForm.email.$pristine\" class=\"help-block\">Ingresa un email valido.</p>\n" +
-    "				<md-input-container flex>\n" +
-    "				<label>Contraseña</label>\n" +
-    "				<input type=\"password\" name=\"password\" ng-model=\"model.user.password\" required>\n" +
-    "				\n" +
-    "				</md-input-container>\n" +
-    "				<md-input-container flex>\n" +
-    "				<md-button class=\"md-raised primary-btn\" >Ingresar</md-button>\n" +
-    "				</md-input-container>\n" +
-    "				\n" +
-    "			</form>\n" +
-    "		</div>\n" +
-    "	</md-card>\n" +
-    "</div>");
+    "<div class=\"account-container\">\n" +
+    "    <div class=\"content clearfix\">\n" +
+    "        <form name=\"loginForm\" ng-submit=\"model.loginUser(loginForm)\" novalidate>\n" +
+    "            <h1>Iniciar Sesión</h1>                        \n" +
+    "            <div class=\"row\">\n" +
+    "                <div class=\"col-sm-12\">\n" +
+    "                    <p>Por favor digita tus datos de usuario</p>\n" +
+    "                    <p ng-show=\"loginForm.email.$invalid && !loginForm.email.$pristine\" class=\"help-block\">Ingresa un email valido.</p>\n" +
+    "                    <div class=\"form-group input-group\" for=\"username\" >\n" +
+    "                        <label class=\"input-group-addon\"><i class=\"fa icon-user fa-fw\"></i></label>\n" +
+    "                        <input type=\"text\" id=\"username\" class=\"form-control\" name=\"email\" ng-model=\"model.user.email\" ng-pattern=\"/^[A-Za-z0-9._%+]+@[A-Za-z0-9]+\\.[A-Za-z]{1,5}$/\" placeholder=\"Correo Electrónico\" class=\"login username-field\" required/>\n" +
+    "                    </div>\n" +
+    "                    <div class=\"form-group input-group\" for=\"password\">\n" +
+    "                        <label class=\"input-group-addon\"><i class=\"fa icon-key fa-fw\"></i></label>\n" +
+    "                        <input type=\"password\" id=\"password\" class=\"form-control\" name=\"password\" ng-model=\"model.user.password\" placeholder=\"Contraseña\" class=\"login password-field\" required/>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "            <div class=\"login-actions\">\n" +
+    "                <span class=\"login-checkbox\">\n" +
+    "<!--                    <input id=\"Field\" name=\"Field\" type=\"checkbox\" class=\"field login-checkbox\" ng-model=\"model.rememberMe\" tabindex=\"4\" />\n" +
+    "                    <label class=\"choice\" for=\"Field\">Recordar en este equipo.</label>-->\n" +
+    "                    <span class=\"login-extra\">\n" +
+    "                        <a href=\"\" ng-click=\"model.recoverPassword()\">¿Olvidaste tu contraseña?</a>\n" +
+    "                    </span>\n" +
+    "                </span>\n" +
+    "                <button class=\"button btn btn-success btn-large\">Ingresar</button>\n" +
+    "            </div>\n" +
+    "\n" +
+    "        </form>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<!--<div layout=\"column\" layout-align=\"center center\" class=\"solo-box\">\n" +
+    "        <md-card class=\"basic-form\">\n" +
+    "                <div>\n" +
+    "                        <md-toolbar>\n" +
+    "                        <div class=\"md-toolbar-tools\" layout-align=\"center center\">\n" +
+    "                                <span class=\"md-flex\">Iniciar Sesión</span>\n" +
+    "                        </div>\n" +
+    "                        </md-toolbar>\n" +
+    "                </div>\n" +
+    "                <div>\n" +
+    "                        <form name=\"loginForm\" ng-submit=\"model.loginUser(loginForm)\" novalidate>\n" +
+    "                                <md-input-container flex>\n" +
+    "                                <label>Correo electrónico</label>\n" +
+    "                                <input type=\"text\" name=\"email\" ng-model=\"model.user.email\" ng-pattern=\"/^[A-Za-z0-9._%+]+@[A-Za-z0-9]+\\.[A-Za-z]{1,5}$/\" required>\n" +
+    "                                \n" +
+    "                                </md-input-container>\n" +
+    "                                <p ng-show=\"loginForm.email.$invalid && !loginForm.email.$pristine\" class=\"help-block\">Ingresa un email valido.</p>\n" +
+    "                                <md-input-container flex>\n" +
+    "                                <label>Contraseña</label>\n" +
+    "                                <input type=\"password\" name=\"password\" ng-model=\"model.user.password\" required>\n" +
+    "                                \n" +
+    "                                </md-input-container>\n" +
+    "                                <md-input-container flex>\n" +
+    "                                <md-button class=\"md-raised primary-btn\" >Ingresar</md-button>\n" +
+    "                                </md-input-container>\n" +
+    "                                \n" +
+    "                        </form>\n" +
+    "                </div>\n" +
+    "        </md-card>\n" +
+    "</div>-->\n" +
+    "\n" +
+    "");
 }]);
 
 angular.module("loginUser/recoverDialog.tpl.html", []).run(["$templateCache", function($templateCache) {

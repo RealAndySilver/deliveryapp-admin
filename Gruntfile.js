@@ -75,7 +75,7 @@ module.exports = function(grunt) {
          * recommended that you use wildcards.
          */
         vendor_files: {
-            js: [
+            js: [//
                 'vendor/angular/angular.js',
                 'vendor/angular-resource/angular-resource.js',
                 'vendor/angular-bootstrap/ui-bootstrap-tpls.min.js',
@@ -83,18 +83,18 @@ module.exports = function(grunt) {
                 'vendor/angular-ui-router/release/angular-ui-router.js',
                 'vendor/angular-ui-utils/modules/route/route.js',
                 'vendor/hammerjs/hammer.min.js',
-                'vendor/angular-material/angular-material.min.js',
+                //'vendor/angular-material/angular-material.min.js',
                 'vendor/angular-animate/angular-animate.min.js',
                 'vendor/angular-aria/angular-aria.min.js',
                 'vendor/jquery/dist/jquery.min.js',
                 'vendor/angular-reverse-geocode/angular-reverse-geocode.js',
                 'vendor/md-date-time/dist/md-date-time.js',
                 'vendor/md-date-time/dist/md-date-time.css',
-                'vendor/angular-material/angular-material.min.css',
+                //'vendor/angular-material/angular-material.min.css',
             ],
             css: [
                 'vendor/md-date-time/dist/md-date-time.css',
-                'vendor/angular-material/angular-material.min.css',
+                //'vendor/angular-material/angular-material.min.css',
             ],
             assets: [
                 'vendor/angular-animate/angular-animate.min.js.map',
@@ -432,7 +432,7 @@ module.exports = function(grunt) {
         express: {
             devServer: {
                 options: {
-                    port: 9000,
+                    port: 9080,
                     hostname: 'localhost',
                     serverreload: false,
                     bases: 'build',
