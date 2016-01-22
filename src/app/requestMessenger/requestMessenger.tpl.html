@@ -1,0 +1,94 @@
+<div layout="column" layout-align="center center" class="solo-box">
+	<md-card class="big-form">
+		<div>
+			<md-toolbar>
+			    <div class="md-toolbar-tools" layout-align="center center">
+			    	<span class="md-flex">Solicitar Servicio</span>
+			    </div>
+			</md-toolbar>
+		</div>
+	    <div>
+			<form name="requestMessengerForm" novalidate>
+				<md-card>
+
+
+					<div id="addNewMessenger" >
+						<h6 class="titleField">Ingresa el email de un usuario para buscarlo y pedir el servicio en su nombre</h6>
+						<md-input-container flex>
+							<label class="titleField">Ingresa un email para buscar un usuario</label>
+			            	<input class="titleField" type="text" name="email" ng-model="model.emailSearchUser" ng-pattern="/^[A-Za-z0-9._%+]+@[A-Za-z0-9]+\.[A-Za-z]{1,5}$/" >
+			        	</md-input-container>
+
+						<md-button class="blueButton"  ng-click="model.searchUser()">Buscar</md-button>
+					</div>
+					
+
+					<md-input-container flex>
+						<label class="titleField">Nombre de Servicio</label>
+		            	<input name="item_name" ng-model="model.delivery.item_name" required>
+		        	</md-input-container>
+
+		        	<md-input-container flex>
+						<label  class="titleField">Dirección de Recogida</label>
+		            	<input class=" textField"name="pickup_address" ng-model="pickup_address" required >
+		        	</md-input-container>
+
+		        	<md-input-container flex>
+						<label  class="titleField">Dirección de Entrega</label>
+		            	<input class=" textField" name="delivery_address" ng-model="delivery_address" required>
+		        	</md-input-container>
+
+		        	<md-content  class="md-padding" style="height: 400px;padding: 14px;">
+						<delivery-map class="map-container" callback="setLatLong(lat1, lon1,lat2, lon2,valueBool)" delivery="model.delivery" pickup="model.pickup"></delivery-map>
+		        	</md-content>
+		        	<md-switch class="titleField" aria-label="Ida y Vuelta" ng-model="model.roundtrip">
+					    Ida y Vuelta 
+					</md-switch>
+					<md-button class="md-raised primary-btn"  id="buttonHistoryAddress" ng-click= "model.isShowing()">Historial de direcciones</md-button>
+
+					<md-card ng-show="model.showAddressBool">
+						<label class="titleField">Direcciones de Recogida</label>
+						<ul>
+							<li ng-repeat="pickup in model.pickUpAddressSave" ng-click="useAddress(pickup)"><a class=" textField" href>{{pickup.address}}</a></li>
+						</ul>
+						<label class="titleField" >Direcciones de Entrega</label>
+						<ul>
+							<li ng-repeat="delivery in model.deliveryAddressSave" ng-click="useAddress(delivery)"><a class=" textField" href>{{delivery.address}}</a></li>
+						</ul>
+					</md-card>
+				</md-card>
+				
+				<md-card class="top-fix">
+					<md-input-container flex>
+						<label>Dia y hora de Recogida</label>
+		        	</md-input-container>
+		        	<time-date-picker ng-model="model.delivery.pickup_time" required></time-date-picker>
+		        	<md-input-container flex>
+						<label>Dia y hora de Entrega</label>
+		        	</md-input-container>
+		        	<time-date-picker ng-model="model.delivery.deadline" required></time-date-picker>
+		        	<md-input-container flex>
+						<label >Valor declarado de la mercancia</label>
+		            	<input name="declared_value" ng-model="model.delivery.declared_value" placeholder="min. $1.000" required>
+		        	</md-input-container>
+		        	<md-input-container flex>
+						<label>Instrucciones para mensajero</label>
+		            	<textarea name="instructions" ng-model="model.delivery.instructions" required></textarea>
+		        	</md-input-container>
+				</md-card>
+				<md-toolbar ng-show="pickup_address && delivery_address" class="md-primary" layout-align="center center">
+				    <span layout-align="center center">
+				    	VALOR APROXIMADO DEL SERVICIO
+				    </span>
+				    <span layout-align="center center" id="value_delivery">
+				    	<span ng-show="currency">COP</span> {{deliveryPrice}}
+				    </span>
+				</md-toolbar>
+	        	<md-input-container flex>
+	        		<md-button class="md-raised primary-btn" ng-click="model.requestMessenger()">Solicitar</md-button>
+	        	</md-input-container>
+			</form>
+	    </div>
+	    <md-divider></md-divider>
+	</md-card>
+</div>

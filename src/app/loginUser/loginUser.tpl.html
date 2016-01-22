@@ -1,0 +1,30 @@
+<div layout="column" layout-align="center center" class="solo-box">
+	<md-card class="basic-form">
+		<div>
+			<md-toolbar>
+			<div class="md-toolbar-tools" layout-align="center center">
+				<span class="md-flex">Iniciar Sesión</span>
+			</div>
+			</md-toolbar>
+		</div>
+		<div>
+			<form name="loginForm" ng-submit="model.loginUser(loginForm)" novalidate>
+				<md-input-container flex>
+				<label>Correo electrónico</label>
+				<input type="text" name="email" ng-model="model.user.email" ng-pattern="/^[A-Za-z0-9._%+]+@[A-Za-z0-9]+\.[A-Za-z]{1,5}$/" required>
+				
+				</md-input-container>
+				<p ng-show="loginForm.email.$invalid && !loginForm.email.$pristine" class="help-block">Ingresa un email valido.</p>
+				<md-input-container flex>
+				<label>Contraseña</label>
+				<input type="password" name="password" ng-model="model.user.password" required>
+				
+				</md-input-container>
+				<md-input-container flex>
+				<md-button class="md-raised primary-btn" >Ingresar</md-button>
+				</md-input-container>
+				
+			</form>
+		</div>
+	</md-card>
+</div>

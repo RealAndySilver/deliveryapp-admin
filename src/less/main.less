@@ -1,0 +1,228 @@
+/**
+ * This is the main application stylesheet. It should include or import all
+ * stylesheets used throughout the application as this is the only stylesheet in
+ * the Grunt configuration that is automatically processed.
+ */
+
+
+/**
+ * First, we include the Twitter Bootstrap LESS files. Only the ones used in the
+ * project should be imported as the rest are just wasting space.
+ */
+
+@import '../../vendor/bootstrap/less/bootstrap.less';
+
+/**
+ * This is our main variables file. We must include it last so we can overwrite any variable
+ * definitions in our imported stylesheets.
+ */
+
+@import 'variables.less';
+@import 'dialog.less';
+
+
+/**
+ * Typography
+ */
+
+@font-face {
+	font-family: @sansFontFamily;
+    font-style: normal;
+    font-weight: 400;
+    src: local('Roboto Regular'), local('Roboto-Regular'), url(fonts/Roboto-Regular.woff) format('woff');
+}
+
+@font-face { 
+	font-family: 'IntriqueScriptPersonalUse'; 
+	src: url('../assets/fonts/IntriqueScriptPersonalUse/IntriqueScriptPersonalUse.eot?#iefix') format('embedded-opentype'), url('../assets/fonts/IntriqueScriptPersonalUse/IntriqueScriptPersonalUse.woff') format('woff'), url('../assets/fonts/IntriqueScriptPersonalUse/IntriqueScriptPersonalUse.ttf') format('truetype'), url('../assets/fonts/IntriqueScriptPersonalUse/IntriqueScriptPersonalUse.svg#IntriqueScriptPersonalUse') format('svg'); 
+	font-weight: normal; 
+	font-style: normal; 
+}
+
+/* Global styles */
+html, body {
+	overflow: scroll !important;
+}
+
+body, container, body .solo-box {
+	height: 100%
+}
+
+md-toolbar.md-default-theme {
+	background-color: @primaryColor;
+}
+
+header md-toolbar.md-default-theme {
+	//height: 130px
+}
+
+header h1 {
+	font-size: 50px;
+}
+
+header md-toolbar.md-default-theme h1{
+	margin:0px 20px 0px 20px;
+	//line-height: 64px;
+	font-family: 'IntriqueScriptPersonalUse';
+}
+
+body .btns-container {
+	margin: 0px 20px 0px 0px;
+ // padding: 20px 20px 0 20px;
+ height: 64px;
+  line-height: 50px;
+	text-align: justify;
+
+	&:after {
+		  content: '';
+		  display: inline-block;
+		  width: 100%;
+	}
+}
+
+body md-item {
+	display: inline-block;
+}
+
+body md-list .btns-container {
+		//width: 465px;
+  	margin: 0px 20px 0px 0px;
+  	background-color: @primaryColor;
+
+  
+}
+
+body md-list .btns-container svg {
+	height: 45px;
+	width: 45px;
+}
+
+body md-list .btns-container .md-grid-text {
+	color: white;
+	/*
+	margin-top: -15px;
+  	margin-bottom: -5px;
+  	*/
+}
+
+body .solo-box {
+ 	padding: 10px 0;
+}
+
+md-card {
+	padding: 10px;
+}
+
+body md-card.basic-form {
+	width: 440px;
+}
+
+body md-card.big-form {
+	width: 620px;
+	padding: 0;
+	overflow: auto;
+}
+
+label {
+	margin-bottom: 15px;
+}
+
+body md-card.basic-form .v-margin-btn, body md-card.big-form  .v-margin-btn {
+	margin: 10px 0; 
+}
+
+body md-card.basic-form a, body md-card.big-form a {
+	text-decoration: none;
+}
+
+body .solo-box form {
+	padding-top: 25px;
+}
+
+.solo-box form button.md-button.primary-btn {
+	width: 160px;
+	margin: 0 auto;
+	margin-top: 20px;
+	background: @primaryColor !important;
+	color: white !important;
+}
+
+.solo-box form button.md-button.md-warn {
+	width: 160px;
+	margin: 0 auto;
+	margin-top: 20px;
+}
+
+md-input-container {
+	padding: 2px 2px 12px !important;
+}
+
+.top-fix {
+	margin-top: 30px;
+}
+/* TAMAÑO DE LOS TEXTOS QUE SE MUESTRAN AL USUARIO SE USA EN DETALLES DEL SERVICIO*/
+.titleField{
+	font-size: 15px;
+	color: #696969;
+}
+.textField{
+	font-size: 20px;
+}
+/* TEXTO DENTRO DE ALGUNAS CARTA COMO PROFILE*/
+.titleInsideCards{
+
+	font-size: 18px;
+	color: #878787;
+	margin-bottom: 0px; 
+}
+.textInsideCards{
+	margin-top: 0px;
+	margin-bottom: 15px;
+
+	font-size: 20px;
+}
+
+#serviceListContainer{
+	position: absolute;
+    right: 66px;
+    margin-top: 0px;
+    background-color: @primaryColor;
+    z-index: 100;
+    color: white;
+    top: 64px;
+    
+}
+
+body {
+	header {
+		position: relative;
+	}
+}
+
+
+
+/**
+ * Now that all app-wide styles have been applied, we can load the styles for
+ * all the submodules and components we are using. 
+ *
+ * TODO: In a later version of this boilerplate, I'd like to automate this.
+ */
+
+@import '../app/home/home.less';
+@import '../app/loginUser/loginUser.less';
+@import '../app/createUser/createUser.less';
+@import '../app/requestMessenger/requestMessenger.less';
+@import '../app/recoverPassword/recoverPassword.less';
+@import '../common/userMap/userMap.less';
+@import '../app/serviceDetails/serviceDetails.less';
+@import '../app/profile/profile.less';
+@import '../app/changePassword/changePassword.less';
+@import '../app/abortedServices/abortedServices.less';
+@import '../app/activeServices/activeServices.less';
+@import '../app/completedServices/completedServices.less';
+@import '../app/ratingMessenger/ratingMessenger.less';
+@import '../app/termsConditions/termsConditions.less';
+@import '../common/alerts/alerts.less';
+@import '../app/messengers/messengers.less';
+@import '../app/users/users.less';
+

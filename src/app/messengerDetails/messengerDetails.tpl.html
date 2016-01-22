@@ -1,0 +1,98 @@
+<div layout="column" layout-align="center center" class="solo-box">
+	<md-card class="big-form">
+		<div>
+			<md-toolbar>
+			<div class="md-toolbar-tools" layout-align="center center">
+				<span class="md-flex">Detalles del Mensajero</span>
+			</div>
+			</md-toolbar>
+		</div>
+
+		<div id="infoContainer">
+			<form name="profileForm" novalidate>
+				<label class="titleField">Nombre:</label>
+				<md-input-container flex>  <input class="textField" name="newName" ng-model="model.Messenger.name" required>  </md-input-container>
+
+				<label class="titleField">Apellido:</label>
+				<md-input-container flex>  <input class="textField" name="newLastname" ng-model="model.Messenger.lastname"  required>  </md-input-container>
+
+				<label class="titleField">Número Celular:</label>
+				<md-input-container flex>  <input class="textField" name="newMobilephone" ng-model="model.Messenger.mobilephone" required>  </md-input-container>
+
+				<label class="titleField">Email:</label>
+				<br/>
+				<label class="textField">{{model.Messenger.email}}</label>
+
+				<br/>
+
+				<label class="titleField">Placa:</label>
+				<md-input-container flex>  <input class="textField" name="placa" ng-model="model.Messenger.plate"  required>  </md-input-container>
+				
+				<md-button class="md-raised primary-btn" ng-click="model.updateMessengerProfile()"  >Actualizar datos</md-button>
+				
+			</form>
+		</div>
+
+	</md-card>
+
+
+	<md-card class="big-form" ng-show="model.startedServices.length!=0">
+		<div  id="startedServices" ng-click="model.turnAcceptedBool()">
+			<md-toolbar>
+			<div class="md-toolbar-tools" layout-align="center center">
+				<span class="md-flex">Servicios Iniciados</span>
+				<span flex></span>
+				<i class="fa fa-caret-square-o-down arrow"></i>
+			</div>
+			</md-toolbar>
+		</div>
+
+		<div id="AvailableServicesContainer" ng-show="model.acceptedServicesBool">
+			
+			<md-card class="md-default-theme" ng-repeat="item in model.startedServices" ng-click="model.goToServiceDetails(item._id)">
+				<div id="containerInfo">
+					<label class="titleInsideCards"> Pedido</label>			
+					<h6 class="textInsideCards">{{item.item_name}}</h6>		
+					<label class="titleInsideCards"> Usuario</label>
+					<h6 class="textInsideCards">{{item.user_info.name}} {{item.user_info.lastname}}</h6>
+					<label class="titleInsideCards"> Estado del servicio</label>
+					<h6 class="textInsideCards">{{model.traslateStatusFunction(item.status)}}</h6>
+				</div>
+
+			</md-card>
+		</div>
+	</md-card>
+
+
+	<md-card class="big-form" ng-show="model.finishedServices.length!=0">
+		<div id="completedServices" ng-click="model.turnCompletedBool()">
+			<md-toolbar>
+			<div class="md-toolbar-tools" layout-align="center center">
+				<span class="md-flex">Servicios Completados</span>
+				<span flex></span>
+				<i class="fa fa-caret-square-o-down arrow"></i>
+			</div>
+			</md-toolbar>
+		</div>
+
+		<div id="AvailableServicesContainer" ng-show="model.completedServicesBool">
+			
+			<md-card class="md-default-theme" ng-repeat="item in model.finishedServices" ng-click="model.goToServiceDetails(item._id)">
+				<div id="containerInfo">
+					<label class="titleInsideCards"> Pedido</label>			
+					<h6 class="textInsideCards">{{item.item_name}}</h6>		
+					<label class="titleInsideCards"> Usuario</label>
+					<h6 class="textInsideCards">{{item.user_info.name}} {{item.user_info.lastname}}</h6>
+					<label class="titleInsideCards"> Estado del servicio</label>
+					<h6 class="textInsideCards">{{model.traslateStatusFunction(item.status)}}</h6>
+				</div>
+
+			</md-card>
+		</div>
+	</md-card>
+
+
+
+
+
+</div>

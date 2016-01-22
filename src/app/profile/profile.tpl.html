@@ -1,0 +1,58 @@
+<div layout="column" layout-align="center center" class="solo-box">
+	<md-card class="big-form">
+		<div>
+			<md-toolbar>
+				<div class="md-toolbar-tools" layout-align="center center">
+					<span class="md-flex">Estadísticas</span>
+					<md-button id="reloadButton" ng-click="model.reload()">
+				    		<i class="fa fa-refresh  fa-lg"></i>
+					</md-button>
+				</div>
+				
+			</md-toolbar>
+		</div>
+		<div id="infoContainer">
+			<div class="listDiv">
+				<h6 class="titleField title">Número de usuarios</h6><span flex></span>
+				<h6 class="textField number">{{model.users}}</h6>
+			</div>
+			<md-divider></md-divider>
+			<div class="listDiv">
+				<h6 class="titleField title">Número de mensajeros</h6><span flex></span>
+				<h6 class="textField number">{{model.messengers}}</h6>
+			</div>
+			<md-divider></md-divider>
+			<div class="listDiv">
+				<h6 class="titleField title">Total de servicios</h6><span flex></span>
+				<h6 class="textField number">{{model.allServices}}</h6>
+			</div>
+			<md-divider></md-divider>
+
+			<div class="listDiv">
+				<h6 class="titleField title">Servicios sin aceptar</h6><span flex></span>
+				<h6 class="textField number">{{model.available}}</h6>
+			</div>
+			<md-divider></md-divider>
+			<div class="listDiv">
+				<h6 class="titleField title">Servicios aceptados</h6><span flex></span>
+				<h6 class="textField number">{{model.accepted}}</h6>
+			</div>
+			<md-divider></md-divider>
+			<div class="listDiv">
+				<h6 class="titleField title">Servicios en transito</h6><span flex></span>
+				<h6 class="textField number">{{model.inTransit}}</h6>
+			</div>
+			
+			<md-divider></md-divider>
+			<div class="listDiv">
+				<h6 class="titleField title">Servicios retornando</h6><span flex></span>
+				<h6 class="textField number">{{model.returning}}</h6>
+			</div>
+			<md-divider></md-divider>
+			<div class="listDiv">
+				<h6 class="titleField title">Servicios Terminados</h6><span flex></span>
+				<h6 class="textField number">{{model.delivered + model.returned}}</h6>
+			</div>
+		</div>
+	</md-card>
+</div>

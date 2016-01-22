@@ -1,0 +1,66 @@
+<div layout="column" layout-align="center center" class="solo-box">
+	<md-card class="big-form">
+		<div>
+			<md-toolbar>
+			<div class="md-toolbar-tools" layout-align="center center">
+				<span class="md-flex">Mensajeros</span>
+			</div>
+			</md-toolbar>
+		</div >
+
+		<div id="addNewMessenger" ng-show="!model.messengerBool">
+		
+
+				<div id="searchMessengerDiv">
+					
+					<h6 class="titleField">Ingresa el email de un mensajero para buscarlo</h6>
+					<md-input-container flex>
+					<label>Ingresa un email para buscar un mensajero</label>
+	            	<input type="text" name="email" ng-model="model.emailSearchMessenger" ng-pattern="/^[A-Za-z0-9._%+]+@[A-Za-z0-9]+\.[A-Za-z]{1,5}$/" >
+	        		</md-input-container>
+	        		<md-button class="blueButton"  ng-click="model.searchMessenger()">Buscar</md-button>
+	        		<h6 id="notFound" ng-show="!model.wasFoundBool">El mensajero no ha sido encontrado</h6>
+				</div>
+				
+
+				<md-card class="md-default-theme" ng-show="model.messenger_info">
+
+				<div>
+					
+					<div id="containerInfoSearch" ng-click="model.goToMessengerDetails(messenger._id)">
+						<label class="titleInsideCards"> Nombre</label>
+						<h6 class="textInsideCards">{{model.messenger_info.name}} {{model.messenger_info.lastname}}</h6>
+						<label class="titleInsideCards"> Email</label>
+						<h6 class="textInsideCards">{{model.messenger_info.email}}</h6>
+						
+					</div>
+					<div id="colorBox"></div>
+				</div>
+					
+					<div>
+						<md-divider></md-divider>
+						<md-button class="md-primary v-margin-btn" ng-click="model.goToMessengerDetails(messenger._id)">Detalles</md-button>
+						<md-button class="md-primary v-margin-btn" ng-click="model.deleteUser(messenger._id)">Eliminar</md-button>
+					</div>
+				</md-card>
+
+		</div>
+	
+		<md-card class="md-default-theme" ng-repeat="messenger in model.messengers" >
+				<div id="containerInfo" ng-click="model.goToMessengerDetails(messenger._id)">
+					<label class="titleInsideCards"> Nombre</label>
+					<h6 class="textInsideCards">{{messenger.name}} {{messenger.lastname}}</h6>
+					<label class="titleInsideCards"> Email</label>
+					<h6 class="textInsideCards">{{messenger.email}}</h6>
+					
+				</div>
+				<div>
+					<md-divider></md-divider>
+					<md-button class="md-primary v-margin-btn" ng-click="model.goToMessengerDetails(messenger._id)">Detalles</md-button>
+					<md-button class="md-primary v-margin-btn" ng-click="model.deleteUser(messenger._id)">Eliminar</md-button>
+				</div>
+		</md-card>
+
+		<md-button class="md-primary v-margin-btn" ng-click="model.getMessengers()" ng-show="model.showMoreBool">BUSCAR MAS</md-button>
+	</md-card>
+</div>

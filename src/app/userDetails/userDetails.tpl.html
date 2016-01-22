@@ -1,0 +1,144 @@
+<div layout="column" layout-align="center center" class="solo-box">
+	<md-card class="big-form">
+		<div>
+			<md-toolbar>
+			<div class="md-toolbar-tools" layout-align="center center">
+				<span class="md-flex">Detalles del Usuario</span>
+			</div>
+			</md-toolbar>
+		</div>
+
+		<div id="infoContainer">
+			<form name="profileForm" novalidate>
+				<label class="titleField">Nombre:</label>
+				<md-input-container flex>  <input class="textField" name="newName" ng-model="model.User.name" required>  </md-input-container>
+				<label class="titleField">Apellido:</label>
+				<md-input-container flex>  <input class="textField" name="newLastname" ng-model="model.User.lastname"  required>  </md-input-container>
+				<label class="titleField">Número Celular:</label>
+				<md-input-container flex>  <input class="textField" name="newMobilephone" ng-model="model.User.mobilephone" required>  </md-input-container>
+				<label class="titleField">Email:</label>
+				<br/>
+				<label class="textField">{{model.User.email}}</label>
+				
+				
+				<md-button class="md-raised primary-btn" ng-click="model.updateProfile()"  >Actualizar datos</md-button>
+				
+			</form>
+		</div>
+
+	</md-card>
+
+
+	<md-card class="big-form" ng-show="model.verifyAvailableservices()">
+		<div id="availableServices" ng-click="model.turnAvailableBool()">
+			<md-toolbar>
+			<div class="md-toolbar-tools" layout-align="center center">
+				<span class="md-flex">Servicios sin Aceptar</span>
+				<span flex></span>
+				<i class="fa fa-caret-square-o-down  arrow"></i>
+			</div>
+			</md-toolbar>
+		</div>
+
+		<div id="AvailableServicesContainer" ng-show="model.availableServicesBool">
+			
+			<md-card class="md-default-theme" ng-repeat="item in model.activeServices" ng-show="item.status == 'available'"   ng-click="model.goToServiceDetails(item._id)">
+				<div id="containerInfo">
+					<label class="titleInsideCards"> Pedido</label>			
+					<h6 class="textInsideCards">{{item.item_name}}</h6>		
+					<label class="titleInsideCards"> Dirección de recogida</label>
+					<h6 class="textInsideCards">{{item.pickup_object.address}}</h6>
+					<label class="titleInsideCards"> Dirección de Entrega</label>
+					<h6 class="textInsideCards">{{item.delivery_object.address}}</h6>
+				</div>
+
+			</md-card>
+		</div>
+	</md-card>
+
+
+	<md-card class="big-form" ng-show="model.verifyAceptedservices()">
+		<div id="acceptedServices" ng-click="model.turnAcceptedBool()">
+			<md-toolbar>
+			<div class="md-toolbar-tools" layout-align="center center">
+				<span class="md-flex">Servicios Aceptados</span>
+				<span flex></span>
+				<i class="fa fa-caret-square-o-down  arrow"></i>
+			</div>
+			</md-toolbar>
+		</div>
+
+		<div id="AcceptedServicesContainer" ng-show="model.acceptedServicesBool">
+			
+			<md-card class="md-default-theme" ng-repeat="item in model.activeServices" ng-show="item.status != 'available'"   ng-click="model.goToServiceDetails(item._id)">
+				<div id="containerInfo">
+					<label class="titleInsideCards"> Pedido</label>			
+					<h6 class="textInsideCards">{{item.item_name}}</h6>		
+					<label class="titleInsideCards"> Dirección de recogida</label>
+					<h6 class="textInsideCards">{{item.pickup_object.address}}</h6>
+					<label class="titleInsideCards"> Dirección de Entrega</label>
+					<h6 class="textInsideCards">{{item.delivery_object.address}}</h6>
+				</div>
+
+			</md-card>
+		</div>
+	</md-card>
+
+
+	<md-card class="big-form" ng-show="model.completedServices.length!=0">
+		<div  id="completedServices" ng-click="model.turnCompletedBool()">
+			<md-toolbar>
+			<div class="md-toolbar-tools" layout-align="center center">
+				<span class="md-flex">Servicios Completados</span>
+				<span flex></span>
+				<i class="fa fa-caret-square-o-down  arrow"></i>
+			</div>
+			</md-toolbar>
+		</div>
+
+		<div id="completedServicesContainer" ng-show="model.completedServicesBool">
+			
+			<md-card class="md-default-theme" ng-repeat="item in model.completedServices" ng-show="item.status != 'available'"   ng-click="model.goToServiceDetails(item._id)">
+				<div id="containerInfo">
+					<label class="titleInsideCards"> Pedido</label>			
+					<h6 class="textInsideCards">{{item.item_name}}</h6>		
+					<label class="titleInsideCards"> Dirección de recogida</label>
+					<h6 class="textInsideCards">{{item.pickup_object.address}}</h6>
+					<label class="titleInsideCards"> Dirección de Entrega</label>
+					<h6 class="textInsideCards">{{item.delivery_object.address}}</h6>
+				</div>
+
+			</md-card>
+		</div>
+	</md-card>
+
+
+	<md-card class="big-form" ng-show="model.abortedServices.length!=0">
+		<div id="abortedServices" ng-click="model.turnAbortedBool()">
+			<md-toolbar>
+			<div class="md-toolbar-tools" layout-align="center center">
+				<span class="md-flex">Servicios Abortados</span>
+				<span flex></span>
+				<i class="fa fa-caret-square-o-down  arrow"></i>
+			</div>
+			</md-toolbar>
+		</div>
+
+		<div id="abortedServicesContainer" ng-show="model.abortedServicesBool">
+			
+			<md-card class="md-default-theme" ng-repeat="item in model.abortedServices" ng-show="item.status != 'available'"   ng-click="model.goToServiceDetails(item._id)">
+				<div id="containerInfo">
+					<label class="titleInsideCards"> Pedido</label>			
+					<h6 class="textInsideCards">{{item.item_name}}</h6>		
+					<label class="titleInsideCards"> Dirección de recogida</label>
+					<h6 class="textInsideCards">{{item.pickup_object.address}}</h6>
+					<label class="titleInsideCards"> Dirección de Entrega</label>
+					<h6 class="textInsideCards">{{item.delivery_object.address}}</h6>
+				</div>
+
+			</md-card>
+		</div>
+	</md-card>
+
+
+</div>

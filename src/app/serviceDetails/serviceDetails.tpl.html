@@ -1,0 +1,129 @@
+<div layout="column" layout-align="center center" class="solo-box">
+	<md-card class="big-form">
+		<div>
+			<md-toolbar>
+			    <div class="md-toolbar-tools" layout-align="center center">
+			    	<span class="md-flex" id="titleServiceDetails">Detalles del Servicio</span>
+			    	
+			    	<md-button id="reloadButton" ng-click="model.reload()">
+			    		<i class="fa fa-refresh  fa-lg"></i>
+			    	</md-button>
+			    </div>
+			</md-toolbar>
+		</div>
+
+		
+		
+		<md-card id="serviceDetailsContainer" >
+			<label class="titleField">Nombre del Usuario</label>
+			<h6 class="textField" >{{model.deliveryItemInfo.user_info.name}} {{model.deliveryItemInfo.user_info.lastname}}</h6>
+			<md-divider></md-divider>
+
+			<label class="titleField">Nombre de Servicio</label>
+			<h6 class="textField" >{{model.deliveryItemInfo.item_name}}</h6>
+			<md-divider></md-divider>
+
+			<label class="titleField">Lugar de Recogida</label>
+			<h6  class="textField" >{{model.deliveryItemInfo.pickup_object.address}}</h6>
+			<md-divider></md-divider>
+
+			<label class="titleField">Lugar de Entrega</label>
+			<h6  class="textField" >{{model.deliveryItemInfo.delivery_object.address}}</h6>
+			<md-divider></md-divider>
+
+			<label class="titleField">Fecha de Recogida</label>
+			<h6  class="textField" >{{model.pickupDate | date:'dd/MM/yyyy hh:mma'}}</h6>
+			<md-divider></md-divider>
+
+			<label class="titleField">Valor Aproximado del Servicio</label>
+			<h6  class="textField" >{{model.deliveryItemInfo.price_to_pay}}</h6>
+		</md-card>
+
+		
+
+		<md-card id="messengerContainer" >
+
+			<div id="infoContainer" ng-show="model.messengerBool">
+				<h4>Información del mensajero</h4>
+
+				<label class="titleField">Nombre del Mensajero</label>
+				<h6 class="textField" >{{model.deliveryItemInfo.messenger_info.name}} {{model.deliveryItemInfo.messenger_info.lastname}}</h6>
+				<md-divider></md-divider>
+
+				<label class="titleField">Teléfono</label>
+				<h6 class="textField" >{{model.deliveryItemInfo.messenger_info.mobilephone}}</h6>
+				<md-divider></md-divider>
+
+				<label class="titleField">ETA</label>
+				<h6 class="textField" >{{model.leftTime}} min</h6>
+
+				<md-button id="redButton"  ng-click="model.removeMessenger()">Remover mensajero</md-button>
+			</div>
+
+			<div id="addNewMessenger" ng-show="!model.messengerBool">
+				<h6 class="titleField">Estes servicio no ha sido aceptado aún, si deseas asignar este servicio a un mensajero, buscalo por su email y luego presiona añadir</h6>
+				<md-input-container flex>
+					<label>Ingresa un email para buscar un mensajero</label>
+	            	<input type="text" name="email" ng-model="model.emailSearchMessenger" ng-pattern="/^[A-Za-z0-9._%+]+@[A-Za-z0-9]+\.[A-Za-z]{1,5}$/" >
+	        	</md-input-container>
+
+				<md-button class="blueButton"  ng-click="model.searchMessenger()">Buscar</md-button>
+
+				<div ng-show="model.messenger_info">
+					<label>Datos del mensajero buscado</label>
+					<br/>
+					<label>Nombre: {{model.messenger_info.name}} {{model.messenger_info.lastname}}</label>
+					<br/>
+					<label>Celular: {{model.messenger_info.mobilephone}}</label>
+				</div>
+
+				<md-button class="blueButton"  ng-click="model.assingMessenger()" ng-show="model.messenger_info">Asignar</md-button>
+
+
+				
+
+			</div>
+			
+			
+		</md-card>
+
+
+		<md-card id="photoContainer" ng-show="model.imageBool">
+			<label class="titleField">Fotos del Servicio</label>
+			<div>
+				<ul class="gallery-container" style="width:{{model.images.length * 100}}px">
+					<li class="img-resize" ng-repeat="image in model.images">
+						<img   ng-src="{{image.url}}" ng-click="model.showBigImage(image.url)">
+					</li>
+				</ul>
+			</div>
+							
+		</md-card>
+		<md-card id="serviceStatusContainer" >
+			<label class="titleField">Estado actual del Servicio:</label><br/>
+			<h6 id="serviceStatus" ng-model="model.serviceStatus">{{model.serviceStatus}}</h6><br/>
+			<h6 ng-show="model.setAvailableButtonBool" class="textField">Razón: {{model.deliveryItemInfo.abort_reason}}</h6>
+		
+	    <md-radio-group ng-model="model.newState" ng-show="!model.deliveryItemInfo.roundtrip">
+	      <md-radio-button value="available" class="md-primary"> Disponible </md-radio-button>
+	      <md-radio-button value="accepted"> Aceptado </md-radio-button>
+	      <md-radio-button value="in-transit"> En tránsito</md-radio-button>
+	      <md-radio-button value="delivered"> Entregado </md-radio-button>
+	      <!--<md-radio-button value="aborted"> Abortado </md-radio-button>-->
+	    </md-radio-group>
+
+	    <md-radio-group ng-model="model.newState" ng-show="model.deliveryItemInfo.roundtrip">
+	      <md-radio-button value="available" class="md-primary"> Disponible </md-radio-button>
+	      <md-radio-button value="accepted"> Aceptado </md-radio-button>
+	      <md-radio-button value="in-transit"> En tránsito</md-radio-button>
+	      <md-radio-button value="returning"> Volviendo </md-radio-button>
+	      <md-radio-button value="returned"> Retornado </md-radio-button>
+	      <!--<md-radio-button value="aborted"> Abortado </md-radio-button>-->
+	    </md-radio-group>
+	    
+
+		<md-button id="blueButton" ng-click="model.changeStatus()" >Poner estado </md-button>
+
+		<md-button id="redButton" ng-click="model.cancelService()" ng-show="model.deliveryItemInfo.status!== 'available'">Abortar Servicio</md-button>
+	</md-card>
+	<div>

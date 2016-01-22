@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html ng-app="appMensajeria" ng-controller="AppController as app">
+    <head>
+        <title ng-bind="pageTitle"></title>
+        <meta charset="UTF8">
+        <!-- font awesome from BootstrapCDN -->
+        <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+        <!-- compiled CSS --><% styles.forEach( function ( file ) { %>
+        <link rel="stylesheet" type="text/css" href="<%= file %>" /><% }); %>
+        <!-- Angulars Material CSS now available via Google CDN; version 0.7 used here -->
+        <!-- <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.7.0/angular-material.min.css"> -->
+        <!-- compiled JavaScript --><% scripts.forEach( function ( file ) { %>
+        <script type="text/javascript" src="<%= file %>"></script><% }); %>
+        <!-- Angular Material Javascript now available via Google CDN; version 0.7 used here -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.7.0/angular-material.min.js"></script>
+        <!-- Librerias del API de Google Maps -->
+        <script src="https://maps.googleapis.com/maps/api/js?key=&sensor=false&extension=.js"></script>
+        <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    </head>
+    <body>
+        <header>
+            <md-toolbar layout="row" >
+            <h1>MensajeriApp</h1>
+            <span flex></span>
+            <!-- -->
+            
+            <div class="btns-container"  ng-show="app.getVisibility()">
+                <md-button class="md-grid-item-content" ng-click="app.goStatistics()">                
+                <div class="md-grid-text"> Estadísticas</div>
+                </md-button>
+                
+                <md-button class="md-grid-item-content" ng-click="app.goUsers()">                
+                <div class="md-grid-text"> Usuarios</div>
+                </md-button>
+                
+                <md-button class="md-grid-item-content" ng-click="app.goMessengers()">                
+                <div class="md-grid-text"> Mensajeros</div>
+                </md-button>
+                
+                <md-button class="md-grid-item-content" ng-click="app.turnShowServices()">                
+                <div class="md-grid-text"> Servicios </div>
+                </md-button>
+               
+
+                <md-button class="md-grid-item-content" ng-click="app.logOut()">                
+                <div class="md-grid-text"> Salir</div>
+                </md-button>
+                
+                <!-- MENU DESPLEGABLE DE SERVICIOS -->
+            
+                  
+               
+            </div>
+        
+            <!-- -->
+            </md-toolbar>
+
+            <md-card id="serviceListContainer" ng-show="app.showServicesBool" ng-click="app.turnShowServices()">
+                <md-button class="md-grid-item-content" ng-click="app.goRequestService()">                
+                <div class="md-grid-text"> Solicitar </div>
+                </md-button>
+
+                <md-button class="md-grid-item-content" ng-click="app.goActiveServices()">                
+                <div class="md-grid-text"> Sin aceptar </div>
+                </md-button>
+                
+            </md-card>  
+
+            
+        </header>
+
+        
+        
+        <div class="container" ui-view="main"></div>
+        <!-- <footer class="container">
+        </footer> -->
+    </body>
+</html>
