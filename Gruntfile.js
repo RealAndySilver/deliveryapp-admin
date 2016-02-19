@@ -83,7 +83,7 @@ module.exports = function(grunt) {
                 'vendor/angular-ui-router/release/angular-ui-router.js',
                 'vendor/angular-ui-utils/modules/route/route.js',
                 'vendor/hammerjs/hammer.min.js',
-                //'vendor/angular-material/angular-material.min.js',
+                'vendor/angular-material/angular-material.min.js',
                 'vendor/angular-animate/angular-animate.min.js',
                 'vendor/angular-aria/angular-aria.min.js',
                 'vendor/jquery/dist/jquery.min.js',
@@ -94,7 +94,7 @@ module.exports = function(grunt) {
             ],
             css: [
                 'vendor/md-date-time/dist/md-date-time.css',
-                //'vendor/angular-material/angular-material.min.css',
+                'vendor/angular-material/angular-material.min.css',
             ],
             assets: [
                 'vendor/angular-animate/angular-animate.min.js.map',
