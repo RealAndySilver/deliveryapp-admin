@@ -31,7 +31,7 @@
 			model.getMessenger();
 
             model.updateStatus = function () {
-				console.log(model.Messenger);
+
                 var service = model.Messenger.admin_confirmation === true ? MessengerDetailsService.activateMessenger :
                     MessengerDetailsService.deactivateMessenger;
 
@@ -43,6 +43,7 @@
                         AlertsService.showAlert("Datos actualizados correctamente", "");
                     } else {
                         AlertsService.showAlert(response.msg, "");
+						model.Messenger.admin_confirmation = !model.Messenger.admin_confirmation;
                     }
                 });
             };
