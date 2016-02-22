@@ -1,144 +1,208 @@
-<div layout="column" layout-align="center center" class="solo-box">
-	<md-card class="big-form">
-		<div>
-			<md-toolbar>
-			<div class="md-toolbar-tools" layout-align="center center">
-				<span class="md-flex">Detalles del Usuario</span>
-			</div>
-			</md-toolbar>
-		</div>
+<div class="row">
+    <div class="col-lg-6 col-sm-12 col-lg-offset-3">
+        <div class="panel panel-yellow">
+            <div class="panel-heading">
+                Detalles del Usuario
+            </div>
+            <div class="panel-body">
+                <form name="profileForm" novalidate ng-submit="model.updateProfile()">
+                    <div class="form-group">
+                        <label for="newName">
+                            Nombre:
+                        </label>
+                        <input name="newName"
+                               id="newName"
+                               type="text"
+                               class="form-control"
+                               placeholder="Nombre del Usuario"
+                               required
+                               ng-model="model.User.name">
+                    </div>
+                    <div class="form-group">
+                        <label for="newLastname">
+                            Apellido:
+                        </label>
+                        <input name="newLastname"
+                               id="newLastname"
+                               type="text"
+                               class="form-control"
+                               placeholder="Apellido del Usuario"
+                               required
+                               ng-model="model.User.lastname">
+                    </div>
+                    <div class="form-group">
+                        <label for="newMobilephone">
+                            Número de celular del usuario:
+                        </label>
+                        <input name="newMobilephone"
+                               id="newMobilephone"
+                               type="text"
+                               class="form-control"
+                               placeholder="Número de Celular del usuario"
+                               required
+                               ng-model="model.User.mobilephone">
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Email:
+                        </label>
+                        <label class="form-control">{{::model.User.email}}</label>
+                    </div>
+                    <div class="col-lg-12 text-center">
+                        <button class="btn btn-success"
+                                ng-disabled="profileForm.$invalid"
+                                type="submit">Actualizar datos
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
-		<div id="infoContainer">
-			<form name="profileForm" novalidate>
-				<label class="titleField">Nombre:</label>
-				<md-input-container flex>  <input class="textField" name="newName" ng-model="model.User.name" required>  </md-input-container>
-				<label class="titleField">Apellido:</label>
-				<md-input-container flex>  <input class="textField" name="newLastname" ng-model="model.User.lastname"  required>  </md-input-container>
-				<label class="titleField">Número Celular:</label>
-				<md-input-container flex>  <input class="textField" name="newMobilephone" ng-model="model.User.mobilephone" required>  </md-input-container>
-				<label class="titleField">Email:</label>
-				<br/>
-				<label class="textField">{{model.User.email}}</label>
-				
-				
-				<md-button class="md-raised primary-btn" ng-click="model.updateProfile()"  >Actualizar datos</md-button>
-				
-			</form>
-		</div>
-
-	</md-card>
-
-
-	<md-card class="big-form" ng-show="model.verifyAvailableservices()">
-		<div id="availableServices" ng-click="model.turnAvailableBool()">
-			<md-toolbar>
-			<div class="md-toolbar-tools" layout-align="center center">
-				<span class="md-flex">Servicios sin Aceptar</span>
-				<span flex></span>
-				<i class="fa fa-caret-square-o-down  arrow"></i>
-			</div>
-			</md-toolbar>
-		</div>
-
-		<div id="AvailableServicesContainer" ng-show="model.availableServicesBool">
-			
-			<md-card class="md-default-theme" ng-repeat="item in model.activeServices" ng-show="item.status == 'available'"   ng-click="model.goToServiceDetails(item._id)">
-				<div id="containerInfo">
-					<label class="titleInsideCards"> Pedido</label>			
-					<h6 class="textInsideCards">{{item.item_name}}</h6>		
-					<label class="titleInsideCards"> Dirección de recogida</label>
-					<h6 class="textInsideCards">{{item.pickup_object.address}}</h6>
-					<label class="titleInsideCards"> Dirección de Entrega</label>
-					<h6 class="textInsideCards">{{item.delivery_object.address}}</h6>
-				</div>
-
-			</md-card>
-		</div>
-	</md-card>
-
-
-	<md-card class="big-form" ng-show="model.verifyAceptedservices()">
-		<div id="acceptedServices" ng-click="model.turnAcceptedBool()">
-			<md-toolbar>
-			<div class="md-toolbar-tools" layout-align="center center">
-				<span class="md-flex">Servicios Aceptados</span>
-				<span flex></span>
-				<i class="fa fa-caret-square-o-down  arrow"></i>
-			</div>
-			</md-toolbar>
-		</div>
-
-		<div id="AcceptedServicesContainer" ng-show="model.acceptedServicesBool">
-			
-			<md-card class="md-default-theme" ng-repeat="item in model.activeServices" ng-show="item.status != 'available'"   ng-click="model.goToServiceDetails(item._id)">
-				<div id="containerInfo">
-					<label class="titleInsideCards"> Pedido</label>			
-					<h6 class="textInsideCards">{{item.item_name}}</h6>		
-					<label class="titleInsideCards"> Dirección de recogida</label>
-					<h6 class="textInsideCards">{{item.pickup_object.address}}</h6>
-					<label class="titleInsideCards"> Dirección de Entrega</label>
-					<h6 class="textInsideCards">{{item.delivery_object.address}}</h6>
-				</div>
-
-			</md-card>
-		</div>
-	</md-card>
-
-
-	<md-card class="big-form" ng-show="model.completedServices.length!=0">
-		<div  id="completedServices" ng-click="model.turnCompletedBool()">
-			<md-toolbar>
-			<div class="md-toolbar-tools" layout-align="center center">
-				<span class="md-flex">Servicios Completados</span>
-				<span flex></span>
-				<i class="fa fa-caret-square-o-down  arrow"></i>
-			</div>
-			</md-toolbar>
-		</div>
-
-		<div id="completedServicesContainer" ng-show="model.completedServicesBool">
-			
-			<md-card class="md-default-theme" ng-repeat="item in model.completedServices" ng-show="item.status != 'available'"   ng-click="model.goToServiceDetails(item._id)">
-				<div id="containerInfo">
-					<label class="titleInsideCards"> Pedido</label>			
-					<h6 class="textInsideCards">{{item.item_name}}</h6>		
-					<label class="titleInsideCards"> Dirección de recogida</label>
-					<h6 class="textInsideCards">{{item.pickup_object.address}}</h6>
-					<label class="titleInsideCards"> Dirección de Entrega</label>
-					<h6 class="textInsideCards">{{item.delivery_object.address}}</h6>
-				</div>
-
-			</md-card>
-		</div>
-	</md-card>
-
-
-	<md-card class="big-form" ng-show="model.abortedServices.length!=0">
-		<div id="abortedServices" ng-click="model.turnAbortedBool()">
-			<md-toolbar>
-			<div class="md-toolbar-tools" layout-align="center center">
-				<span class="md-flex">Servicios Abortados</span>
-				<span flex></span>
-				<i class="fa fa-caret-square-o-down  arrow"></i>
-			</div>
-			</md-toolbar>
-		</div>
-
-		<div id="abortedServicesContainer" ng-show="model.abortedServicesBool">
-			
-			<md-card class="md-default-theme" ng-repeat="item in model.abortedServices" ng-show="item.status != 'available'"   ng-click="model.goToServiceDetails(item._id)">
-				<div id="containerInfo">
-					<label class="titleInsideCards"> Pedido</label>			
-					<h6 class="textInsideCards">{{item.item_name}}</h6>		
-					<label class="titleInsideCards"> Dirección de recogida</label>
-					<h6 class="textInsideCards">{{item.pickup_object.address}}</h6>
-					<label class="titleInsideCards"> Dirección de Entrega</label>
-					<h6 class="textInsideCards">{{item.delivery_object.address}}</h6>
-				</div>
-
-			</md-card>
-		</div>
-	</md-card>
-
-
+<div class="row">
+    <div class="col-lg-6 col-sm-12 col-lg-offset-3 services-accordion">
+        <accordion close-others="true">
+            <accordion-group ng-show="model.verifyAvailableservices()"
+                             is-open="model.availableServicesBool">
+                <accordion-heading style="cursor:pointer;">
+                    Servicios sin aceptar <i class="pull-right fa"
+                                             ng-class="{'fa-plus': !model.availableServicesBool, 'fa-minus': model.availableServicesBool}"></i>
+                </accordion-heading>
+                <div class="panel panel-default"
+                     ng-repeat="item in model.activeServices"
+                     ng-show="item.status == 'available'"
+                     ng-click="model.goToServiceDetails(item._id)">
+                    <div class="panel-body">
+                        <div class="list-group"
+                             style="cursor:pointer;">
+                            <div class="list-group-item">
+                                Pedido
+                                <span class="pull-right text-muted">
+                                    <em>{{item.item_name}}</em>
+                                </span>
+                            </div>
+                            <div class="list-group-item">
+                                Dirección de recogida
+                                <span class="pull-right text-muted">
+                                    <em>{{item.pickup_object.address}}</em>
+                                </span>
+                            </div>
+                            <div class="list-group-item">
+                                Dirección de entrega
+                                <span class="pull-right text-muted">
+                                    <em>{{item.delivery_object.address}}</em>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </accordion-group>
+            <accordion-group ng-show="model.verifyAceptedservices()"
+                             is-open="model.acceptedServicesBool">
+                <accordion-heading style="cursor:pointer;">
+                    Servicios aceptados <i class="pull-right fa"
+                                           ng-class="{'fa-plus': !model.acceptedServicesBool, 'fa-minus': model.acceptedServicesBool}"></i>
+                </accordion-heading>
+                <div class="panel panel-default"
+                     ng-repeat="item in model.activeServices"
+                     ng-show="item.status != 'available'"
+                     ng-click="model.goToServiceDetails(item._id)">
+                    <div class="panel-body">
+                        <div class="list-group"
+                             style="cursor:pointer;">
+                            <div class="list-group-item">
+                                Pedido
+                                <span class="pull-right text-muted">
+                                    <em>{{item.item_name}}</em>
+                                </span>
+                            </div>
+                            <div class="list-group-item">
+                                Dirección de recogida
+                                <span class="pull-right text-muted">
+                                    <em>{{item.pickup_object.address}}</em>
+                                </span>
+                            </div>
+                            <div class="list-group-item">
+                                Dirección de entrega
+                                <span class="pull-right text-muted">
+                                    <em>{{item.delivery_object.address}}</em>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </accordion-group>
+            <accordion-group ng-show="model.completedServices.length!=0"
+                             is-open="model.completedServicesBool">
+                <accordion-heading style="cursor:pointer;">
+                    Servicios completados <i class="pull-right fa"
+                                             ng-class="{'fa-plus': !model.completedServicesBool, 'fa-minus': model.completedServicesBool}"></i>
+                </accordion-heading>
+                <div class="panel panel-default"
+                     ng-repeat="item in model.completedServices"
+                     ng-show="item.status != 'available'"
+                     ng-click="model.goToServiceDetails(item._id)">
+                    <div class="panel-body">
+                        <div class="list-group"
+                             style="cursor:pointer;">
+                            <div class="list-group-item">
+                                Pedido
+                                <span class="pull-right text-muted">
+                                    <em>{{item.item_name}}</em>
+                                </span>
+                            </div>
+                            <div class="list-group-item">
+                                Dirección de recogida
+                                <span class="pull-right text-muted">
+                                    <em>{{item.pickup_object.address}}</em>
+                                </span>
+                            </div>
+                            <div class="list-group-item">
+                                Dirección de entrega
+                                <span class="pull-right text-muted">
+                                    <em>{{item.delivery_object.address}}</em>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </accordion-group>
+            <accordion-group ng-show="model.abortedServices.length!=0"
+                             is-open="model.abortedServicesBool">
+                <accordion-heading style="cursor:pointer;">
+                    Servicios abortados <i class="pull-right fa"
+                                           ng-class="{'fa-plus': !model.abortedServicesBool, 'fa-minus': model.abortedServicesBool}"></i>
+                </accordion-heading>
+                <div class="panel panel-default"
+                     ng-repeat="item in model.abortedServices"
+                     ng-show="item.status != 'available'"
+                     ng-click="model.goToServiceDetails(item._id)">
+                    <div class="panel-body">
+                        <div class="list-group"
+                             style="cursor:pointer;">
+                            <div class="list-group-item">
+                                Pedido
+                                <span class="pull-right text-muted">
+                                    <em>{{item.item_name}}</em>
+                                </span>
+                            </div>
+                            <div class="list-group-item">
+                                Dirección de recogida
+                                <span class="pull-right text-muted">
+                                    <em>{{item.pickup_object.address}}</em>
+                                </span>
+                            </div>
+                            <div class="list-group-item">
+                                Dirección de entrega
+                                <span class="pull-right text-muted">
+                                    <em>{{item.delivery_object.address}}</em>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </accordion-group>
+        </accordion>
+    </div>
 </div>

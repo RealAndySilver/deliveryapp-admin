@@ -1,98 +1,136 @@
-<div layout="column" layout-align="center center" class="solo-box">
-	<md-card class="big-form">
-		<div>
-			<md-toolbar>
-			<div class="md-toolbar-tools" layout-align="center center">
-				<span class="md-flex">Detalles del Mensajero</span>
-			</div>
-			</md-toolbar>
-		</div>
+<div class="row">
+    <div class="col-lg-6 col-sm-12 col-lg-offset-3">
+        <div class="panel panel-yellow">
+            <div class="panel-heading">
+                Detalles del Mensajero
+            </div>
+            <div class="panel-body">
+                <form name="profileForm" novalidate ng-submit="model.updateMessengerProfile()">
+                    <div class="form-group">
+                        <label for="newName">
+                            Nombre:
+                        </label>
+                        <input name="newName"
+                               id="newName"
+                               type="text"
+                               class="form-control"
+                               placeholder="Nombre del Mensajero"
+                               required
+                               ng-model="model.Messenger.name">
+                    </div>
+                    <div class="form-group">
+                        <label for="newLastname">
+                            Apellido:
+                        </label>
+                        <input name="newLastname"
+                               id="newLastname"
+                               type="text"
+                               class="form-control"
+                               placeholder="Apellido del Mensajero"
+                               required
+                               ng-model="model.Messenger.lastname">
+                    </div>
+                    <div class="form-group">
+                        <label for="newMobilephone">
+                            Número de celular del usuario:
+                        </label>
+                        <input name="newMobilephone"
+                               id="newMobilephone"
+                               type="text"
+                               class="form-control"
+                               placeholder="Número de Celular del mensajero"
+                               required
+                               ng-model="model.Messenger.mobilephone">
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Email:
+                        </label>
+                        <label class="form-control">{{::model.Messenger.email}}</label>
+                    </div>
+                    <div class="col-lg-12 text-center">
+                        <button class="btn btn-success"
+                                ng-disabled="profileForm.$invalid"
+                                type="submit">Actualizar datos
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
-		<div id="infoContainer">
-			<form name="profileForm" novalidate>
-				<label class="titleField">Nombre:</label>
-				<md-input-container flex>  <input class="textField" name="newName" ng-model="model.Messenger.name" required>  </md-input-container>
-
-				<label class="titleField">Apellido:</label>
-				<md-input-container flex>  <input class="textField" name="newLastname" ng-model="model.Messenger.lastname"  required>  </md-input-container>
-
-				<label class="titleField">Número Celular:</label>
-				<md-input-container flex>  <input class="textField" name="newMobilephone" ng-model="model.Messenger.mobilephone" required>  </md-input-container>
-
-				<label class="titleField">Email:</label>
-				<br/>
-				<label class="textField">{{model.Messenger.email}}</label>
-
-				<br/>
-
-				<label class="titleField">Placa:</label>
-				<md-input-container flex>  <input class="textField" name="placa" ng-model="model.Messenger.plate"  required>  </md-input-container>
-				
-				<md-button class="md-raised primary-btn" ng-click="model.updateMessengerProfile()"  >Actualizar datos</md-button>
-				
-			</form>
-		</div>
-
-	</md-card>
-
-
-	<md-card class="big-form" ng-show="model.startedServices.length!=0">
-		<div  id="startedServices" ng-click="model.turnAcceptedBool()">
-			<md-toolbar>
-			<div class="md-toolbar-tools" layout-align="center center">
-				<span class="md-flex">Servicios Iniciados</span>
-				<span flex></span>
-				<i class="fa fa-caret-square-o-down arrow"></i>
-			</div>
-			</md-toolbar>
-		</div>
-
-		<div id="AvailableServicesContainer" ng-show="model.acceptedServicesBool">
-			
-			<md-card class="md-default-theme" ng-repeat="item in model.startedServices" ng-click="model.goToServiceDetails(item._id)">
-				<div id="containerInfo">
-					<label class="titleInsideCards"> Pedido</label>			
-					<h6 class="textInsideCards">{{item.item_name}}</h6>		
-					<label class="titleInsideCards"> Usuario</label>
-					<h6 class="textInsideCards">{{item.user_info.name}} {{item.user_info.lastname}}</h6>
-					<label class="titleInsideCards"> Estado del servicio</label>
-					<h6 class="textInsideCards">{{model.traslateStatusFunction(item.status)}}</h6>
-				</div>
-
-			</md-card>
-		</div>
-	</md-card>
-
-
-	<md-card class="big-form" ng-show="model.finishedServices.length!=0">
-		<div id="completedServices" ng-click="model.turnCompletedBool()">
-			<md-toolbar>
-			<div class="md-toolbar-tools" layout-align="center center">
-				<span class="md-flex">Servicios Completados</span>
-				<span flex></span>
-				<i class="fa fa-caret-square-o-down arrow"></i>
-			</div>
-			</md-toolbar>
-		</div>
-
-		<div id="AvailableServicesContainer" ng-show="model.completedServicesBool">
-			
-			<md-card class="md-default-theme" ng-repeat="item in model.finishedServices" ng-click="model.goToServiceDetails(item._id)">
-				<div id="containerInfo">
-					<label class="titleInsideCards"> Pedido</label>			
-					<h6 class="textInsideCards">{{item.item_name}}</h6>		
-					<label class="titleInsideCards"> Usuario</label>
-					<h6 class="textInsideCards">{{item.user_info.name}} {{item.user_info.lastname}}</h6>
-					<label class="titleInsideCards"> Estado del servicio</label>
-					<h6 class="textInsideCards">{{model.traslateStatusFunction(item.status)}}</h6>
-				</div>
-
-			</md-card>
-		</div>
-	</md-card>
-
-
-
-
-
+<div class="row">
+    <div class="col-lg-6 col-sm-12 col-lg-offset-3 services-accordion">
+        <accordion close-others="true">
+            <accordion-group ng-show="model.startedServices.length!=0"
+                             is-open="model.acceptedServicesBool">
+                <accordion-heading style="cursor:pointer;">
+                    Servicios iniciados <i class="pull-right fa"
+                                           ng-class="{'fa-plus': !model.availableServicesBool, 'fa-minus': model.availableServicesBool}"></i>
+                </accordion-heading>
+                <div class="panel panel-default"
+                     ng-repeat="item in model.startedServices"
+                     ng-click="model.goToServiceDetails(item._id)">
+                    <div class="panel-body">
+                        <div class="list-group"
+                             style="cursor:pointer;">
+                            <div class="list-group-item">
+                                Pedido
+                                <span class="pull-right text-muted">
+                                    <em>{{item.item_name}}</em>
+                                </span>
+                            </div>
+                            <div class="list-group-item">
+                                Usuario
+                                <span class="pull-right text-muted">
+                                    <em>{{item.user_info.name}} {{item.user_info.lastname}}</em>
+                                </span>
+                            </div>
+                            <div class="list-group-item">
+                                Estado del servicio
+                                <span class="pull-right text-muted">
+                                    <em>{{model.traslateStatusFunction(item.status)}}</em>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </accordion-group>
+            <accordion-group ng-show="model.finishedServices.length!=0"
+                             is-open="model.completedServicesBool">
+                <accordion-heading style="cursor:pointer;">
+                    Servicios completados <i class="pull-right fa"
+                                             ng-class="{'fa-plus': !model.acceptedServicesBool, 'fa-minus': model.acceptedServicesBool}"></i>
+                </accordion-heading>
+                <div class="panel panel-default"
+                     ng-repeat="item in model.finishedServices"
+                     ng-click="model.goToServiceDetails(item._id)">
+                    <div class="panel-body">
+                        <div class="list-group"
+                             style="cursor:pointer;">
+                            <div class="list-group-item">
+                                Pedido
+                                <span class="pull-right text-muted">
+                                    <em>{{item.item_name}}</em>
+                                </span>
+                            </div>
+                            <div class="list-group-item">
+                                Usuario
+                                <span class="pull-right text-muted">
+                                    <em>{{item.user_info.name}} {{item.user_info.lastname}}</em>
+                                </span>
+                            </div>
+                            <div class="list-group-item">
+                                Estado del servicio
+                                <span class="pull-right text-muted">
+                                    <em>{{model.traslateStatusFunction(item.status)}}</em>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </accordion-group>
+        </accordion>
+    </div>
 </div>

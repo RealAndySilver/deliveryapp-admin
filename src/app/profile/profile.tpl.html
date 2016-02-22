@@ -1,58 +1,78 @@
-<div layout="column" layout-align="center center" class="solo-box">
-	<md-card class="big-form">
-		<div>
-			<md-toolbar>
-				<div class="md-toolbar-tools" layout-align="center center">
-					<span class="md-flex">Estadísticas</span>
-					<md-button id="reloadButton" ng-click="model.reload()">
-				    		<i class="fa fa-refresh  fa-lg"></i>
-					</md-button>
-				</div>
-				
-			</md-toolbar>
-		</div>
-		<div id="infoContainer">
-			<div class="listDiv">
-				<h6 class="titleField title">Número de usuarios</h6><span flex></span>
-				<h6 class="textField number">{{model.users}}</h6>
-			</div>
-			<md-divider></md-divider>
-			<div class="listDiv">
-				<h6 class="titleField title">Número de mensajeros</h6><span flex></span>
-				<h6 class="textField number">{{model.messengers}}</h6>
-			</div>
-			<md-divider></md-divider>
-			<div class="listDiv">
-				<h6 class="titleField title">Total de servicios</h6><span flex></span>
-				<h6 class="textField number">{{model.allServices}}</h6>
-			</div>
-			<md-divider></md-divider>
-
-			<div class="listDiv">
-				<h6 class="titleField title">Servicios sin aceptar</h6><span flex></span>
-				<h6 class="textField number">{{model.available}}</h6>
-			</div>
-			<md-divider></md-divider>
-			<div class="listDiv">
-				<h6 class="titleField title">Servicios aceptados</h6><span flex></span>
-				<h6 class="textField number">{{model.accepted}}</h6>
-			</div>
-			<md-divider></md-divider>
-			<div class="listDiv">
-				<h6 class="titleField title">Servicios en transito</h6><span flex></span>
-				<h6 class="textField number">{{model.inTransit}}</h6>
-			</div>
-			
-			<md-divider></md-divider>
-			<div class="listDiv">
-				<h6 class="titleField title">Servicios retornando</h6><span flex></span>
-				<h6 class="textField number">{{model.returning}}</h6>
-			</div>
-			<md-divider></md-divider>
-			<div class="listDiv">
-				<h6 class="titleField title">Servicios Terminados</h6><span flex></span>
-				<h6 class="textField number">{{model.delivered + model.returned}}</h6>
-			</div>
-		</div>
-	</md-card>
+<div class="row">
+    <div class="col-lg-6 col-sm-12 col-lg-offset-3">
+        <div class="panel panel-yellow">
+            <div class="panel-heading">
+                Estadísticas
+                <span class="pull-right"><strong><i ng-click="model.reload()"
+                                                    class="fa fa-refresh fa-lg"
+                        style="cursor: pointer"></i></strong></span>
+            </div>
+            <div class="panel-body">
+                <div class="list-group">
+                    <div class="list-group-item">
+                        Número de Usuarios
+                        <span class="pull-right text-muted">
+                            <em>{{model.users}}</em>
+                        </span>
+                    </div>
+                </div>
+                <div class="list-group">
+                    <div class="list-group-item">
+                        Número de Mensajeros
+                        <span class="pull-right text-muted">
+                            <em>{{model.messengers}}</em>
+                        </span>
+                    </div>
+                </div>
+                <div class="list-group">
+                    <div class="list-group-item">
+                        Total de Servicios
+                        <span class="pull-right text-muted">
+                            <em>{{model.allServices}}</em>
+                        </span>
+                    </div>
+                </div>
+                <div class="list-group">
+                    <div class="list-group-item">
+                        Servicios sin aceptar
+                        <span class="pull-right text-muted">
+                            <em>{{model.available}}</em>
+                        </span>
+                    </div>
+                </div>
+                <div class="list-group">
+                    <div class="list-group-item">
+                        Servicios aceptados
+                        <span class="pull-right text-muted">
+                            <em>{{model.accepted}}</em>
+                        </span>
+                    </div>
+                </div>
+                <div class="list-group">
+                    <div class="list-group-item">
+                        Servicios en tránsito
+                        <span class="pull-right text-muted">
+                            <em>{{model.inTransit}}</em>
+                        </span>
+                    </div>
+                </div>
+                <div class="list-group">
+                    <div class="list-group-item">
+                        Servicios retornando
+                        <span class="pull-right text-muted">
+                            <em>{{model.returning}}</em>
+                        </span>
+                    </div>
+                </div>
+                <div class="list-group">
+                    <div class="list-group-item">
+                        Servicios terminados
+                        <span class="pull-right text-muted">
+                            <em>{{model.delivered + model.returned}}</em>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

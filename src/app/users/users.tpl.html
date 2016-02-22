@@ -1,63 +1,96 @@
-<div layout="column" layout-align="center center" class="solo-box">
-	<md-card class="big-form">
-		<div>
-			<md-toolbar>
-			<div class="md-toolbar-tools" layout-align="center center">
-				<span class="md-flex">Usuarios</span>
-			</div>
-			</md-toolbar>
-		</div >
-
-		<div id="addNewMessenger" >
-						<div id="searchUserDiv">
-							<h6 class="titleField">Ingresa el email de un usuario para buscarlo</h6>
-							<md-input-container flex>
-							<label>Ingresa un email para buscar un usuario</label>
-			            	<input type="text" name="email" ng-model="model.emailSearchUser" ng-pattern="/^[A-Za-z0-9._%+]+@[A-Za-z0-9]+\.[A-Za-z]{1,5}$/" >
-			        		</md-input-container>
-
-							<md-button class="blueButton"  ng-click="model.searchUser()">Buscar</md-button>
-						</div>
-						
-
-
-						<md-card class="md-default-theme"  ng-show="model.userInformation">
-							<div>
-								<div id="containerInfoSearch" ng-click="model.goToUserDetails(model.userInformation._id)">
-								<label class="titleInsideCards"> Nombre</label>
-								<h6 class="textInsideCards">{{model.userInformation.name}} {{model.userInformation.lastname}}</h6>
-								<label class="titleInsideCards"> Email</label>
-								<h6 class="textInsideCards">{{model.userInformation.email}}</h6>
-								
-							</div>
-							<div id="colorBox"></div>
-								
-							</div>
-							
-							<div>
-								<md-divider></md-divider>
-								<md-button class="md-primary v-margin-btn" ng-click="model.goToUserDetails(user._id)">Detalles</md-button>
-								<md-button class="md-primary v-margin-btn" ng-click="model.deleteUser(user._id)">Eliminar</md-button>
-								</div>
-						</md-card>
-		</div>
-
-
-	
-		<md-card class="md-default-theme" ng-repeat="user in model.users" >
-				<div id="containerInfo"  ng-click="model.goToUserDetails(user._id)">
-					<label class="titleInsideCards"> Nombre</label>
-					<h6 class="textInsideCards">{{user.name}} {{user.lastname}}</h6>
-					<label class="titleInsideCards"> Email</label>
-					<h6 class="textInsideCards">{{user.email}}</h6>
-					
-				</div>
-				<div>
-					<md-divider></md-divider>
-					<md-button class="md-primary v-margin-btn" ng-click="model.goToUserDetails(user._id)">Detalles</md-button>
-					<md-button class="md-primary v-margin-btn" ng-click="model.deleteUser(user._id)">Eliminar</md-button>
-				</div>
-		</md-card>
-		<md-button class="md-primary v-margin-btn" ng-click="model.getUsers()" ng-show="model.showMoreBool">BUSCAR MAS</md-button>
-	</md-card>
+<div class="row">
+    <div class="col-lg-6 col-sm-12 col-lg-offset-3">
+        <div class="panel panel-yellow">
+            <div class="panel-heading">
+                Usuarios
+            </div>
+            <div class="panel-body">
+                <div class="panel panel-default">
+                    <div class="panel-body text-center">
+                        <div class="list-group">
+                            <div class="list-group-item">
+                                Ingresa el email de un usuario para buscarlo:
+                            </div>
+                            <div class="list-group-item">
+                                <form name="formSearch">
+                                    <input type="email"
+                                           placeholder="email del mensajero"
+                                           name="email"
+                                           required
+                                           ng-model="model.emailSearchUser">
+                                    <button type="button" class="btn btn-success btn-sm"
+                                            ng-disabled="formSearch.$invalid"
+                                            ng-click="model.searchUser()">Buscar
+                                    </button>
+                                </form>
+                                <!--<h6 id="notFound" ng-hide="model.userInformation">El usuario no ha sido encontrado</h6>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default"
+                     ng-show="model.userInformation">
+                    <div class="panel-body">
+                        <div class="list-group"
+                             style="cursor:pointer;"
+                             ng-click="model.goToUserDetails(model.userInformation._id)">
+                            <div class="list-group-item">
+                                <strong>Nombre</strong>
+                                <span class="pull-right text-muted">
+                                    <strong><em>{{model.userInformation.name}}
+                                        {{model.userInformation.lastname}}</em></strong>
+                                </span>
+                            </div>
+                            <div class="list-group-item">
+                                <strong>Email</strong>
+                                <span class="pull-right text-muted">
+                                    <strong><em>{{model.userInformation.email}}</em></strong>
+                                </span>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-danger btn-sm"
+                                ng-click="model.goToUserDetails(model.userInformation._id)">Detalles
+                        </button>
+                        <button type="button" class="btn btn-danger btn-sm"
+                                ng-click="model.deleteUser(model.userInformation._id)">Eliminar
+                        </button>
+                    </div>
+                </div>
+                <div class="panel panel-default"
+                     ng-repeat="user in model.users">
+                    <div class="panel-body">
+                        <div class="list-group"
+                             style="cursor:pointer;"
+                             ng-click="model.goToUserDetails(user._id)">
+                            <div class="list-group-item">
+                                Nombre
+                                <span class="pull-right text-muted">
+                                    <em>{{user.name}} {{user.lastname}}</em>
+                                </span>
+                            </div>
+                            <div class="list-group-item">
+                                Email
+                                <span class="pull-right text-muted">
+                                    <em>{{user.email}}</em>
+                                </span>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-success btn-sm"
+                                ng-click="model.goToUserDetails(user._id)">Detalles
+                        </button>
+                        <button type="button" class="btn btn-success btn-sm"
+                                ng-click="model.deleteUser(user._id)">Eliminar
+                        </button>
+                    </div>
+                </div>
+                <div class="panel panel-default" ng-show="model.showMoreBool">
+                    <div class="panel-body text-center">
+                        <button type="button" class="btn btn-success btn-sm"
+                                ng-click="model.getUsers()">Buscar M&aacute;s
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
