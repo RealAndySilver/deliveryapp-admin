@@ -32,7 +32,7 @@
 
             model.updateStatus = function () {
 
-                var service = model.Messenger.admin_confirmation === true ? MessengerDetailsService.activateMessenger :
+                var service = model.Messenger.admin_confirmation === false ? MessengerDetailsService.activateMessenger :
                     MessengerDetailsService.deactivateMessenger;
 
                 AlertsService.loading();
