@@ -357,6 +357,23 @@
                         url: endpoint + 'Count/DeliveryItems/' + status,
                     });
                 };
+
+                model.activateMessenger = function (idMessenger) {
+                    return $http({
+                        method: 'PUT',
+                        headers: getHeader(),
+                        url: endpoint + 'Admin/ActivateMessenger/' + idMessenger,
+                    });
+                };
+
+                model.deactivateMessenger = function (idMessenger) {
+                    return $http({
+                        method: 'PUT',
+                        headers: getHeader(),
+                        url: endpoint + 'Admin/DeactivateMessenger/' + idMessenger,
+                    });
+                };
+
                 //DeliveryItem/ChangeStatus/Status/:status/:delivery_id
 
 

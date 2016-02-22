@@ -16,7 +16,9 @@
 				AlertsService.loading();
 				MessengerDetailsService.getMessenger($stateParams.id, function(response) {
 					model.Messenger = response.data;
-
+                    if(!model.Messenger.admin_confirmation){
+                        model.Messenger.admin_confirmation = false;
+                    }
 					console.log(model.Messenger);
 					AlertsService.cancel();
 					if (!response.data) {
@@ -27,6 +29,23 @@
 				});
 			};
 			model.getMessenger();
+
+            model.updateStatus = function () {
+				console.log(model.Messenger);
+                var service = model.Messenger.admin_confirmation === true ? MessengerDetailsService.activateMessenger :
+                    MessengerDetailsService.deactivateMessenger;
+
+                AlertsService.loading();
+                service(model.Messenger["_id"], function (response) {
+                    AlertsService.cancel();
+
+                    if (response.response) {
+                        AlertsService.showAlert("Datos actualizados correctamente", "");
+                    } else {
+                        AlertsService.showAlert(response.msg, "");
+                    }
+                });
+            };
 
 			model.updateMessengerProfile = function() {
 
