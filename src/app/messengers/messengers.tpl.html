@@ -47,6 +47,15 @@
                                     <strong><em>{{model.messenger_info.email}}</em></strong>
                                 </span>
                             </div>
+                            <div class="list-group-item">
+                                <strong>Estado</strong>
+                                <span class="pull-right text-muted">
+                                    <strong>
+                                    <em ng-if="!model.messenger_info.admin_confirmation"><span class="label label-danger">Inactivo</span></em>
+                                    <em ng-if="!!model.messenger_info.admin_confirmation"><span class="label label-success">Activo</span></em>
+                                    </strong>
+                                </span>
+                            </div>
                         </div>
                         <button type="button" class="btn btn-danger btn-sm"
                                 ng-click="model.goToMessengerDetails(model.messenger_info._id)">Detalles
@@ -72,6 +81,15 @@
                                 Email
                                 <span class="pull-right text-muted">
                                     <em>{{messenger.email}}</em>
+                                </span>
+                            </div>
+                            <div class="list-group-item">
+                                Estado
+                                <span class="pull-right text-muted">
+                                    <strong>
+                                    <em ng-if="!messenger.admin_confirmation"><span class="label label-danger">Inactivo</span></em>
+                                    <em ng-if="messenger.admin_confirmation"><span class="label label-success">Activo</span></em>
+                                    </strong>
                                 </span>
                             </div>
                         </div>
