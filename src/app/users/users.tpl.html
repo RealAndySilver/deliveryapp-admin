@@ -14,7 +14,7 @@
                             <div class="list-group-item">
                                 <form name="formSearch">
                                     <input type="email"
-                                           placeholder="email del mensajero"
+                                           placeholder="email del usuario"
                                            name="email"
                                            required
                                            ng-model="model.emailSearchUser">
@@ -22,6 +22,8 @@
                                             ng-disabled="formSearch.$invalid"
                                             ng-click="model.searchUser()">Buscar
                                     </button>
+                                    <br>
+                                    <label class="text-danger" ng-bind="model.errorSearch"></label>
                                 </form>
                                 <!--<h6 id="notFound" ng-hide="model.userInformation">El usuario no ha sido encontrado</h6>-->
                             </div>

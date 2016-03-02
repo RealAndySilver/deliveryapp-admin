@@ -1,129 +1,436 @@
+<div class="row">
+    <div class="col-lg-6 col-sm-12 col-lg-offset-3">
+        <!--- información del  cliente --->
+        <div class="panel panel-yellow">
+            <div class="panel-heading">
+                Detalles del Servicio
+            </div>
+            <div class="panel-body">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="list-group"
+                             style="cursor:pointer;">
+                            <div class="list-group-item">
+                                <strong>Nombre del Usuario</strong>
+                                <span class="pull-right text-muted">
+                                    <strong><em>
+                                        {{model.deliveryItemInfo.user_info.name}}
+                                        {{model.deliveryItemInfo.user_info.lastname}}
+                                    </em></strong>
+                                </span>
+                            </div>
+
+                            <div class="list-group-item">
+                                <strong>Nombre de Servicio</strong>
+                                <span class="pull-right text-muted">
+                                    <strong><em>
+                                        {{model.deliveryItemInfo.item_name}}
+                                    </em></strong>
+                                </span>
+                            </div>
+
+                            <div class="list-group-item">
+                                <strong>Lugar de Recogida</strong>
+                                <span class="pull-right text-muted">
+                                    <strong><em>
+                                        {{model.deliveryItemInfo.pickup_object.address}}
+                                    </em></strong>
+                                </span>
+                            </div>
+
+                            <div class="list-group-item">
+                                <strong>Lugar de Entrega</strong>
+                                <span class="pull-right text-muted">
+                                    <strong><em>
+                                        {{model.deliveryItemInfo.delivery_object.address}}
+                                    </em></strong>
+                                </span>
+                            </div>
+
+                            <div class="list-group-item">
+                                <strong>Fecha de Recogida</strong>
+                                <span class="pull-right text-muted">
+                                    <strong><em>
+                                        {{model.pickupDate | date:'dd/MM/yyyy hh:mma'}}
+                                    </em></strong>
+                                </span>
+                            </div>
+
+                            <div class="list-group-item">
+                                <strong>Valor Aproximado del Servicio</strong>
+                                <span class="pull-right text-muted">
+                                    <strong><em>
+                                        {{model.deliveryItemInfo.price_to_pay}}
+                                    </em></strong>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--- información del  cliente --->
+
+
+        <!--- información del  mensajero --->
+        <div class="panel panel-yellow" ng-show="model.deliveryItemInfo.messenger_info">
+            <div class="panel-heading">
+                Información del mensajero
+            </div>
+            <div class="panel-body">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="list-group"
+                             style="cursor:pointer;">
+
+                            <div class="list-group-item">
+                                <strong>Nombre del Mensajero</strong>
+                                <span class="pull-right text-muted">
+                                    <strong><em>
+                                        {{model.deliveryItemInfo.messenger_info.name}}
+                                        {{model.deliveryItemInfo.messenger_info.lastname}}
+                                    </em></strong>
+                                </span>
+                            </div>
+
+                            <div class="list-group-item">
+                                <strong>Teléfono</strong>
+                                <span class="pull-right text-muted">
+                                    <strong><em>
+                                        {{model.deliveryItemInfo.messenger_info.mobilephone}}
+                                    </em></strong>
+                                </span>
+                            </div>
+
+                            <div class="list-group-item">
+                                <strong>ETA</strong>
+                                <span class="pull-right text-muted">
+                                    <strong><em>
+                                        {{model.leftTime}} min
+                                    </em></strong>
+                                </span>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-danger btn-sm"
+                                ng-click="model.removeMessenger()">Eliminar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--- información del mensajero --->
+
+
+        <!--- panel agregar mensajero --->
+        <div class="panel panel-yellow" ng-show="!model.messengerBool">
+            <div class="panel-heading">
+                Asignar Mensajero
+            </div>
+            <div class="panel-body">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="list-group">
+                            <div class="list-group-item text-center">
+                                Estes servicio no ha sido aceptado aún, si deseas asignar este servicio a un mensajero,
+                                buscalo por su email y luego presiona añadir
+                            </div>
+                            <div class="list-group-item">
+                                <form name="formSearch" ng-submit="model.searchMessenger()">
+                                    <input class="form-control" type="text" name="email"
+                                           ng-model="model.emailSearchMessenger"
+                                           ng-pattern="/^[A-Za-z0-9._%+]+@[A-Za-z0-9]+\.[A-Za-z]{1,5}$/">
+                                    <button class="btn btn-success btn-sm margin-top-1rem"
+                                            ng-disabled="formSearch.$invalid">
+                                        Buscar
+                                    </button>
+                                </form>
+                            </div>
+
+                            <div class="panel panel-default" ng-show="model.messenger_info">
+                                <div class="panel-body">
+                                    <div class="list-group">
+                                        <div class="list-group-item text-center">
+                                            Datos del mensajero encontrado
+                                        </div>
+
+                                        <div class="list-group-item">
+                                            <strong>Nombre:</strong>
+                                            <span class="pull-right text-muted">
+                                                <strong><em>
+                                                    {{model.messenger_info.name}} {{model.messenger_info.lastname}}
+                                                </em></strong>
+                                            </span>
+                                        </div>
+
+                                        <div class="list-group-item">
+                                            <strong>Celular:</strong>
+                                            <span class="pull-right text-muted">
+                                                <strong><em>
+                                                    {{model.messenger_info.mobilephone}}
+                                                </em></strong>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-success" ng-click="model.assingMessenger()"
+                                            ng-show="model.messenger_info">Asignar
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--- panel agregar mensajero --->
+
+        <!--- panel listado de fotos --->
+        <div class="panel panel-yellow" ng-show="model.imageBool">
+            <div class="panel-heading">
+                Fotos del servicio
+            </div>
+            <div class="panel-body">
+                <div class="panel panel-default">
+                    <div class="panel-body text-center">
+                        <img class="img-thumbnail margin-center" ng-repeat="image in model.images" ng-src="{{image.url}}"
+                             ng-click="model.showBigImage(image.url)">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--- panel listado de fotos --->
+
+        <!--- panel cambiar estado --->
+        <!--- información del estado del servicio --->
+        <div class="panel panel-yellow">
+            <div class="panel-heading">
+                Estado actual del Servicio:
+            </div>
+            <div class="panel-body">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="list-group">
+
+                            <div class="list-group-item">
+                                <strong>{{model.serviceStatus}}</strong>
+                                <span class="pull-right text-muted">
+                                    <strong ng-show="model.setAvailableButtonBool"><em>
+                                        Razón: {{model.deliveryItemInfo.abort_reason}}
+                                    </em></strong>
+                                </span>
+                            </div>
+
+                            <div>
+                                <div class="panel-heading">Cambiar el estado del servicio</div>
+                                <div class="panel-body">
+                                    <div class="panel panel-yellow">
+                                        <div class="panel-heading">
+                                            Asignar estado del servicio
+                                        </div>
+                                        <div class="panel-body" ng-show="!model.deliveryItemInfo.roundtrip">
+                                            <div class="panel panel-default">
+                                                <div class="panel-body">
+                                                    <div class="list-group">
+                                                        <div class="list-group-item">
+                                                            <strong>Disponible</strong>
+                                                            <span class="pull-right text-muted">
+                                                                <strong><em>
+                                                                    <label class="cursor-pointer" for="state1-available">Disponible</label>
+                                                                    <input class="cursor-pointer" id="state1-available" ng-model="model.newState" type="radio"
+                                                                           value="available"/>
+
+                                                                </em></strong>
+                                                            </span>
+                                                        </div>
+                                                        <div class="list-group-item">
+                                                            <strong>Aceptado</strong>
+                                                            <span class="pull-right text-muted">
+                                                                <strong><em>
+                                                                    <label class="cursor-pointer" for="state1-accepted">Aceptado</label>
+                                                                    <input class="cursor-pointer" id="state1-accepted" ng-model="model.newState" type="radio"
+                                                                           value="accepted"/>
+                                                                </em></strong>
+                                                            </span>
+                                                        </div>
+
+                                                        <div class="list-group-item">
+                                                            <strong>En tránsito</strong>
+                                                            <span class="pull-right text-muted">
+                                                                <strong><em>
+                                                                    <label class="cursor-pointer" for="state1-in-intransit">En tránsito</label>
+                                                                    <input class="cursor-pointer" id="state1-in-intransit" ng-model="model.newState" type="radio"
+                                                                           value="in-transit"/>
+                                                                </em></strong>
+                                                            </span>
+                                                        </div>
+
+                                                        <div class="list-group-item">
+                                                            <strong>Entregado</strong>
+                                                                <span class="pull-right text-muted">
+                                                                    <strong><em>
+                                                                        <label class="cursor-pointer" for="state1-delivered">Entregado</label>
+                                                                        <input class="cursor-pointer" id="state1-delivered" ng-model="model.newState" type="radio"
+                                                                               value="delivered"/>
+                                                                    </em></strong>
+                                                                </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel-body" ng-show="model.deliveryItemInfo.roundtrip">
+                                            <div class="panel panel-default">
+                                                <div class="panel-body">
+                                                    <div class="list-group">
+                                                        <div class="list-group-item">
+                                                            <strong>Disponible</strong>
+                                                            <span class="pull-right text-muted">
+                                                                <strong><em>
+                                                                    <label class="cursor-pointer" for="state2-available">Disponible</label>
+                                                                    <input class="cursor-pointer" id="state2-available" ng-model="model.newState" type="radio"
+                                                                           value="available"/>
+                                                                </em></strong>
+                                                            </span>
+                                                        </div>
+                                                        <div class="list-group-item">
+                                                            <strong>Aceptado</strong>
+                                                            <span class="pull-right text-muted">
+                                                                <strong><em>
+                                                                    <label class="cursor-pointer" for="state2-accepted">Aceptado</label>
+                                                                    <input class="cursor-pointer" id="state2-accepted" ng-model="model.newState" type="radio"
+                                                                           value="accepted"/>
+                                                                </em></strong>
+                                                            </span>
+                                                        </div>
+                                                        <div class="list-group-item">
+                                                            <strong>En tránsito</strong>
+                                                            <span class="pull-right text-muted">
+                                                                <strong><em>
+                                                                    <label class="cursor-pointer" for="state2-returning">Volviendo</label>
+                                                                    <input class="cursor-pointer" id="state2-returning" ng-model="model.newState" type="radio"
+                                                                           value="returning"/>
+                                                                </em></strong>
+                                                            </span>
+                                                        </div>
+                                                        <div class="list-group-item">
+                                                            <strong>Entregado</strong>
+                                                            <span class="pull-right text-muted">
+                                                                <strong><em>
+                                                                    <label class="cursor-pointer" for="state2-returned">Retornado</label>
+                                                                    <input class="cursor-pointer" id="state2-returned" ng-model="model.newState" type="radio"
+                                                                           value="returned"/>
+                                                                </em></strong>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button class="margin-1rem btn btn-success" ng-click="model.changeStatus()">Poner estado
+                                        </button>
+                                        <button class="margin-1rem btn btn-danger" ng-click="model.cancelService()"
+                                                ng-show="model.deliveryItemInfo.status!== 'available'">Abortar Servicio
+                                        </button>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--- información del estado del servicio --->
+        <!--- panel cambiar estado --->
+
+
+    </div>
+</div>
+<!-- código antiguo
 <div layout="column" layout-align="center center" class="solo-box">
-	<md-card class="big-form">
-		<div>
-			<md-toolbar>
-			    <div class="md-toolbar-tools" layout-align="center center">
-			    	<span class="md-flex" id="titleServiceDetails">Detalles del Servicio</span>
-			    	
-			    	<md-button id="reloadButton" ng-click="model.reload()">
-			    		<i class="fa fa-refresh  fa-lg"></i>
-			    	</md-button>
-			    </div>
-			</md-toolbar>
-		</div>
+    <md-card class="big-form">
+        <div>
+            <md-toolbar>
+                <div class="md-toolbar-tools" layout-align="center center">
+                    <span class="md-flex" id="titleServiceDetails">Detalles del Servicio</span>
 
-		
-		
-		<md-card id="serviceDetailsContainer" >
-			<label class="titleField">Nombre del Usuario</label>
-			<h6 class="textField" >{{model.deliveryItemInfo.user_info.name}} {{model.deliveryItemInfo.user_info.lastname}}</h6>
-			<md-divider></md-divider>
-
-			<label class="titleField">Nombre de Servicio</label>
-			<h6 class="textField" >{{model.deliveryItemInfo.item_name}}</h6>
-			<md-divider></md-divider>
-
-			<label class="titleField">Lugar de Recogida</label>
-			<h6  class="textField" >{{model.deliveryItemInfo.pickup_object.address}}</h6>
-			<md-divider></md-divider>
-
-			<label class="titleField">Lugar de Entrega</label>
-			<h6  class="textField" >{{model.deliveryItemInfo.delivery_object.address}}</h6>
-			<md-divider></md-divider>
-
-			<label class="titleField">Fecha de Recogida</label>
-			<h6  class="textField" >{{model.pickupDate | date:'dd/MM/yyyy hh:mma'}}</h6>
-			<md-divider></md-divider>
-
-			<label class="titleField">Valor Aproximado del Servicio</label>
-			<h6  class="textField" >{{model.deliveryItemInfo.price_to_pay}}</h6>
-		</md-card>
-
-		
-
-		<md-card id="messengerContainer" >
-
-			<div id="infoContainer" ng-show="model.messengerBool">
-				<h4>Información del mensajero</h4>
-
-				<label class="titleField">Nombre del Mensajero</label>
-				<h6 class="textField" >{{model.deliveryItemInfo.messenger_info.name}} {{model.deliveryItemInfo.messenger_info.lastname}}</h6>
-				<md-divider></md-divider>
-
-				<label class="titleField">Teléfono</label>
-				<h6 class="textField" >{{model.deliveryItemInfo.messenger_info.mobilephone}}</h6>
-				<md-divider></md-divider>
-
-				<label class="titleField">ETA</label>
-				<h6 class="textField" >{{model.leftTime}} min</h6>
-
-				<md-button id="redButton"  ng-click="model.removeMessenger()">Remover mensajero</md-button>
-			</div>
-
-			<div id="addNewMessenger" ng-show="!model.messengerBool">
-				<h6 class="titleField">Estes servicio no ha sido aceptado aún, si deseas asignar este servicio a un mensajero, buscalo por su email y luego presiona añadir</h6>
-				<md-input-container flex>
-					<label>Ingresa un email para buscar un mensajero</label>
-	            	<input type="text" name="email" ng-model="model.emailSearchMessenger" ng-pattern="/^[A-Za-z0-9._%+]+@[A-Za-z0-9]+\.[A-Za-z]{1,5}$/" >
-	        	</md-input-container>
-
-				<md-button class="blueButton"  ng-click="model.searchMessenger()">Buscar</md-button>
-
-				<div ng-show="model.messenger_info">
-					<label>Datos del mensajero buscado</label>
-					<br/>
-					<label>Nombre: {{model.messenger_info.name}} {{model.messenger_info.lastname}}</label>
-					<br/>
-					<label>Celular: {{model.messenger_info.mobilephone}}</label>
-				</div>
-
-				<md-button class="blueButton"  ng-click="model.assingMessenger()" ng-show="model.messenger_info">Asignar</md-button>
+                    <md-button id="reloadButton" ng-click="model.reload()">
+                        <i class="fa fa-refresh  fa-lg"></i>
+                    </md-button>
+                </div>
+            </md-toolbar>
+        </div>
 
 
-				
+        <md-card id="messengerContainer">
+            <div id="addNewMessenger" ng-show="!model.messengerBool">
+                <h6 class="titleField">Estes servicio no ha sido aceptado aún, si deseas asignar este servicio a un
+                    mensajero, buscalo por su email y luego presiona añadir</h6>
+                <md-input-container flex>
+                    <label>Ingresa un email para buscar un mensajero</label>
+                    <input type="text" name="email" ng-model="model.emailSearchMessenger"
+                           ng-pattern="/^[A-Za-z0-9._%+]+@[A-Za-z0-9]+\.[A-Za-z]{1,5}$/">
+                </md-input-container>
 
-			</div>
-			
-			
-		</md-card>
+                <md-button class="blueButton" ng-click="model.searchMessenger()">Buscar</md-button>
+
+                <div ng-show="model.messenger_info">
+                    <label>Datos del mensajero buscado</label>
+                    <br/>
+                    <label>Nombre: {{model.messenger_info.name}} {{model.messenger_info.lastname}}</label>
+                    <br/>
+                    <label>Celular: {{model.messenger_info.mobilephone}}</label>
+                </div>
+
+                <md-button class="blueButton" ng-click="model.assingMessenger()" ng-show="model.messenger_info">
+                    Asignar
+                </md-button>
 
 
-		<md-card id="photoContainer" ng-show="model.imageBool">
-			<label class="titleField">Fotos del Servicio</label>
-			<div>
-				<ul class="gallery-container" style="width:{{model.images.length * 100}}px">
-					<li class="img-resize" ng-repeat="image in model.images">
-						<img   ng-src="{{image.url}}" ng-click="model.showBigImage(image.url)">
-					</li>
-				</ul>
-			</div>
-							
-		</md-card>
-		<md-card id="serviceStatusContainer" >
-			<label class="titleField">Estado actual del Servicio:</label><br/>
-			<h6 id="serviceStatus" ng-model="model.serviceStatus">{{model.serviceStatus}}</h6><br/>
-			<h6 ng-show="model.setAvailableButtonBool" class="textField">Razón: {{model.deliveryItemInfo.abort_reason}}</h6>
-		
-	    <md-radio-group ng-model="model.newState" ng-show="!model.deliveryItemInfo.roundtrip">
-	      <md-radio-button value="available" class="md-primary"> Disponible </md-radio-button>
-	      <md-radio-button value="accepted"> Aceptado </md-radio-button>
-	      <md-radio-button value="in-transit"> En tránsito</md-radio-button>
-	      <md-radio-button value="delivered"> Entregado </md-radio-button>
-	      <!--<md-radio-button value="aborted"> Abortado </md-radio-button>-->
-	    </md-radio-group>
+            </div>
 
-	    <md-radio-group ng-model="model.newState" ng-show="model.deliveryItemInfo.roundtrip">
-	      <md-radio-button value="available" class="md-primary"> Disponible </md-radio-button>
-	      <md-radio-button value="accepted"> Aceptado </md-radio-button>
-	      <md-radio-button value="in-transit"> En tránsito</md-radio-button>
-	      <md-radio-button value="returning"> Volviendo </md-radio-button>
-	      <md-radio-button value="returned"> Retornado </md-radio-button>
-	      <!--<md-radio-button value="aborted"> Abortado </md-radio-button>-->
-	    </md-radio-group>
-	    
 
-		<md-button id="blueButton" ng-click="model.changeStatus()" >Poner estado </md-button>
+        </md-card>
 
-		<md-button id="redButton" ng-click="model.cancelService()" ng-show="model.deliveryItemInfo.status!== 'available'">Abortar Servicio</md-button>
-	</md-card>
-	<div>
+
+        <md-card id="photoContainer" ng-show="model.imageBool">
+            <label class="titleField">Fotos del Servicio</label>
+            <div>
+                <ul class="gallery-container" style="width:{{model.images.length * 100}}px">
+                    <li class="img-resize" ng-repeat="image in model.images">
+                        <img ng-src="{{image.url}}" ng-click="model.showBigImage(image.url)">
+                    </li>
+                </ul>
+            </div>
+        </md-card>
+        <md-card id="serviceStatusContainer">
+            <label class="titleField">Estado actual del Servicio:</label><br/>
+            <h6 id="serviceStatus" ng-model="model.serviceStatus">{{model.serviceStatus}}</h6><br/>
+            <h6 ng-show="model.setAvailableButtonBool" class="textField">Razón:
+                {{model.deliveryItemInfo.abort_reason}}</h6>
+
+            <md-radio-group ng-model="model.newState" ng-show="!model.deliveryItemInfo.roundtrip">
+                <md-radio-button value="available" class="md-primary"> Disponible</md-radio-button>
+                <md-radio-button value="accepted"> Aceptado</md-radio-button>
+                <md-radio-button value="in-transit"> En tránsito</md-radio-button>
+                <md-radio-button value="delivered"> Entregado</md-radio-button>
+            </md-radio-group>
+
+            <md-radio-group ng-model="model.newState" ng-show="model.deliveryItemInfo.roundtrip">
+                <md-radio-button value="available" class="md-primary"> Disponible</md-radio-button>
+                <md-radio-button value="accepted"> Aceptado</md-radio-button>
+                <md-radio-button value="in-transit"> En tránsito</md-radio-button>
+                <md-radio-button value="returning"> Volviendo</md-radio-button>
+                <md-radio-button value="returned"> Retornado</md-radio-button>
+            </md-radio-group>
+
+
+            <md-button id="blueButton" ng-click="model.changeStatus()">Poner estado</md-button>
+
+            <md-button id="redButton" ng-click="model.cancelService()"
+                       ng-show="model.deliveryItemInfo.status!== 'available'">Abortar Servicio
+            </md-button>
+        </md-card>
+        <div>
+-->

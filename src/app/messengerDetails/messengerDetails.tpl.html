@@ -69,6 +69,71 @@
                         </button>
                     </div>
                 </form>
+
+                <div class="list-group margin-top-1rem">
+                    <div class="list-group-item text-center">
+                        <b>Documentos</b>
+                    </div>
+                    <div class="list-group-item text-center" ng-if="!model.Messenger.documents && model.finishLoading">
+                        <i class="fa fa-exclamation-triangle f24"></i>
+                        NO se encontro ningún archivo asociado al mensajero
+                    </div>
+
+                    <div class="list-group-item" ng-if="model.Messenger.documents">
+                        <strong>Cedula</strong>
+                        <span class="pull-right text-muted">
+                            <strong ng-show="model.Messenger.documents.cedula"><em>
+                                <a ng-href="{{model.Messenger.documents.cedula.url}}" target="_blank">
+                                    <i class="fa fa-eye f24"></i>
+                                </a>
+                            </em></strong>
+                        </span>
+                    </div>
+
+                    <div class="list-group-item" ng-if="model.Messenger.documents">
+                        <strong>Foto placa</strong>
+                        <span class="pull-right text-muted">
+                            <strong ng-show="model.Messenger.documents.foto_placa"><em>
+                                <a ng-href="{{model.Messenger.documents.foto_placa.url}}" target="_blank">
+                                    <i class="fa fa-eye f24"></i>
+                                </a>
+                            </em></strong>
+                        </span>
+                    </div>
+
+                    <div class="list-group-item" ng-if="model.Messenger.documents">
+                        <strong>Licencia</strong>
+                        <span class="pull-right text-muted">
+                            <strong ng-show="model.Messenger.documents.licencia"><em>
+                                <a ng-href="{{model.Messenger.documents.licencia.url}}" target="_blank">
+                                    <i class="fa fa-eye f24"></i>
+                                </a>
+                            </em></strong>
+                        </span>
+                    </div>
+
+                    <div class="list-group-item" ng-if="model.Messenger.documents">
+                        <strong>Soat</strong>
+                        <span class="pull-right text-muted">
+                            <strong ng-show="model.Messenger.documents.soat"><em>
+                                <a ng-href="{{model.Messenger.documents.soat.url}}" target="_blank">
+                                    <i class="fa fa-eye f24"></i>
+                                </a>
+                            </em></strong>
+                        </span>
+                    </div>
+
+                    <div class="list-group-item" ng-if="model.Messenger.documents">
+                        <strong>Tarjeta propiedad</strong>
+                        <span class="pull-right text-muted">
+                            <strong ng-show="model.Messenger.documents.tarjeta_propiedad"><em>
+                                <a ng-href="{{model.Messenger.documents.tarjeta_propiedad.url}}" target="_blank">
+                                    <i class="fa fa-eye f24"></i>
+                                </a>
+                            </em></strong>
+                        </span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

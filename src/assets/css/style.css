@@ -1575,3 +1575,10 @@ button:focus, a:focus {
     text-decoration: none;
     cursor: pointer;
 }
+
+.margin-1rem{ margin: 1rem !important; }
+.margin-top-1rem{ margin-top: 1rem !important; }
+.margin-bottom-1rem{ margin-bottom: 1rem !important; }
+.f48{ font-size: 48px }
+.f24{ font-size: 24px }
+.cursor-pointer{ cursor: pointer }

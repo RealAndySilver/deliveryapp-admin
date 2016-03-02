@@ -13,17 +13,20 @@
 		function init() {
 
 			model.getUser = function() {
-				console.log("ENTRO A DETALLES", $stateParams.id);
-				AlertsService.loading();
+				/*console.log("ENTRO A DETALLES", $stateParams.id);*/
+				/*AlertsService.loading();*/
+                $scope.BootstrapLoading.show(true);
 				UserDetailsService.getUser($stateParams.id, function(response) {
 					model.User = response.data;
-
-					console.log(model.User);
-					AlertsService.cancel();
+                    $scope.BootstrapLoading.show(false);
+					/*console.log(model.User);*/
+					/*AlertsService.cancel();*/
 					if (!response.data) {
-						AlertsService.showAlert(response.msg, "");
+						/*AlertsService.showAlert(response.msg, "");*/
+                        $scope.BootstrapLoading.show(response.msg, "");
 					} else if (model.User.length === 0) {
-						//AlertsService.showAlert("No tienes servicios Activos en este momento", "");
+						/*AlertsService.showAlert("No tienes servicios Activos en este momento", "");*/
+                        $scope.BootstrapLoading.show("No tienes servicios Activos en este momento", "");
 					}
 				});
 			};
@@ -32,28 +35,28 @@
 
 			model.updateProfile = function() {
 				if ($scope.profileForm.$valid) {
-					AlertsService.loading();
-
-					console.log("NEW NAME", model.User.name);
+					/*AlertsService.loading();*/
+                    $scope.BootstrapLoading.show(true);
 					UserDetailsService.updateProfile(model.User["_id"], model.User.name, model.User.lastname, model.User.mobilephone, function(response) {
-						console.log(response);
-						AlertsService.cancel();
-						///
+                        $scope.BootstrapLoading.show(false);
+						/*AlertsService.cancel();*/
 						if (response.response) {
-							AlertsService.showAlert("Datos actualizados correctamente", "");
+							/*AlertsService.showAlert("Datos actualizados correctamente", "");*/
+                            $scope.BootstrapLoading.show("Datos actualizados correctamente", "");
 						} else {
-							AlertsService.showAlert(response.msg, "");
+							/*AlertsService.showAlert(response.msg, "");*/
+                            $scope.BootstrapLoading.show(response.msg, "");
 						}
 					});
 				} else {
-					AlertsService.showSimpleAlert("Completa todos los campos por favor");
+					/*AlertsService.showSimpleAlert("Completa todos los campos por favor");*/
+                    $scope.BootstrapLoading.show("Completa todos los campos por favor");
 				}
 
 
 			};
 
 			model.getActiveServices = function() {
-				console.log("ENTRO A GETACTIVESERVICES");
 				UserDetailsService.getActiveServices($stateParams.id, function(response) {
 					model.activeServices = response.data;
 				});
@@ -151,39 +154,43 @@
 				var availableServices = {};
 				var boolea = false;
 				var i = 0;
-				for (i; i < model.activeServices.length; i++) {
-					if (model.activeServices[i].status === "available") {
-						availableServices.p = model.activeServices[i];
-						break;
-					}
-				}
+                if(model.activeServices) {
+                    for (i; i < model.activeServices.length; i++) {
+                        if (model.activeServices[i].status === "available") {
+                            availableServices.p = model.activeServices[i];
+                            break;
+                        }
+                    }
 
-				if (availableServices.p) {
-					boolea = true;
-				} else {
-					boolea = false;
-				}
+                    if (availableServices.p) {
+                        boolea = true;
+                    } else {
+                        boolea = false;
+                    }
 
-				return boolea;
+                    return boolea;
+                }
 			};
 			model.verifyAceptedservices = function() {
 				var acceptedServices = {};
 				var boolea = false;
 				var i = 0;
-				for (i; i < model.activeServices.length; i++) {
-					if (model.activeServices[i].status !== "available") {
-						acceptedServices.p = model.activeServices[i];
-						break;
-					}
-				}
+                if(model.activeServices){
+                    for (i; i < model.activeServices.length; i++) {
+                        if (model.activeServices[i].status !== "available") {
+                            acceptedServices.p = model.activeServices[i];
+                            break;
+                        }
+                    }
 
-				if (acceptedServices.p) {
-					boolea = true;
-				} else {
-					boolea = false;
-				}
+                    if (acceptedServices.p) {
+                        boolea = true;
+                    } else {
+                        boolea = false;
+                    }
 
-				return boolea;
+                    return boolea;
+                }
 			};
 
 

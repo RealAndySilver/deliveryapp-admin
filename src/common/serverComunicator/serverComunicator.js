@@ -15,7 +15,6 @@
                     var pass = sessionStorage.getItem('pass');
                     //pass = "bbb";
                     var token = sessionStorage.token;
-                    console.log("Token from local ", token);
                     return {
                         type: 'admin'
                     };

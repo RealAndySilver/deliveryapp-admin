@@ -10,7 +10,7 @@
 
             var toBoolean = function(strBool){
                 return strBool==="true"?true:(strBool==="false"?false:false);
-            }
+            };
 
             scope.BootstrapLoading = {
                 config: {
@@ -21,10 +21,13 @@
                     active: toBoolean(attrs.active)?"active":""
                 },
                 show: function(isShow){
-                    this.config.show = isShow;
-                    console.log("muestre", isShow);
+                    var self = this;
+                    $timeout(function(){
+                        self.config.show = isShow;
+                    },0);
                 }
             };
+
 
         };
         return {
