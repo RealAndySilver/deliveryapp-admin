@@ -215,6 +215,17 @@
                     });
                 };
 
+                model.getServicesByType = function(type,sort){
+                    return $http({
+                        method : 'GET',
+                        headers : getHeader(),
+                        url : ( sort ?
+                            endpoint + 'DeliveryItems/'+type+"/"+sort :
+                            endpoint + 'DeliveryItems/'+type
+                        )
+                    });
+                };
+
                 model.getCompletedDeliveryItems = function (idUser) {
                     return $http({
                         method: 'GET',

@@ -245,3 +245,7 @@ span.login-checkbox > input[type='checkbox']:checked + label {
 	}
 	
 }
+
+.panel-heading h4.panel-title *{
+    color: #FFF;
+}
