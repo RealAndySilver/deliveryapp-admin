@@ -13,9 +13,14 @@
 
                 model.loadServicesAvailable = function (sort) {
                     loadServicesByType('available', sort, function (response) {
-                        model.services.available = response.data;
-                        console.log('get services response ', response);
-                        /*console.log(model.services.available);*/
+                        $scope.BootstrapLoading.show(false);
+                        if (response.response) { 
+                            model.services.available = response.data;
+                            console.log('get services response ', response);
+                            /*console.log(model.services.available);*/
+                        } else {
+                            $scope.BootstrapModal.show('No existen servicios con los parámetros seleccionados.');
+                        }
                     });
                 };
 
