@@ -2,7 +2,7 @@
 
     module.service('ServerComunicator', ['$http', function ($http) {
             var model = this;
-            var endpoint = "http://192.241.187.135:2000/api_1.0/";
+            var endpoint = "http://192.241.187.135:8080/api_1.0/";
             //var endpoint = "http://andres.local:2000/api_1.0/";
 
             var SORT_LIMIT = 10;
@@ -13,7 +13,6 @@
                 function getHeader() {
                     var email = sessionStorage.getItem('email');
                     var pass = sessionStorage.getItem('pass');
-                    //pass = "bbb";
                     var token = sessionStorage.token;
                     return {
                         type: 'admin'
@@ -64,8 +63,6 @@
                         url: endpoint + 'User' + '/NewPassword/' + token
                     });
                 };
-
-
 
                 model.requestMessenger = function (delivery) {
                     return $http({
@@ -256,6 +253,7 @@
                         url: endpoint + 'Messengers/' + JSON.stringify(sort),
                     });
                 };
+                
                 model.getAllMessengers = function () {
                     return $http({
                         method: 'GET',

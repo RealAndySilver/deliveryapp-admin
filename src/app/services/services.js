@@ -14,6 +14,7 @@
                 model.loadServicesAvailable = function (sort) {
                     loadServicesByType('available', sort, function (response) {
                         model.services.available = response.data;
+                        console.log('get services response ', response);
                         /*console.log(model.services.available);*/
                     });
                 };
@@ -59,6 +60,7 @@
                         /*console.log(model.services.cancelleds);*/
                     });
                 };
+
                 model.loadServiceAborted = function(sort){
                     loadServicesByType('aborted', sort, function (response) {
                         model.services.aborteds = response.data;
@@ -75,13 +77,13 @@
 
                 $scope.BootstrapLoading.show(true);
                 model.loadServicesAvailable();
-                model.loadServicesAccepted();
+                /*model.loadServicesAccepted();
                 model.loadServicesInTransit();
                 model.loadServiceDelivered();
                 model.loadServiceReturning();
                 model.loadServiceReturned();
                 model.loadServiceCancelled();
-                model.loadServiceAborted();
+                model.loadServiceAborted();*/
             };
 
             init();
