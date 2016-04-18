@@ -30,7 +30,7 @@
                     }
 
                     model.deliveryItemInfo = response.data;
-                    /*console.log("EL deliveryItemInfo", model.deliveryItemInfo);*/
+                    console.log("EL deliveryItemInfo", model.deliveryItemInfo);
                     model.serviceStatus = traslateStatusFunction(response.data["status"]);
                     model.pickupDate = new Date(model.deliveryItemInfo["pickup_time"]);
                     model.estimated = new Date(model.deliveryItemInfo["estimated"]);

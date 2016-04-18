@@ -27,7 +27,7 @@
                             $scope.BootstrapModal.show(response.msg, "");
                         } else if (model.users.length === 0) {
                             //AlertsService.showAlert("No se encuentran usuariso registrados en este momento.", "");
-                            $scope.BootstrapModal.show("No se encuentran usuariso registrados en este momento.", "");
+                            $scope.BootstrapModal.show("No se encuentran usuarios registrados en este momento.", "");
                         }
                     });
                 };
@@ -53,7 +53,7 @@
                             $state.go($state.current,{},{ reload:true });
                         } else if (model.users.length === 0) {
                             /*AlertsService.showAlert("No tienes servicios Activos en este momento", "");*/
-                            $scope.BootstrapModal.show("No tienes servicios Activos en este momento", "");
+                            $scope.BootstrapModal.show("No tienes Servicios Activos en este momento", "");
                         }
                     });
                 };

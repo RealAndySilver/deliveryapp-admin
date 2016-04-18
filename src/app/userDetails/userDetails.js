@@ -26,7 +26,7 @@
                         $scope.BootstrapLoading.show(response.msg, "");
 					} else if (model.User.length === 0) {
 						/*AlertsService.showAlert("No tienes servicios Activos en este momento", "");*/
-                        $scope.BootstrapLoading.show("No tienes servicios Activos en este momento", "");
+                        $scope.BootstrapLoading.show("No tienes Servicios Activos en este momento", "");
 					}
 				});
 			};

@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-lg-6 col-sm-12 col-lg-offset-3">
+    <div>
         <div class="panel panel-yellow">
             <div class="panel-heading">
                 Usuarios
@@ -14,13 +14,13 @@
                             <div class="list-group-item">
                                 <form name="formSearch">
                                     <input type="email"
-                                           placeholder="email del usuario"
-                                           name="email"
-                                           required
-                                           ng-model="model.emailSearchUser">
+                                        placeholder="email del usuario"
+                                        name="email"
+                                        required
+                                        ng-model="model.emailSearchUser">
                                     <button type="button" class="btn btn-success btn-sm"
-                                            ng-disabled="formSearch.$invalid"
-                                            ng-click="model.searchUser()">Buscar
+                                        ng-disabled="formSearch.$invalid"
+                                        ng-click="model.searchUser()">Buscar
                                     </button>
                                     <br>
                                     <label class="text-danger" ng-bind="model.errorSearch"></label>

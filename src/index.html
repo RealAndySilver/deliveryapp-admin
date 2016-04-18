@@ -67,56 +67,9 @@
             </div>
             <bs-loading label="Cargando..." percent="100" show="false" active="true"></bs-loading>
         </div>
-
-        <!--
-
-        <header>
-            <md-toolbar layout="row" >
-            <h1>MensajeriApp</h1>
-            <span flex></span>
-            
-            <div class="btns-container"  ng-show="app.getVisibility()">
-                <md-button class="md-grid-item-content" ng-click="app.goStatistics()">                
-                <div class="md-grid-text"> Estadísticas</div>
-                </md-button>
-                
-                <md-button class="md-grid-item-content" ng-click="app.goUsers()">                
-                <div class="md-grid-text"> Usuarios</div>
-                </md-button>
-                
-                <md-button class="md-grid-item-content" ng-click="app.goMessengers()">                
-                <div class="md-grid-text"> Mensajeros</div>
-                </md-button>
-                
-                <md-button class="md-grid-item-content" ng-click="app.turnShowServices()">                
-                <div class="md-grid-text"> Servicios </div>
-                </md-button>
-               
-
-                <md-button class="md-grid-item-content" ng-click="app.logOut()">                
-                <div class="md-grid-text"> Salir</div>
-                </md-button>
-                
-            </div>
-
-            </md-toolbar>
-
-            <md-card id="serviceListContainer" ng-show="app.showServicesBool" ng-click="app.turnShowServices()">
-                <md-button class="md-grid-item-content" ng-click="app.goRequestService()">                
-                <div class="md-grid-text"> Solicitar </div>
-                </md-button>
-
-                <md-button class="md-grid-item-content" ng-click="app.goActiveServices()">                
-                <div class="md-grid-text"> Sin aceptar </div>
-                </md-button>
-                
-            </md-card>  
-
-            
-        </header>-->
         
         <div class="container" ui-view="main"></div>
-        <bs-modal title="Ups" label-accept-button="Ok" directory="assets/js/modal/templates"></bs-modal>
+        <bs-modal title="" label-accept-button="Ok" directory="assets/js/modal/templates"></bs-modal>
         <!-- <footer class="container">
         </footer> -->
         <script src="assets/js/bootstrap.js"></script>

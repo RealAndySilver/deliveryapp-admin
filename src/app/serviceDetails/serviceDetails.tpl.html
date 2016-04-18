@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-lg-6 col-sm-12 col-lg-offset-3">
+    <div>
         <!--- información del  cliente --->
         <div class="panel panel-yellow">
             <div class="panel-heading">
@@ -51,7 +51,7 @@
                                 <strong>Fecha de Recogida</strong>
                                 <span class="pull-right text-muted">
                                     <strong><em>
-                                        {{model.pickupDate | date:'dd/MM/yyyy hh:mma'}}
+                                        {{model.deliveryItemInfo.date_created | date:'dd/MM/yyyy hh:mma'}}
                                     </em></strong>
                                 </span>
                             </div>
