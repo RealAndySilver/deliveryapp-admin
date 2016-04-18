@@ -8,16 +8,48 @@
 				<form>
 				  <div class="form-group">
 					<label for="exampleInputEmail1">Tipo de Servicio</label>
-					<select class="form-control">
-					  <!--<option>Todos</option>-->
-					  <option>Disponible</option>
-					  <option>En tránsito</option>
-					  <option>Terminado</option>
+					<select class="form-control" ng-model="model.selectedServiceType" ng-change="model.loadSelectedService(model.selectedServiceType)">
+						<option ng-repeat="type in model.serviceTypes" ng-selected="type == 'Disponible'">{{type}}</option>
 					</select>
 				  </div>
 				</form>
 				<div class="panel-body">
-					<div class="list-group service-block" ng-repeat="item in model.services.available | limitTo: 5">
+					<div class="list-group service-block" ng-repeat="item in model.services.available | limitTo: 5" ng-if="model.services.available">
+						<span><b>Item: </b>{{::item.item_name}}</span>
+						<span><b>Usuario: </b>{{::item.user_info.name}} <i class="pull-right" ng-click="model.goToServiceDetails(item._id)">Ver detalles...</i></span>
+						<span><b>Mensajero: </b>{{::item.messenger_info.name}} {{::item.messenger_info.lastname}}</span>
+					</div>
+					<div class="list-group service-block" ng-repeat="item in model.services.accepteds | limitTo: 5" ng-if="model.services.accepteds">
+						<span><b>Item: </b>{{::item.item_name}}</span>
+						<span><b>Usuario: </b>{{::item.user_info.name}} <i class="pull-right" ng-click="model.goToServiceDetails(item._id)">Ver detalles...</i></span>
+						<span><b>Mensajero: </b>{{::item.messenger_info.name}} {{::item.messenger_info.lastname}}</span>
+					</div>
+					<div class="list-group service-block" ng-repeat="item in model.services.inTransits | limitTo: 5" ng-if="model.services.inTransits">
+						<span><b>Item: </b>{{::item.item_name}}</span>
+						<span><b>Usuario: </b>{{::item.user_info.name}} <i class="pull-right" ng-click="model.goToServiceDetails(item._id)">Ver detalles...</i></span>
+						<span><b>Mensajero: </b>{{::item.messenger_info.name}} {{::item.messenger_info.lastname}}</span>
+					</div>
+					<div class="list-group service-block" ng-repeat="item in model.services.delivereds | limitTo: 5" ng-if="model.services.delivereds">
+						<span><b>Item: </b>{{::item.item_name}}</span>
+						<span><b>Usuario: </b>{{::item.user_info.name}} <i class="pull-right" ng-click="model.goToServiceDetails(item._id)">Ver detalles...</i></span>
+						<span><b>Mensajero: </b>{{::item.messenger_info.name}} {{::item.messenger_info.lastname}}</span>
+					</div>
+					<div class="list-group service-block" ng-repeat="item in model.services.returning | limitTo: 5" ng-if="model.services.returning">
+						<span><b>Item: </b>{{::item.item_name}}</span>
+						<span><b>Usuario: </b>{{::item.user_info.name}} <i class="pull-right" ng-click="model.goToServiceDetails(item._id)">Ver detalles...</i></span>
+						<span><b>Mensajero: </b>{{::item.messenger_info.name}} {{::item.messenger_info.lastname}}</span>
+					</div>
+					<div class="list-group service-block" ng-repeat="item in model.services.returneds | limitTo: 5" ng-if="model.services.returneds">
+						<span><b>Item: </b>{{::item.item_name}}</span>
+						<span><b>Usuario: </b>{{::item.user_info.name}} <i class="pull-right" ng-click="model.goToServiceDetails(item._id)">Ver detalles...</i></span>
+						<span><b>Mensajero: </b>{{::item.messenger_info.name}} {{::item.messenger_info.lastname}}</span>
+					</div>
+					<div class="list-group service-block" ng-repeat="item in model.services.cancelleds | limitTo: 5" ng-if="model.services.cancelleds">
+						<span><b>Item: </b>{{::item.item_name}}</span>
+						<span><b>Usuario: </b>{{::item.user_info.name}} <i class="pull-right" ng-click="model.goToServiceDetails(item._id)">Ver detalles...</i></span>
+						<span><b>Mensajero: </b>{{::item.messenger_info.name}} {{::item.messenger_info.lastname}}</span>
+					</div>
+					<div class="list-group service-block" ng-repeat="item in model.services.aborteds | limitTo: 5" ng-if="model.services.aborteds">
 						<span><b>Item: </b>{{::item.item_name}}</span>
 						<span><b>Usuario: </b>{{::item.user_info.name}} <i class="pull-right" ng-click="model.goToServiceDetails(item._id)">Ver detalles...</i></span>
 						<span><b>Mensajero: </b>{{::item.messenger_info.name}} {{::item.messenger_info.lastname}}</span>

@@ -6,6 +6,16 @@
 
             var init = function () {
                 model.services = {};
+                model.serviceTypes = [
+                    "Disponible",
+                    "Aceptado",
+                    "En Tránsito",
+                    "Entregado",
+                    "De vuelta",
+                    "Devuelto",
+                    "Cancelado",
+                    "Abortado"
+                ];
 
                 var loadServicesByType = function (type, sort, callback) {
                     ServicesService.listByType(type, sort, callback);
@@ -13,10 +23,11 @@
 
                 model.loadServicesAvailable = function (sort) {
                     loadServicesByType('available', sort, function (response) {
-                        $scope.BootstrapLoading.show(false);
+                        $scope.BootstrapLoading.show(true);
                         if (response.response) { 
+                            $scope.BootstrapLoading.show(false);
                             model.services.available = response.data;
-                            console.log('get services response ', response);
+                            console.log('get available services response ', response);
                             /*console.log(model.services.available);*/
                         } else {
                             $scope.BootstrapModal.show('No existen servicios con los parámetros seleccionados.');
@@ -26,58 +37,146 @@
 
                 model.loadServicesAccepted = function(sort){
                     loadServicesByType('accepted', sort, function (response) {
-                        model.services.accepteds = response.data;
+                        $scope.BootstrapLoading.show(true);
                         /*console.log(model.services.accepteds);*/
+                        if (response.response) { 
+                            $scope.BootstrapLoading.show(false);
+                            model.services.accepteds = response.data;
+                            console.log('get accepted services response ', response);
+                            /*console.log(model.services.available);*/
+                        } else {
+                            $scope.BootstrapModal.show('No existen servicios con los parámetros seleccionados.');
+                        }
                     });
                 };
 
                 model.loadServicesInTransit = function(sort){
                     loadServicesByType('in-transit', sort, function (response) {
-                        model.services.inTransits = response.data;
+                        $scope.BootstrapLoading.show(true);
                         /*console.log(model.services.inTransits);*/
+                        if (response.response) { 
+                            $scope.BootstrapLoading.show(false);
+                            model.services.inTransits = response.data;
+                            console.log('get in transit services response ', response);
+                            /*console.log(model.services.available);*/
+                        } else {
+                            $scope.BootstrapModal.show('No existen servicios con los parámetros seleccionados.');
+                        }
                     });
                 };
 
                 model.loadServiceDelivered = function(sort){
+                    $scope.BootstrapLoading.show(true);
                     loadServicesByType('delivered', sort, function (response) {
-                        model.services.delivereds = response.data;
                         /*console.log(model.services.delivereds);*/
+                        if (response.response) { 
+                            $scope.BootstrapLoading.show(false);
+                            model.services.delivereds = response.data;
+                            console.log('get delivered services response ', response);
+                            /*console.log(model.services.available);*/
+                        } else {
+                            $scope.BootstrapModal.show('No existen servicios con los parámetros seleccionados.');
+                        }
                     });
                 };
 
                 model.loadServiceReturning = function(sort){
+                    $scope.BootstrapLoading.show(true);
                     loadServicesByType('returning', sort, function (response) {
-                        model.services.returning = response.data;
-                        /*console.log(model.services.returning);*/
+                        if (response.response) { 
+                            $scope.BootstrapLoading.show(false);
+                            model.services.returning = response.data;
+                            console.log('get returning services response ', response);
+                            /*console.log(model.services.available);*/
+                        } else {
+                            $scope.BootstrapModal.show('No existen servicios con los parámetros seleccionados.');
+                        }
                     });
                 };
 
                 model.loadServiceReturned = function(sort){
+                    $scope.BootstrapLoading.show(true);
                     loadServicesByType('returned', sort, function (response) {
-                        model.services.returneds = response.data;
                         /*console.log(model.services.returneds);*/
+                        if (response.response) { 
+                            $scope.BootstrapLoading.show(false);
+                            model.services.returneds = response.data;
+                            console.log('get returned services response ', response);
+                            /*console.log(model.services.available);*/
+                        } else {
+                            $scope.BootstrapModal.show('No existen servicios con los parámetros seleccionados.');
+                        }
                     });
                 };
 
                 model.loadServiceCancelled = function(sort){
+                    $scope.BootstrapLoading.show(true);
                     loadServicesByType('cancelled', sort, function (response) {
-                        model.services.cancelleds = response.data;
                         /*console.log(model.services.cancelleds);*/
+                        if (response.response) { 
+                            $scope.BootstrapLoading.show(false);
+                            model.services.cancelleds = response.data;
+                            console.log('get cancelled services response ', response);
+                            /*console.log(model.services.available);*/
+                        } else {
+                            $scope.BootstrapModal.show('No existen servicios con los parámetros seleccionados.');
+                        }
                     });
                 };
 
                 model.loadServiceAborted = function(sort){
+                    $scope.BootstrapLoading.show(true);
                     loadServicesByType('aborted', sort, function (response) {
-                        model.services.aborteds = response.data;
                         $scope.BootstrapLoading.show(false);
                         /*console.log(model.services.aborteds);*/
+                        if (response.response) { 
+                            $scope.BootstrapLoading.show(false);
+                            model.services.aborteds = response.data;
+                            console.log('get aborted services response ', response);
+                            /*console.log(model.services.available);*/
+                        } else {
+                            $scope.BootstrapModal.show('No existen servicios con los parámetros seleccionados.');
+                        }
                     });
                 };
 
                 model.goToServiceDetails = function(idObject) {
                     $state.go('serviceDetails', {
-                        id: idObject
+                        id: idObject,
                     });
+                };
+
+                model.loadSelectedService = function(selectedType) {
+                    model.services = {};
+                    console.log('perrittooooo ', selectedType);
+                    switch(selectedType) {
+                        case "Disponible":
+                            model.loadServicesAvailable();
+                            break;
+                        case "Aceptado":
+                            model.loadServicesAccepted();
+                            break;
+                        case "En Tránsito":
+                            model.loadServicesInTransit();
+                            break;
+                        case "Entregado":
+                            model.loadServiceDelivered();
+                            break;
+                        case "De vuelta":
+                            model.loadServiceReturning();
+                            break;
+                        case "Devuelto":
+                            model.loadServiceReturned();
+                            break;
+                        case "Cancelado":
+                            model.loadServiceCancelled();
+                            break;
+                        case "Abortado":
+                            model.loadServiceAborted();
+                            break;
+                        /*default:
+                            default code block*/
+                    }
                 };
 
                 $scope.BootstrapLoading.show(true);
