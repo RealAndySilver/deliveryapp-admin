@@ -6,12 +6,12 @@
             </div>
             <div class="panel-body">
                 <div class="panel panel-default">
-                    <div class="panel-body text-center">
+                    <div class="text-center">
                         <div class="list-group">
-                            <div class="list-group-item">
+                            <div class="inner-block">
                                 Ingresa el email de un mensajero para buscarlo:
                             </div>
-                            <div class="list-group-item">
+                            <div class="inner-block">
                                 <form name="formSearch">
                                     <input type="email"
                                            placeholder="email del mensajero"
@@ -31,9 +31,7 @@
                 <div class="panel panel-default"
                      ng-show="model.messenger_info">
                     <div class="panel-body">
-                        <div class="list-group"
-                             style="cursor:pointer;"
-                             ng-click="model.goToMessengerDetails(model.messenger_info._id)">
+                        <div class="list-group">
                             <div class="list-group-item">
                                 <strong>Nombre</strong>
                                 <span class="pull-right text-muted">
