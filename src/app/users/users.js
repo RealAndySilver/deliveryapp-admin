@@ -12,9 +12,9 @@
             function init() {
 
                 model.getUsers = function () {
-                    $scope.BootstrapLoading.show(true);
+
                     GetUsersService.getUsers(counter, function (response) {
-                        $scope.BootstrapLoading.show(false);
+                        
                         model.users = model.users.concat(response.data);
                         if (response.data.length === 0) {
                             model.showMoreBool = false;
@@ -42,11 +42,11 @@
 
                 model.deleteUser = function (idUser) {
                     /*AlertsService.loading();*/
-                    $scope.BootstrapLoading.show(true);
+
                     GetUsersService.deleteUser(idUser, function (response) {
                         console.log(response);
                         /*AlertsService.cancel();*/
-                        $scope.BootstrapLoading.show(false);
+
                         if (!response.data) {
                             /*AlertsService.showAlert(response.msg, "");*/
                             $scope.BootstrapModal.show(response.msg, "Confirmación de eliminación");

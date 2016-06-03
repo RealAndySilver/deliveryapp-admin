@@ -15,9 +15,9 @@
 
                 model.getMessengers = function () {
                     //AlertsService.loading();
-                    $scope.BootstrapLoading.show(true);
+                    
                     GetMessengersService.getMessengers(counter, function (response) {
-                        $scope.BootstrapLoading.show(false);
+                        
                         model.messengers = model.messengers.concat(response.data);
                         /*console.log(model.messengers.length);*/
                         if (response.data.length === 0) {
@@ -49,12 +49,12 @@
                     $scope.BootstrapModal.save();
                     /*AlertsService.loading();*/
                     var remove = function() {
-                        $scope.BootstrapLoading.show(true);
+                        
                         GetMessengersService.deleteMessenger(idMessenger, function (response) {
                             /*console.log(response);*/
                             /*AlertsService.cancel();*/
                             $scope.BootstrapModal.restore();
-                            $scope.BootstrapLoading.show(false);
+                            
                             if (!response.data) {
                                 /*AlertsService.showAlert(response.msg, "");*/
                                 $scope.BootstrapModal.show(response.msg, "Resultado Elimininación");

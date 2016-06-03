@@ -2,8 +2,11 @@
 
     module.service('ServerComunicator', ['$http', function ($http) {
             var model = this;
-            var endpoint = "http://192.241.187.135:8080/api_1.0/";
-            //var endpoint = "http://andres.local:2000/api_1.0/";
+
+            /*DEV IAMSTUDIO*/
+            // var endpoint = "http://192.241.187.135:8080/api_1.0/";
+            /*VUELTAP PROD*/
+            var endpoint = "https://vueltap.com:8080/api_1.0/";
 
             var SORT_LIMIT = 10;
 

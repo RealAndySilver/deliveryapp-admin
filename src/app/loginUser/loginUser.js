@@ -31,11 +31,11 @@
                 model.loginUser = function () {
 
                     if (model.MY_FORM.$valid) {
-                        //$scope.BootstrapLoading.show(true);
+                        //
                         LoginUserService.loginUser(model.user.email, model.user.password, function (response) {
                             console.log("r" , response);
                             //var user = response.data;
-                            //$scope.BootstrapLoading.show(false);
+                            //
 
                             if (!response.response) {
                                 $scope.BootstrapModal.show("sss" + response.msg);

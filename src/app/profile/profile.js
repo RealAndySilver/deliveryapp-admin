@@ -23,9 +23,9 @@
 
 
 			model.getAllUsers = function() {
-                $scope.BootstrapLoading.show(true);
+                
 				ProfileService.getAllUsers( function(response) {
-                    $scope.BootstrapLoading.show(false);
+                    
 					console.log(response.data);
 					model.users=response.data.length;
 

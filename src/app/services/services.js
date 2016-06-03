@@ -23,9 +23,9 @@
 
                 model.loadServicesAvailable = function (sort) {
                     loadServicesByType('available', sort, function (response) {
-                        $scope.BootstrapLoading.show(true);
+                        
                         if (response.response) { 
-                            $scope.BootstrapLoading.show(false);
+                            
                             model.services.available = response.data;
                             console.log('get available services response ', response);
                             /*console.log(model.services.available);*/
@@ -37,10 +37,10 @@
 
                 model.loadServicesAccepted = function(sort){
                     loadServicesByType('accepted', sort, function (response) {
-                        $scope.BootstrapLoading.show(true);
+                        
                         /*console.log(model.services.accepteds);*/
                         if (response.response) { 
-                            $scope.BootstrapLoading.show(false);
+                            
                             model.services.accepteds = response.data;
                             console.log('get accepted services response ', response);
                             /*console.log(model.services.available);*/
@@ -52,10 +52,10 @@
 
                 model.loadServicesInTransit = function(sort){
                     loadServicesByType('in-transit', sort, function (response) {
-                        $scope.BootstrapLoading.show(true);
+                        
                         /*console.log(model.services.inTransits);*/
                         if (response.response) { 
-                            $scope.BootstrapLoading.show(false);
+                            
                             model.services.inTransits = response.data;
                             console.log('get in transit services response ', response);
                             /*console.log(model.services.available);*/
@@ -66,11 +66,11 @@
                 };
 
                 model.loadServiceDelivered = function(sort){
-                    $scope.BootstrapLoading.show(true);
+                    
                     loadServicesByType('delivered', sort, function (response) {
                         /*console.log(model.services.delivereds);*/
                         if (response.response) { 
-                            $scope.BootstrapLoading.show(false);
+                            
                             model.services.delivereds = response.data;
                             console.log('get delivered services response ', response);
                             /*console.log(model.services.available);*/
@@ -81,10 +81,10 @@
                 };
 
                 model.loadServiceReturning = function(sort){
-                    $scope.BootstrapLoading.show(true);
+                    
                     loadServicesByType('returning', sort, function (response) {
                         if (response.response) { 
-                            $scope.BootstrapLoading.show(false);
+                            
                             model.services.returning = response.data;
                             console.log('get returning services response ', response);
                             /*console.log(model.services.available);*/
@@ -95,11 +95,11 @@
                 };
 
                 model.loadServiceReturned = function(sort){
-                    $scope.BootstrapLoading.show(true);
+                    
                     loadServicesByType('returned', sort, function (response) {
                         /*console.log(model.services.returneds);*/
                         if (response.response) { 
-                            $scope.BootstrapLoading.show(false);
+                            
                             model.services.returneds = response.data;
                             console.log('get returned services response ', response);
                             /*console.log(model.services.available);*/
@@ -110,11 +110,11 @@
                 };
 
                 model.loadServiceCancelled = function(sort){
-                    $scope.BootstrapLoading.show(true);
+                    
                     loadServicesByType('cancelled', sort, function (response) {
                         /*console.log(model.services.cancelleds);*/
                         if (response.response) { 
-                            $scope.BootstrapLoading.show(false);
+                            
                             model.services.cancelleds = response.data;
                             console.log('get cancelled services response ', response);
                             /*console.log(model.services.available);*/
@@ -125,12 +125,12 @@
                 };
 
                 model.loadServiceAborted = function(sort){
-                    $scope.BootstrapLoading.show(true);
+                    
                     loadServicesByType('aborted', sort, function (response) {
-                        $scope.BootstrapLoading.show(false);
+                        
                         /*console.log(model.services.aborteds);*/
                         if (response.response) { 
-                            $scope.BootstrapLoading.show(false);
+                            
                             model.services.aborteds = response.data;
                             console.log('get aborted services response ', response);
                             /*console.log(model.services.available);*/
@@ -179,7 +179,7 @@
                     }
                 };
 
-                $scope.BootstrapLoading.show(true);
+                
                 model.loadServicesAvailable();
                 /*model.loadServicesAccepted();
                 model.loadServicesInTransit();

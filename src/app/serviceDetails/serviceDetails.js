@@ -19,14 +19,14 @@
             function serviceDetails() {
                 if (model.messengerBool) {
                     /*AlertsService.loading();*/
-                    $scope.BootstrapLoading.show(true);
+                    
                 }
 
                 DetailsDeliveryItemService.serviceDetails($stateParams.id, function (response) {
 
                     if (model.messengerBool) {
                         /*AlertsService.cancel();*/
-                        $scope.BootstrapLoading.show(false);
+                        
                     }
 
                     model.deliveryItemInfo = response.data;
@@ -121,11 +121,11 @@
 
 
             model.searchMessenger = function () {
-                $scope.BootstrapLoading.show(true);
+                
                 DetailsDeliveryItemService.getMessengerEmail(model.emailSearchMessenger, function (response) {
                     model.messenger_info = response.data;
                     /*console.log(model.messenger_info);*/
-                    $scope.BootstrapLoading.show(false);
+                    
                     if (response.response) {
                         $scope.BootstrapModal.show("El mensajero fue encontrado", "Resultado Busqueda");
                         model.reload();

@@ -15,18 +15,18 @@
 			model.getUser = function() {
 				/*console.log("ENTRO A DETALLES", $stateParams.id);*/
 				/*AlertsService.loading();*/
-                $scope.BootstrapLoading.show(true);
+                
 				UserDetailsService.getUser($stateParams.id, function(response) {
 					model.User = response.data;
-                    $scope.BootstrapLoading.show(false);
+                    
 					/*console.log(model.User);*/
 					/*AlertsService.cancel();*/
 					if (!response.data) {
 						/*AlertsService.showAlert(response.msg, "");*/
-                        $scope.BootstrapLoading.show(response.msg, "");
+
 					} else if (model.User.length === 0) {
 						/*AlertsService.showAlert("No tienes servicios Activos en este momento", "");*/
-                        $scope.BootstrapLoading.show("No tienes Servicios Activos en este momento", "");
+                        //$scope.BootstrapLoading.show("No tienes Servicios Activos en este momento", "");
 					}
 				});
 			};
@@ -36,21 +36,21 @@
 			model.updateProfile = function() {
 				if ($scope.profileForm.$valid) {
 					/*AlertsService.loading();*/
-                    $scope.BootstrapLoading.show(true);
+                    
 					UserDetailsService.updateProfile(model.User["_id"], model.User.name, model.User.lastname, model.User.mobilephone, function(response) {
-                        $scope.BootstrapLoading.show(false);
+                        
 						/*AlertsService.cancel();*/
 						if (response.response) {
 							/*AlertsService.showAlert("Datos actualizados correctamente", "");*/
-                            $scope.BootstrapLoading.show("Datos actualizados correctamente", "");
+                            //$scope.BootstrapLoading.show("Datos actualizados correctamente", "");
 						} else {
 							/*AlertsService.showAlert(response.msg, "");*/
-                            $scope.BootstrapLoading.show(response.msg, "");
+                            //$scope.BootstrapLoading.show(response.msg, "");
 						}
 					});
 				} else {
 					/*AlertsService.showSimpleAlert("Completa todos los campos por favor");*/
-                    $scope.BootstrapLoading.show("Completa todos los campos por favor");
+                    //$scope.BootstrapLoading.show("Completa todos los campos por favor");
 				}
 
 

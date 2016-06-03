@@ -14,9 +14,9 @@
 
 			model.getMessenger = function() {
 				/*AlertsService.loading();*/
-                $scope.BootstrapLoading.show(true);
+                
 				MessengerDetailsService.getMessenger($stateParams.id, function(response) {
-                    $scope.BootstrapLoading.show(false);
+                    
 					model.Messenger = response.data;
                     if(!model.Messenger.admin_confirmation){
                         model.Messenger.admin_confirmation = false;
@@ -24,10 +24,10 @@
 					/*AlertsService.cancel();*/
 					if (!response.data) {
 						/*AlertsService.showAlert(response.msg, "");*/
-                        $scope.BootstrapLoading.show(response.msg, "");
+                        //$scope.BootstrapLoading.show(response.msg, "");
 					} else if (model.Messenger.length === 0) {
 						/*AlertsService.showAlert("No tienes servicios Activos en este momento", "");*/
-                        $scope.BootstrapLoading.show("No tienes servicios Activos en este momento", "");
+                        //$scope.BootstrapLoading.show("No tienes servicios Activos en este momento", "");
 					}
                     model.finishLoading = true;
 				});
@@ -41,16 +41,16 @@
 
                 /*AlertsService.loading();*/
 
-                $scope.BootstrapLoading.show(true);
+                
                 service(model.Messenger["_id"], function (response) {
                     /*AlertsService.cancel();*/
-                    $scope.BootstrapLoading.show(false);
+                    
                     if (response.response) {
                         /*AlertsService.showAlert("Datos actualizados correctamente", "");*/
-                        $scope.BootstrapLoading.show("Datos actualizados correctamente", "");
+                        //$scope.BootstrapLoading.show("Datos actualizados correctamente", "");
                     } else {
                         /*AlertsService.showAlert(response.msg, "");*/
-                        $scope.BootstrapLoading.show(response.msg, "");
+                        //$scope.BootstrapLoading.show(response.msg, "");
 						model.Messenger.admin_confirmation = !model.Messenger.admin_confirmation;
                     }
                 });
@@ -60,25 +60,25 @@
 
 				if ($scope.profileForm.$valid) {
 					/*AlertsService.loading();*/
-                    $scope.BootstrapLoading.show(true);
+                    
 					//idMessenger, name, lastname, mobilephone,plate
 					MessengerDetailsService.updateMessengerProfile(model.Messenger["_id"], model.Messenger.name, model.Messenger.lastname, model.Messenger.mobilephone, model.Messenger.plate, function(response) {
 
-                        $scope.BootstrapLoading.show(false);
+                        
 						/*AlertsService.cancel();*/
 						///
 						if (response.response) {
 							/*AlertsService.showAlert("Datos actualizados correctamente", "");*/
-                            $scope.BootstrapLoading.show("Datos actualizados correctamente", "");
+                            //$scope.BootstrapLoading.show("Datos actualizados correctamente", "");
 						} else {
 							/*AlertsService.showAlert(response.msg, "");*/
-                            $scope.BootstrapLoading.show(response.msg, "");
+                            //$scope.BootstrapLoading.show(response.msg, "");
 						}
 					});
 
 				} else {
 					/*AlertsService.showSimpleAlert("Completa todos los campos por favor");*/
-                    $scope.BootstrapLoading.show("Completa todos los campos por favor");
+                    //$scope.BootstrapLoading.show("Completa todos los campos por favor");
 				}
 
 

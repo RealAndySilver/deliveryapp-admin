@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html ng-app="appMensajeria" ng-controller="AppController as app">
+<div id="mydiv">
+    <img height="50" width="50" src="assets/img/ajax_loader.gif" class="ajax-loader"/>
+</div>
     <head>
         <title ng-bind="pageTitle"></title>
         <meta charset="UTF8">
         <!-- font awesome from BootstrapCDN -->
-        <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+        <link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
         <!-- compiled CSS --><% styles.forEach( function ( file ) { %>
         <link rel="stylesheet" type="text/css" href="<%= file %>" /><% }); %>
 
@@ -12,7 +15,7 @@
         <link href="assets/css/font-awesome.css" rel="stylesheet">
         <link href="assets/css/style.css" rel="stylesheet" type="text/css">
         <link href="assets/css/signin.css" rel="stylesheet" type="text/css">
-        <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600" rel="stylesheet">
         <!-- Angulars Material CSS now available via Google CDN; version 0.7 used here -->
          <!--<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.7.0/angular-material.min.css">-->
         <!-- compiled JavaScript --><% scripts.forEach( function ( file ) { %>
@@ -22,7 +25,7 @@
         <script src="https://maps.googleapis.com/maps/api/js?key=&sensor=false&extension=.js"></script>
         <!-- sdasd -->
         <!-- Librerias del API de Google Maps -->
-        <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     </head>
     <body>
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
@@ -65,7 +68,6 @@
                     </ul>
                 </div>
             </div>
-            <bs-loading label="Cargando..." percent="100" show="false" active="true"></bs-loading>
         </div>
         
         <div class="container" ui-view="main"></div>
@@ -76,4 +78,5 @@
         <script src="assets/js/modal/bootstrap.modal.js"></script>
         <script src="assets/js/bootstrap.loading.js"></script>
     </body>
+    <footer>V 1.0.0</footer>
 </html>
