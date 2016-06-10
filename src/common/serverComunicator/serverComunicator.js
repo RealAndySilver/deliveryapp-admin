@@ -6,7 +6,9 @@
             /*DEV IAMSTUDIO*/
             // var endpoint = "http://192.241.187.135:8080/api_1.0/";
             /*VUELTAP PROD*/
-            var endpoint = "https://vueltap.com:8080/api_1.0/";
+            var endpoint = "http://localhost:8080/api_1.0/";
+            /*VUELTAP PROD
+            var endpoint = "https://vueltap.com:8080/api_1.0/";*/
 
             var SORT_LIMIT = 10;
 
@@ -220,8 +222,8 @@
                         method : 'GET',
                         headers : getHeader(),
                         url : ( sort ?
-                            endpoint + 'DeliveryItems/'+type+"/"+sort :
-                            endpoint + 'DeliveryItems/'+type
+                            endpoint + 'DeliveryItems/Status/'+type+"/"+sort :
+                            endpoint + 'DeliveryItems/Status/'+type
                         )
                     });
                 };

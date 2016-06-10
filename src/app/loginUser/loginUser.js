@@ -38,7 +38,7 @@
                             //
 
                             if (!response.response) {
-                                $scope.BootstrapModal.show("sss" + response.msg);
+                                $scope.BootstrapModal.show("Usuario o contraseña incorrectos.");
                                 //AlertsService.showAlert(response.msg, "");
                             } else if (response.data) {
 

@@ -6,68 +6,84 @@
             </div>
             <div class="panel-body">
                 <form name="profileForm" novalidate ng-submit="model.updateMessengerProfile()">
-                    <div class="form-group">
-                        <label for="newName">
-                            Nombre:
-                        </label>
-                        <input name="newName"
-                               id="newName"
-                               type="text"
-                               class="form-control"
-                               placeholder="Nombre del Mensajero"
-                               required
-                               ng-model="model.Messenger.name">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="newName">
+                                    Nombre:
+                                </label>
+                                <input name="newName"
+                                       id="newName"
+                                       type="text"
+                                       class="form-control"
+                                       placeholder="Nombre del Mensajero"
+                                       required
+                                       ng-model="model.Messenger.name">
+                            </div>
+                            <div class="form-group">
+                                <label for="newLastname">
+                                    Apellido:
+                                </label>
+                                <input name="newLastname"
+                                       id="newLastname"
+                                       type="text"
+                                       class="form-control"
+                                       placeholder="Apellido del Mensajero"
+                                       required
+                                       ng-model="model.Messenger.lastname">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="newMobilephone">
+                                    Número de celular del usuario:
+                                </label>
+                                <input name="newMobilephone"
+                                       id="newMobilephone"
+                                       type="text"
+                                       class="form-control"
+                                       placeholder="Número de Celular del mensajero"
+                                       required
+                                       ng-model="model.Messenger.mobilephone">
+                            </div>
+                            <div class="form-group">
+                                <label>
+                                    Email:
+                                </label>
+                                <label class="form-control">{{::model.Messenger.email}}</label>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="newLastname">
-                            Apellido:
-                        </label>
-                        <input name="newLastname"
-                               id="newLastname"
-                               type="text"
-                               class="form-control"
-                               placeholder="Apellido del Mensajero"
-                               required
-                               ng-model="model.Messenger.lastname">
+
+                    <div class="row">
+                        <div class="form-group col-lg-6">
+                            <label>
+                                Estado:
+                            </label>
+                            <button type="button"
+                                    ng-click="model.updateStatus()"
+                                    class="btn btn-primary"
+                                    ng-model="model.Messenger.admin_confirmation"
+                                    btn-checkbox
+                                    btn-checkbox-true="true"
+                                    btn-checkbox-false="false">
+                                {{model.Messenger.admin_confirmation ? "Activo" : "Inactivo"}}
+                            </button>
+                        </div>
+                        <div class="form-group col-lg-6">
+                            <label style="float:left;margin-right:5px;margin-top:3px;">
+                                Clasificacion:
+                            </label>
+                            <rating id="rating" style="margin-top:0" value="model.Messenger.rating_average" max="5" readonly="true" on-leave="overStar = null"></rating>
+                        </div>
+                        <div class="col-lg-12 text-center">
+                            <button class="btn btn-success"
+                                    ng-disabled="profileForm.$invalid"
+                                    type="submit">Actualizar datos
+                            </button>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="newMobilephone">
-                            Número de celular del usuario:
-                        </label>
-                        <input name="newMobilephone"
-                               id="newMobilephone"
-                               type="text"
-                               class="form-control"
-                               placeholder="Número de Celular del mensajero"
-                               required
-                               ng-model="model.Messenger.mobilephone">
-                    </div>
-                    <div class="form-group">
-                        <label>
-                            Email:
-                        </label>
-                        <label class="form-control">{{::model.Messenger.email}}</label>
-                    </div>
-                    <div class="form-group">
-                        <label>
-                            Estado:
-                        </label>
-                        <button type="button"
-                                ng-click="model.updateStatus()"
-                                class="btn btn-primary"
-                                ng-model="model.Messenger.admin_confirmation"
-                                btn-checkbox
-                                btn-checkbox-true="true"
-                                btn-checkbox-false="false">
-                            {{model.Messenger.admin_confirmation ? "Activo" : "Inactivo"}}
-                        </button>
-                    </div>
-                    <div class="col-lg-12 text-center">
-                        <button class="btn btn-success"
-                                ng-disabled="profileForm.$invalid"
-                                type="submit">Actualizar datos
-                        </button>
-                    </div>
+
                 </form>
 
                 <div class="list-group margin-top-1rem">
@@ -78,7 +94,6 @@
                         <i class="fa fa-exclamation-triangle f24"></i>
                         NO se encontro ningún archivo asociado al mensajero
                     </div>
-
                     <div class="list-group-item" ng-if="model.Messenger.documents">
                         <strong>Cedula</strong>
                         <span class="pull-right text-muted">
@@ -148,66 +163,101 @@
                     Servicios iniciados <i class="pull-right fa"
                                            ng-class="{'fa-plus': !model.availableServicesBool, 'fa-minus': model.availableServicesBool}"></i>
                 </accordion-heading>
-                <div class="panel panel-default"
-                     ng-repeat="item in model.startedServices"
-                     ng-click="model.goToServiceDetails(item._id)">
-                    <div class="panel-body">
-                        <div class="list-group"
-                             style="cursor:pointer;">
-                            <div class="list-group-item">
-                                Pedido
-                                <span class="pull-right text-muted">
-                                    <em>{{item.item_name}}</em>
-                                </span>
-                            </div>
-                            <div class="list-group-item">
-                                Usuario
-                                <span class="pull-right text-muted">
-                                    <em>{{item.user_info.name}} {{item.user_info.lastname}}</em>
-                                </span>
-                            </div>
-                            <div class="list-group-item">
-                                Estado del servicio
-                                <span class="pull-right text-muted">
-                                    <em>{{model.traslateStatusFunction(item.status)}}</em>
-                                </span>
-                            </div>
-                        </div>
+
+                <div class="panel panel-default" style="margin-bottom: 40px; width:100%">
+                    <div class="panel panel-default">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Pedido</th>
+                                <th>Usuario</th>
+                                <th>Estado</th>
+                                <th>Detalle</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <!--<tr ng-repeat="bin in bins.all">-->
+                            <tr ng-repeat="(key, service) in model.startedServices" >
+                                <td>{{service.item_name}}</td>
+                                <td>{{service.user_info.name}} {{service.user_info.lastname}}</td>
+                                <td>{{model.traslateStatusFunction(service.status)}} </td>
+                                <td><button type="button" class="btn btn-success btn-sm"
+                                            ng-click="model.goToServiceDetails(service._id)">Detalle
+                                </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
+                    <paging
+                            class="small paging-block post-title"
+                            page="customers.pagingInfo.currentPage"
+                            page-size="customers.pagingInfo.pageSize"
+                            total="customers.pagingInfo.totalRecords"
+                            adjacent="{{adjacent}}"
+                            dots="{{dots}}"
+                            scroll-top="true"
+                            hide-if-empty="{{hideIfEmpty}}"
+                            ul-class="{{ulClass}}"
+                            active-class="{{activeClass}}"
+                            disabled-class="{{disabledClass}}"
+                            show-prev-next="true"
+                            paging-action="customers.loadCustomers(page)">
+                    </paging>
                 </div>
             </accordion-group>
             <accordion-group ng-show="model.finishedServices.length!=0"
                              is-open="model.completedServicesBool">
                 <accordion-heading style="cursor:pointer;">
-                    Servicios completados <i class="pull-right fa"
+                    Servicios Completados <i class="pull-right fa"
                                              ng-class="{'fa-plus': !model.acceptedServicesBool, 'fa-minus': model.acceptedServicesBool}"></i>
                 </accordion-heading>
-                <div class="panel panel-default"
-                     ng-repeat="item in model.finishedServices"
-                     ng-click="model.goToServiceDetails(item._id)">
-                    <div class="panel-body">
-                        <div class="list-group"
-                             style="cursor:pointer;">
-                            <div class="list-group-item">
-                                Pedido
-                                <span class="pull-right text-muted">
-                                    <em>{{item.item_name}}</em>
-                                </span>
-                            </div>
-                            <div class="list-group-item">
-                                Usuario
-                                <span class="pull-right text-muted">
-                                    <em>{{item.user_info.name}} {{item.user_info.lastname}}</em>
-                                </span>
-                            </div>
-                            <div class="list-group-item">
-                                Estado del servicio
-                                <span class="pull-right text-muted">
-                                    <em>{{model.traslateStatusFunction(item.status)}}</em>
-                                </span>
-                            </div>
-                        </div>
+                <div class="panel panel-default" style="margin-bottom: 40px; width:100%">
+                    <div class="panel panel-default">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Pedido</th>
+                                <th>Usuario</th>
+                                <th>Estado</th>
+                                <th>Valor Servicio</th>
+                                <th>Clasificacion</th>
+                                <th>Detalle</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <!--<tr ng-repeat="bin in bins.all">-->
+                            <tr ng-repeat="(key, service) in model.finishedServices" >
+                                <td>{{service.item_name}}</td>
+                                <td>{{service.user_info.name}} {{service.user_info.lastname}}</td>
+                                <td>{{model.traslateStatusFunction(service.status)}}</td>
+                                <td>{{service.service_price}}</td>
+                                <td>
+                                    <rating style="margin-top:0" value="service.rate_object.rating" max="5" readonly="true" on-leave="overStar = null"></rating>
+                                </td>
+                                <td><button type="button" class="btn btn-success btn-sm"
+                                            ng-click="model.goToServiceDetails(service._id)">Detalle
+                                </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
+                    <paging
+                            class="small paging-block post-title"
+                            page="customers.pagingInfo.currentPage"
+                            page-size="customers.pagingInfo.pageSize"
+                            total="customers.pagingInfo.totalRecords"
+                            adjacent="{{adjacent}}"
+                            dots="{{dots}}"
+                            scroll-top="true"
+                            hide-if-empty="{{hideIfEmpty}}"
+                            ul-class="{{ulClass}}"
+                            active-class="{{activeClass}}"
+                            disabled-class="{{disabledClass}}"
+                            show-prev-next="true"
+                            paging-action="customers.loadCustomers(page)">
+                    </paging>
                 </div>
             </accordion-group>
         </accordion>

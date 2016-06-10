@@ -6,32 +6,39 @@
 		model.completedServicesBool = false;
         model.finishLoading = false;
 
+		model.getMessenger = function() {
+			/*AlertsService.loading();*/
+
+			MessengerDetailsService.getMessenger($stateParams.id, function(response) {
+
+				model.Messenger = response.data;
+				console.log("MENSAJERO ",model.Messenger);
+				if(!model.Messenger.admin_confirmation){
+					model.Messenger.admin_confirmation = false;
+				}
+				/*AlertsService.cancel();*/
+				if (!response.data) {
+					/*AlertsService.showAlert(response.msg, "");*/
+					//$scope.BootstrapLoading.show(response.msg, "");
+				} else if (model.Messenger.length === 0) {
+					/*AlertsService.showAlert("No tienes servicios Activos en este momento", "");*/
+					//$scope.BootstrapLoading.show("No tienes servicios Activos en este momento", "");
+				}
+			});
+		};
+
+
+		model.goToServiceDetails = function(idObject) {
+			console.log("Entro ",idObject);
+			$state.go('serviceDetails', {
+				id: idObject,
+			});
+		};
+
 		init();
 
 		function init() {
 
-
-
-			model.getMessenger = function() {
-				/*AlertsService.loading();*/
-                
-				MessengerDetailsService.getMessenger($stateParams.id, function(response) {
-                    
-					model.Messenger = response.data;
-                    if(!model.Messenger.admin_confirmation){
-                        model.Messenger.admin_confirmation = false;
-                    }
-					/*AlertsService.cancel();*/
-					if (!response.data) {
-						/*AlertsService.showAlert(response.msg, "");*/
-                        //$scope.BootstrapLoading.show(response.msg, "");
-					} else if (model.Messenger.length === 0) {
-						/*AlertsService.showAlert("No tienes servicios Activos en este momento", "");*/
-                        //$scope.BootstrapLoading.show("No tienes servicios Activos en este momento", "");
-					}
-                    model.finishLoading = true;
-				});
-			};
 			model.getMessenger();
 
             model.updateStatus = function () {
@@ -101,14 +108,7 @@
 				});
 			};
 			model.getFinishedServices();
-
-
-
-			model.goToServiceDetails = function(idObject) {
-				$state.go('serviceDetails', {
-					id: idObject
-				});
-			};
+			
 
 			model.traslateStatusFunction = function(status) {
 				var traslateStatus = "";

@@ -3,81 +3,63 @@
     module.controller('UsersController', ["RequestMessengerService", "GetUsersService", "AlertsService", "$state", "$scope",
         function (RequestMessengerService, GetUsersService, AlertsService, $state, $scope) {
             var model = this;
-            var counter = 0;
-            model.showMoreBool = true;
+
+            model.pagingInfo={currentPage:1,pageSize:10,totalRecords:0};
             model.users = [];
 
-            init();
+            model.getUsers = function (pageSelected) {
+                var recordsToSkip=(pageSelected-1);
+                GetUsersService.getUsers(recordsToSkip, function (response) {
+                    model.users = response.data;
+                    updatePagingInfo(pageSelected,response.total);
+                });
+            };
+
+            model.goToUserDetails = function (idUser) {
+                $state.go('userDetails', {
+                    id: idUser
+                });
+
+            };
+
+            model.deleteUser = function (idUser) {
+                GetUsersService.deleteUser(idUser, function (response) {
+                    console.log(response);
+
+                    if (!response.data) {
+                        $scope.BootstrapModal.show(response.msg, "Confirmación de eliminación");
+                        $state.go($state.current,{},{ reload:true });
+                    } else if (model.users.length === 0) {
+                        $scope.BootstrapModal.show("No tienes Servicios Activos en este momento", "");
+                    }
+                });
+            };
+
+
+            model.searchUser = function () {
+                RequestMessengerService.getUserEmail(model.emailSearchUser, function (response) {
+                    model.userInformation = response.data;
+                    //console.log(response);
+                    //console.log(response.error);
+                    if (response.response) {
+                        model.errorSearch = '';
+                    }else if(response.msg  == 'not found'){
+                        model.errorSearch = 'Usuario no encontrado';
+                    }
+                });
+            };
+
+            var updatePagingInfo=function(currPage,totRecords){
+                model.pagingInfo.currentPage=currPage;
+                model.pagingInfo.totalRecords=totRecords;
+            };
+
 
             function init() {
-
-                model.getUsers = function () {
-
-                    GetUsersService.getUsers(counter, function (response) {
-                        
-                        model.users = model.users.concat(response.data);
-                        if (response.data.length === 0) {
-                            model.showMoreBool = false;
-                        }
-                        if (response.response) {
-                            counter++;
-                        }
-                        if (!response.data) {
-                            //AlertsService.showAlert(response.msg, "");
-                            $scope.BootstrapModal.show(response.msg, "");
-                        } else if (model.users.length === 0) {
-                            //AlertsService.showAlert("No se encuentran usuariso registrados en este momento.", "");
-                            $scope.BootstrapModal.show("No se encuentran usuarios registrados en este momento.", "");
-                        }
-                    });
-                };
-                model.getUsers();
-
-                model.goToUserDetails = function (idUser) {
-                    $state.go('userDetails', {
-                        id: idUser
-                    });
-
-                };
-
-                model.deleteUser = function (idUser) {
-                    /*AlertsService.loading();*/
-
-                    GetUsersService.deleteUser(idUser, function (response) {
-                        console.log(response);
-                        /*AlertsService.cancel();*/
-
-                        if (!response.data) {
-                            /*AlertsService.showAlert(response.msg, "");*/
-                            $scope.BootstrapModal.show(response.msg, "Confirmación de eliminación");
-                            $state.go($state.current,{},{ reload:true });
-                        } else if (model.users.length === 0) {
-                            /*AlertsService.showAlert("No tienes servicios Activos en este momento", "");*/
-                            $scope.BootstrapModal.show("No tienes Servicios Activos en este momento", "");
-                        }
-                    });
-                };
-
-
-                model.searchUser = function () {
-                    RequestMessengerService.getUserEmail(model.emailSearchUser, function (response) {
-                        model.userInformation = response.data;
-                        console.log(response);
-                        console.log(response.error);
-                        if (response.response) {
-                            model.errorSearch = '';
-                            //AlertsService.showAlert("El usuario fue encontrado", "");
-
-                        }else if(response.msg  == 'not found'){
-                            model.errorSearch = 'Usuario no encontrado';
-                        } else {
-                            //AlertsService.showAlert(response.msg, "");
-                        }
-                    });
-                };
-
-
+                model.getUsers(model.pagingInfo.currentPage);
             }
+
+            init();
         }]);
 
 }(angular.module("appMensajeria.users")));

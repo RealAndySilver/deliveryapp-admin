@@ -24,85 +24,98 @@
                                     </button>
                                 </form>
                                 <h6 id="notFound" ng-show="!model.wasFoundBool">El mensajero no ha sido encontrado</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="panel panel-default"
-                     ng-show="model.messenger_info">
-                    <div class="panel-body">
-                        <div class="list-group">
-                            <div class="list-group-item">
-                                <strong>Nombre</strong>
+
+                                <div class="panel panel-default"
+                                     ng-show="model.messenger_info">
+                                    <div class="panel-body">
+                                        <div class="list-group">
+                                            <div class="list-group-item">
+                                                <strong>Nombre</strong>
                                 <span class="pull-right text-muted">
                                     <strong><em>{{model.messenger_info.name}}
                                         {{model.messenger_info.lastname}}</em></strong>
                                 </span>
-                            </div>
-                            <div class="list-group-item">
-                                <strong>Email</strong>
+                                            </div>
+                                            <div class="list-group-item">
+                                                <strong>Email</strong>
                                 <span class="pull-right text-muted">
                                     <strong><em>{{model.messenger_info.email}}</em></strong>
                                 </span>
-                            </div>
-                            <div class="list-group-item">
-                                <strong>Estado</strong>
+                                            </div>
+                                            <div class="list-group-item">
+                                                <strong>Estado</strong>
                                 <span class="pull-right text-muted">
                                     <strong>
                                     <em ng-if="!model.messenger_info.admin_confirmation"><span class="label label-danger">Inactivo</span></em>
                                     <em ng-if="!!model.messenger_info.admin_confirmation"><span class="label label-success">Activo</span></em>
                                     </strong>
                                 </span>
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn btn-danger btn-sm"
+                                                ng-click="model.goToMessengerDetails(model.messenger_info._id)">Detalles
+                                        </button>
+                                        <button type="button" class="btn btn-danger btn-sm"
+                                                ng-click="model.deleteMessenger(model.messenger_info._id)">Eliminar
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-danger btn-sm"
-                                ng-click="model.goToMessengerDetails(model.messenger_info._id)">Detalles
-                        </button>
-                        <button type="button" class="btn btn-danger btn-sm"
-                                ng-click="model.deleteMessenger(model.messenger_info._id)">Eliminar
-                        </button>
                     </div>
                 </div>
-                <div class="panel panel-default"
-                     ng-repeat="messenger in model.messengers">
-                    <div class="panel-body">
-                        <div class="list-group innner-block">
-                            <div class="list-group-item">
-                                Nombre
-                                <span class="pull-right text-muted">
-                                    <em>{{messenger.name}} {{messenger.lastname}}</em>
-                                </span>
-                            </div>
-                            <div class="list-group-item">
-                                Email
-                                <span class="pull-right text-muted">
-                                    <em>{{messenger.email}}</em>
-                                </span>
-                            </div>
-                            <div class="list-group-item">
-                                Estado
-                                <span class="pull-right text-muted">
-                                    <strong>
-                                    <em ng-if="!messenger.admin_confirmation"><span class="label label-danger">Inactivo</span></em>
+
+                <div class="panel panel-default" style="margin-bottom: 40px; width:100%">
+                    <div class="panel-heading"><b>Listado de Mensajeros</b></div>
+                    <div class="panel panel-default">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Nombres</th>
+                                <th>Apellidos</th>
+                                <th>Email</th>
+                                <th>Estado</th>
+                                <th>Detalle</th>
+                                <th>Eliminar</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <!--<tr ng-repeat="bin in bins.all">-->
+                            <tr ng-repeat="(key, messenger) in model.messengers" >
+                                <td>{{messenger.name}}</td>
+                                <td>{{messenger.lastname}}</td>
+                                <td>{{messenger.email}}</td>
+                                <td><em ng-if="!messenger.admin_confirmation"><span class="label label-danger">Inactivo</span></em>
                                     <em ng-if="messenger.admin_confirmation"><span class="label label-success">Activo</span></em>
-                                    </strong>
-                                </span>
-                            </div>
-                        </div>
-                        <button type="button" class="btn btn-success btn-sm"
-                                ng-click="model.goToMessengerDetails(messenger._id)">Detalles
-                        </button>
-                        <button type="button" class="btn btn-success btn-sm"
-                                ng-click="model.deleteMessenger(messenger._id)"> Eliminar
-                        </button>
+                                </td>
+                                <td><button type="button" class="btn btn-success btn-sm"
+                                            ng-click="model.goToMessengerDetails(messenger._id)">Detalle
+                                    </button>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-success btn-sm"
+                                            ng-click="model.deleteMessenger(messenger._id)"> Eliminar
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
-                </div>
-                <div class="panel panel-default" ng-show="model.showMoreBool">
-                    <div class="panel-body text-center">
-                        <button type="button" class="btn btn-success btn-sm"
-                                ng-click="model.getMessengers()">Buscar M&aacute;s
-                        </button>
-                    </div>
+                    <paging
+                            class="small paging-block post-title"
+                            page="model.pagingInfo.currentPage"
+                            page-size="model.pagingInfo.pageSize"
+                            total="model.pagingInfo.totalRecords"
+                            adjacent="{{adjacent}}"
+                            dots="{{dots}}"
+                            scroll-top="true"
+                            hide-if-empty="{{hideIfEmpty}}"
+                            ul-class="{{ulClass}}"
+                            active-class="{{activeClass}}"
+                            disabled-class="{{disabledClass}}"
+                            show-prev-next="true"
+                            paging-action="model.getMessengers(page)">
+                    </paging>
                 </div>
             </div>
         </div>

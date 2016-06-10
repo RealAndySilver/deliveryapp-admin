@@ -58,39 +58,56 @@
                         </button>
                     </div>
                 </div>
-                <div class="panel panel-default"
-                     ng-repeat="user in model.users">
-                    <div class="panel-body">
-                        <div class="list-group"
-                             style="cursor:pointer;"
-                             ng-click="model.goToUserDetails(user._id)">
-                            <div class="list-group-item">
-                                Nombre
-                                <span class="pull-right text-muted">
-                                    <em>{{user.name}} {{user.lastname}}</em>
-                                </span>
-                            </div>
-                            <div class="list-group-item">
-                                Email
-                                <span class="pull-right text-muted">
-                                    <em>{{user.email}}</em>
-                                </span>
-                            </div>
-                        </div>
-                        <button type="button" class="btn btn-success btn-sm"
-                                ng-click="model.goToUserDetails(user._id)">Detalles
-                        </button>
-                        <button type="button" class="btn btn-success btn-sm"
-                                ng-click="model.deleteUser(user._id)">Eliminar
-                        </button>
+
+                <div class="panel panel-default" style="margin-bottom: 40px; width:100%">
+                    <div class="panel-heading"><b>Listado de Usuarios</b></div>
+                    <div class="panel panel-default">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Nombres</th>
+                                <th>Apellidos</th>
+                                <th>Email</th>
+                                <th>Total Servicios</th>
+                                <th>Detalle</th>
+                                <th>Eliminar</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <!--<tr ng-repeat="bin in bins.all">-->
+                            <tr ng-repeat="(key, user) in model.users" >
+                                <td>{{user.name}}</td>
+                                <td>{{user.lastname}}</td>
+                                <td>{{user.email}}</td>
+                                <td align="middle">{{user.stats.created_services}}</td>
+                                <td><button type="button" class="btn btn-success btn-sm"
+                                            ng-click="model.goToUserDetails(user._id)">Detalle
+                                </button>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-success btn-sm"
+                                            ng-click="model.deleteUser(user._id)"> Eliminar
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
-                </div>
-                <div class="panel panel-default" ng-show="model.showMoreBool">
-                    <div class="panel-body text-center">
-                        <button type="button" class="btn btn-success btn-sm"
-                                ng-click="model.getUsers()">Buscar M&aacute;s
-                        </button>
-                    </div>
+                    <paging
+                            class="small paging-block post-title"
+                            page="model.pagingInfo.currentPage"
+                            page-size="model.pagingInfo.pageSize"
+                            total="model.pagingInfo.totalRecords"
+                            adjacent="{{adjacent}}"
+                            dots="{{dots}}"
+                            scroll-top="true"
+                            hide-if-empty="{{hideIfEmpty}}"
+                            ul-class="{{ulClass}}"
+                            active-class="{{activeClass}}"
+                            disabled-class="{{disabledClass}}"
+                            show-prev-next="true"
+                            paging-action="model.getUsers(page)">
+                    </paging>
                 </div>
             </div>
         </div>

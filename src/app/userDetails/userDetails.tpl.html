@@ -69,34 +69,48 @@
                     Servicios sin aceptar <i class="pull-right fa"
                                              ng-class="{'fa-plus': !model.availableServicesBool, 'fa-minus': model.availableServicesBool}"></i>
                 </accordion-heading>
-                <div class="panel panel-default"
-                     ng-repeat="item in model.activeServices"
-                     ng-show="item.status == 'available'"
-                     ng-click="model.goToServiceDetails(item._id)">
-                    <div class="panel-body">
-                        <div class="list-group"
-                             style="cursor:pointer;">
-                            <div class="list-group-item">
-                                Pedido
-                                <span class="pull-right text-muted">
-                                    <em>{{item.item_name}}</em>
-                                </span>
-                            </div>
-                            <div class="list-group-item">
-                                Dirección de recogida
-                                <span class="pull-right text-muted">
-                                    <em>{{item.pickup_object.address}}</em>
-                                </span>
-                            </div>
-                            <div class="list-group-item">
-                                Dirección de entrega
-                                <span class="pull-right text-muted">
-                                    <em>{{item.delivery_object.address}}</em>
-                                </span>
-                            </div>
-                        </div>
+                <div class="panel panel-default" style="margin-bottom: 40px; width:100%">
+                    <div class="panel panel-default">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Pedido</th>
+                                <th>Dirección Recogida</th>
+                                <th>Dirección Entrega </th>
+                                <th>Detalle</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <!--<tr ng-repeat="bin in bins.all">-->
+                            <tr ng-repeat="(key, service) in model.activeServices" ng-show="service.status == 'available'">
+                                <td>{{service.item_name}}</td>
+                                <td>{{service.pickup_object.address}}</td>
+                                <td>{{service.delivery_object.address}} </td>
+                                <td><button type="button" class="btn btn-success btn-sm"
+                                            ng-click="model.goToServiceDetails(service._id)">Detalle
+                                </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
+                    <paging
+                            class="small paging-block post-title"
+                            page="customers.pagingInfo.currentPage"
+                            page-size="customers.pagingInfo.pageSize"
+                            total="customers.pagingInfo.totalRecords"
+                            adjacent="{{adjacent}}"
+                            dots="{{dots}}"
+                            scroll-top="true"
+                            hide-if-empty="{{hideIfEmpty}}"
+                            ul-class="{{ulClass}}"
+                            active-class="{{activeClass}}"
+                            disabled-class="{{disabledClass}}"
+                            show-prev-next="true"
+                            paging-action="customers.loadCustomers(page)">
+                    </paging>
                 </div>
+
             </accordion-group>
             <accordion-group ng-show="model.verifyAceptedservices()"
                              is-open="model.acceptedServicesBool">
@@ -104,33 +118,46 @@
                     Servicios aceptados <i class="pull-right fa"
                                            ng-class="{'fa-plus': !model.acceptedServicesBool, 'fa-minus': model.acceptedServicesBool}"></i>
                 </accordion-heading>
-                <div class="panel panel-default"
-                     ng-repeat="item in model.activeServices"
-                     ng-show="item.status != 'available'"
-                     ng-click="model.goToServiceDetails(item._id)">
-                    <div class="panel-body">
-                        <div class="list-group"
-                             style="cursor:pointer;">
-                            <div class="list-group-item">
-                                Pedido
-                                <span class="pull-right text-muted">
-                                    <em>{{item.item_name}}</em>
-                                </span>
-                            </div>
-                            <div class="list-group-item">
-                                Dirección de recogida
-                                <span class="pull-right text-muted">
-                                    <em>{{item.pickup_object.address}}</em>
-                                </span>
-                            </div>
-                            <div class="list-group-item">
-                                Dirección de entrega
-                                <span class="pull-right text-muted">
-                                    <em>{{item.delivery_object.address}}</em>
-                                </span>
-                            </div>
-                        </div>
+                <div class="panel panel-default" style="margin-bottom: 40px; width:100%">
+                    <div class="panel panel-default">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Pedido</th>
+                                <th>Dirección Recogida</th>
+                                <th>Dirección Entrega </th>
+                                <th>Detalle</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <!--<tr ng-repeat="bin in bins.all">-->
+                            <tr ng-repeat="(key, service) in model.activeServices" ng-show="service.status != 'available'">
+                                <td>{{service.item_name}}</td>
+                                <td>{{service.pickup_object.address}}</td>
+                                <td>{{service.delivery_object.address}} </td>
+                                <td><button type="button" class="btn btn-success btn-sm"
+                                            ng-click="model.goToServiceDetails(service._id)">Detalle
+                                </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
+                    <paging
+                            class="small paging-block post-title"
+                            page="customers.pagingInfo.currentPage"
+                            page-size="customers.pagingInfo.pageSize"
+                            total="customers.pagingInfo.totalRecords"
+                            adjacent="{{adjacent}}"
+                            dots="{{dots}}"
+                            scroll-top="true"
+                            hide-if-empty="{{hideIfEmpty}}"
+                            ul-class="{{ulClass}}"
+                            active-class="{{activeClass}}"
+                            disabled-class="{{disabledClass}}"
+                            show-prev-next="true"
+                            paging-action="customers.loadCustomers(page)">
+                    </paging>
                 </div>
             </accordion-group>
             <accordion-group ng-show="model.completedServices.length!=0"
@@ -139,68 +166,46 @@
                     Servicios completados <i class="pull-right fa"
                                              ng-class="{'fa-plus': !model.completedServicesBool, 'fa-minus': model.completedServicesBool}"></i>
                 </accordion-heading>
-                <div class="panel panel-default"
-                     ng-repeat="item in model.completedServices"
-                     ng-show="item.status != 'available'"
-                     ng-click="model.goToServiceDetails(item._id)">
-                    <div class="panel-body">
-                        <div class="list-group"
-                             style="cursor:pointer;">
-                            <div class="list-group-item">
-                                Pedido
-                                <span class="pull-right text-muted">
-                                    <em>{{item.item_name}}</em>
-                                </span>
-                            </div>
-                            <div class="list-group-item">
-                                Dirección de recogida
-                                <span class="pull-right text-muted">
-                                    <em>{{item.pickup_object.address}}</em>
-                                </span>
-                            </div>
-                            <div class="list-group-item">
-                                Dirección de entrega
-                                <span class="pull-right text-muted">
-                                    <em>{{item.delivery_object.address}}</em>
-                                </span>
-                            </div>
-                        </div>
+                <div class="panel panel-default" style="margin-bottom: 40px; width:100%">
+                    <div class="panel panel-default">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Pedido</th>
+                                <th>Dirección Recogida</th>
+                                <th>Dirección Entrega </th>
+                                <th>Detalle</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <!--<tr ng-repeat="bin in bins.all">-->
+                            <tr ng-repeat="(key, service) in model.completedServices">
+                                <td>{{service.item_name}}</td>
+                                <td>{{service.pickup_object.address}}</td>
+                                <td>{{service.delivery_object.address}} </td>
+                                <td><button type="button" class="btn btn-success btn-sm"
+                                            ng-click="model.goToServiceDetails(service._id)">Detalle
+                                </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
-                </div>
-            </accordion-group>
-            <accordion-group ng-show="model.abortedServices.length!=0"
-                             is-open="model.abortedServicesBool">
-                <accordion-heading style="cursor:pointer;">
-                    Servicios abortados <i class="pull-right fa"
-                                           ng-class="{'fa-plus': !model.abortedServicesBool, 'fa-minus': model.abortedServicesBool}"></i>
-                </accordion-heading>
-                <div class="panel panel-default"
-                     ng-repeat="item in model.abortedServices"
-                     ng-show="item.status != 'available'"
-                     ng-click="model.goToServiceDetails(item._id)">
-                    <div class="panel-body">
-                        <div class="list-group"
-                             style="cursor:pointer;">
-                            <div class="list-group-item">
-                                Pedido
-                                <span class="pull-right text-muted">
-                                    <em>{{item.item_name}}</em>
-                                </span>
-                            </div>
-                            <div class="list-group-item">
-                                Dirección de recogida
-                                <span class="pull-right text-muted">
-                                    <em>{{item.pickup_object.address}}</em>
-                                </span>
-                            </div>
-                            <div class="list-group-item">
-                                Dirección de entrega
-                                <span class="pull-right text-muted">
-                                    <em>{{item.delivery_object.address}}</em>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
+                    <paging
+                            class="small paging-block post-title"
+                            page="customers.pagingInfo.currentPage"
+                            page-size="customers.pagingInfo.pageSize"
+                            total="customers.pagingInfo.totalRecords"
+                            adjacent="{{adjacent}}"
+                            dots="{{dots}}"
+                            scroll-top="true"
+                            hide-if-empty="{{hideIfEmpty}}"
+                            ul-class="{{ulClass}}"
+                            active-class="{{activeClass}}"
+                            disabled-class="{{disabledClass}}"
+                            show-prev-next="true"
+                            paging-action="customers.loadCustomers(page)">
+                    </paging>
                 </div>
             </accordion-group>
         </accordion>

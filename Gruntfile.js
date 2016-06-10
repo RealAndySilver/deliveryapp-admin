@@ -90,11 +90,11 @@ module.exports = function(grunt) {
                 'vendor/angular-reverse-geocode/angular-reverse-geocode.js',
                 'vendor/md-date-time/dist/md-date-time.js',
                 'vendor/md-date-time/dist/md-date-time.css',
+                'vendor/angular-paging/dist/paging.min.js',
                 //'vendor/angular-material/angular-material.min.css',
             ],
             css: [
                 'vendor/md-date-time/dist/md-date-time.css',
-                'vendor/angular-material/angular-material.min.css',
             ],
             assets: [
                 'vendor/angular-animate/angular-animate.min.js.map',

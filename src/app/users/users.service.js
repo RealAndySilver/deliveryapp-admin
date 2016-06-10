@@ -15,6 +15,7 @@
 							response: response.data.status,
 							msg: response.data.message|| response.data.error,
 							data: response.data.response,
+							total: response.data.total,
 						});
 					},
 					function error(e) {
