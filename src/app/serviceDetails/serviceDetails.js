@@ -17,11 +17,6 @@
             model.serviceDetails = serviceDetails;
 
             function serviceDetails() {
-                if (model.messengerBool) {
-                    /*AlertsService.loading();*/
-                    
-                }
-
                 DetailsDeliveryItemService.serviceDetails($stateParams.id, function (response) {
 
                     if (model.messengerBool) {

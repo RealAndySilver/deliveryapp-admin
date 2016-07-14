@@ -5,6 +5,7 @@
 		model.acceptedServicesBool = false;
 		model.completedServicesBool = false;
         model.finishLoading = false;
+		model.lastWeekReportInfo={};
 
 		model.getMessenger = function() {
 			/*AlertsService.loading();*/
@@ -26,7 +27,13 @@
 				}
 			});
 		};
-
+		
+		model.getLastWeekReportInfo=function(){
+			MessengerDetailsService.getLastWeekReportInfo($stateParams.id, function(response) {
+				model.lastWeekReportInfo = response.data;
+				model.lastWeekReportInfo.totalToPay=0;
+			});
+		};
 
 		model.goToServiceDetails = function(idObject) {
 			console.log("Entro ",idObject);
@@ -40,6 +47,7 @@
 		function init() {
 
 			model.getMessenger();
+			model.getLastWeekReportInfo();
 
             model.updateStatus = function () {
 
@@ -108,7 +116,6 @@
 				});
 			};
 			model.getFinishedServices();
-			
 
 			model.traslateStatusFunction = function(status) {
 				var traslateStatus = "";

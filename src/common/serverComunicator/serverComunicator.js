@@ -6,7 +6,7 @@
             /*DEV IAMSTUDIO*/
             // var endpoint = "http://192.241.187.135:8080/api_1.0/";
             /*VUELTAP PROD
-            var endpoint = "http://localhost:8080/api_1.0/";*/
+            var endpoint = "http://localhost:8080/api_1.0/";
             /*VUELTAP PROD*/
             var endpoint = "https://vueltap.com:8080/api_1.0/";
 
@@ -314,6 +314,21 @@
                     });
                 };
 
+                model.getLastWeekReportInfo = function (idMessenger) {
+                    return $http({
+                        method: 'GET',
+                        headers: getHeader(),
+                        url: endpoint + 'DeliveryItems/Messenger/LastWeek/'+ idMessenger,
+                    });
+                };
+
+                model.getLastFortnightInfo = function (idUser) {
+                    return $http({
+                        method: 'GET',
+                        headers: getHeader(),
+                        url: endpoint + 'DeliveryItems/User/LastFortnight/'+ idUser,
+                    });
+                };
 
                 model.assingMessenger = function (idItem, messenger_info) {
                     return $http({

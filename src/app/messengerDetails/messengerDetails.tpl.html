@@ -83,9 +83,7 @@
                             </button>
                         </div>
                     </div>
-
                 </form>
-
                 <div class="list-group margin-top-1rem">
                     <div class="list-group-item text-center">
                         <b>Documentos</b>
@@ -155,6 +153,73 @@
 </div>
 
 <div class="row">
+    <div>
+        <div class="panel panel-yellow">
+            <div class="panel-heading">
+                Liquidacion Semanal
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="form-group col-lg-6">
+                        <label for="newName">
+                            Fecha Inicial: {{model.lastWeekReportInfo.filters.startDate| date:'dd/MM/yyyy hh:mma'}}
+                        </label>
+                    </div>
+                    <div class="form-group col-lg-6">
+                        <label for="newLastname">
+                            Fecha Final: {{model.lastWeekReportInfo.filters.endDate| date:'dd/MM/yyyy hh:mma'}}
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-lg-6">
+                        <label for="newName">
+                            Total Servicios: {{model.lastWeekReportInfo.items.length}}
+                        </label>
+                    </div>
+                    <div class="form-group col-lg-6">
+                        <label for="newLastname">
+                            Total a Pagar: {{model.lastWeekReportInfo.totalToPay|currency:"COP$"}}
+                        </label>
+                    </div>
+                </div>
+                <div class="panel panel-default" style="margin-bottom: 40px; width:100%">
+                    <div class="panel panel-default">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Pedido</th>
+                                <th>Usuario</th>
+                                <th>Estado</th>
+                                <th>Valor Servicio</th>
+                                <th>Clasificacion</th>
+                                <th>Detalle</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <!--<tr ng-repeat="bin in bins.all">-->
+                            <tr ng-repeat="(key, service) in model.lastWeekReportInfo.items" >
+                                <td>{{service.item_name}}</td>
+                                <td>{{service.user_info.name}} {{service.user_info.lastname}}</td>
+                                <td>{{model.traslateStatusFunction(service.status)}}</td>
+                                <td ng-init="model.lastWeekReportInfo.totalToPay=model.lastWeekReportInfo.totalToPay+service.service_price">{{service.service_price|currency:"COP$"}}</td>
+                                <td>
+                                    <rating style="margin-top:0" ng-show="service.rate_object" value="service.rate_object.rating" max="5" readonly="true" on-leave="overStar = null"></rating>
+                                </td>
+                                <td><button type="button" class="btn btn-success btn-sm"
+                                            ng-click="model.goToServiceDetails(service._id)">Detalle
+                                </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
     <div class="col-lg-6 col-sm-12 col-lg-offset-3 services-accordion">
         <accordion close-others="true">
             <accordion-group ng-show="model.startedServices.length!=0"
@@ -189,21 +254,6 @@
                             </tbody>
                         </table>
                     </div>
-                    <paging
-                            class="small paging-block post-title"
-                            page="customers.pagingInfo.currentPage"
-                            page-size="customers.pagingInfo.pageSize"
-                            total="customers.pagingInfo.totalRecords"
-                            adjacent="{{adjacent}}"
-                            dots="{{dots}}"
-                            scroll-top="true"
-                            hide-if-empty="{{hideIfEmpty}}"
-                            ul-class="{{ulClass}}"
-                            active-class="{{activeClass}}"
-                            disabled-class="{{disabledClass}}"
-                            show-prev-next="true"
-                            paging-action="customers.loadCustomers(page)">
-                    </paging>
                 </div>
             </accordion-group>
             <accordion-group ng-show="model.finishedServices.length!=0"
@@ -233,7 +283,7 @@
                                 <td>{{model.traslateStatusFunction(service.status)}}</td>
                                 <td>{{service.service_price}}</td>
                                 <td>
-                                    <rating style="margin-top:0" value="service.rate_object.rating" max="5" readonly="true" on-leave="overStar = null"></rating>
+                                    <rating style="margin-top:0" ng-show="service.rate_object" value="service.rate_object.rating" max="5" readonly="true" on-leave="overStar = null"></rating>
                                 </td>
                                 <td><button type="button" class="btn btn-success btn-sm"
                                             ng-click="model.goToServiceDetails(service._id)">Detalle
@@ -261,5 +311,40 @@
                 </div>
             </accordion-group>
         </accordion>
+    </div>
+</div>
+<div class="modal fade billing-container"  id="lastWeekReport" role="dialog">
+    <div class="content clearfix model-dialog" role="document">
+        <div class="panel panel-default" style="margin-bottom: 40px; width:100%">
+            <div class="panel panel-default">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Pedido</th>
+                        <th>Usuario</th>
+                        <th>Estado</th>
+                        <th>Valor Servicio</th>
+                        <th>Clasificacion</th>
+                        <th>Detalle</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!--<tr ng-repeat="bin in bins.all">-->
+                    <tr ng-repeat="(key, service) in model.finishedServices" >
+                        <td>{{service.item_name}}</td>
+                        <td>{{service.user_info.name}} {{service.user_info.lastname}}</td>
+                        <td>{{model.traslateStatusFunction(service.status)}}</td>
+                        <td>{{service.service_price|currency:"COP$"}}</td>
+                        <td>
+                            <rating style="margin-top:0" ng-show="service.rate_object" value="service.rate_object.rating" max="5" readonly="true" on-leave="overStar = null"></rating>
+                        </td>
+                        <td><button type="button" class="btn btn-success btn-sm"
+                                    ng-click="model.goToServiceDetails(service._id)">Detalle
+                        </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
     </div>
 </div>

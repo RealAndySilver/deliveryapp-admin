@@ -6,31 +6,74 @@
 		model.acceptedServicesBool = false;
 		model.completedServicesBool = false;
 		model.abortedServicesBool = false;
+		model.lastFortnightReportInfo = [];
 
+
+		/**
+		 *
+		 * */
+		model.getLastFortnightInfo=function(){
+			UserDetailsService.getLastFortnightInfo($stateParams.id, function(response) {
+				console.log("RESPUESTA FORT ",response);
+				model.lastFortnightReportInfo = response.data;
+				model.lastFortnightReportInfo.totalToCharge=0;
+			});
+		};
+
+		model.getUser = function() {
+			/*console.log("ENTRO A DETALLES", $stateParams.id);*/
+			/*AlertsService.loading();*/
+
+			UserDetailsService.getUser($stateParams.id, function(response) {
+				model.User = response.data;
+
+				/*console.log(model.User);*/
+				/*AlertsService.cancel();*/
+				if (!response.data) {
+					/*AlertsService.showAlert(response.msg, "");*/
+
+				} else if (model.User.length === 0) {
+					/*AlertsService.showAlert("No tienes servicios Activos en este momento", "");*/
+					//$scope.BootstrapLoading.show("No tienes Servicios Activos en este momento", "");
+				}
+			});
+		};
+
+		model.translateStatusToText = function(status) {
+			var traslateStatus = "";
+			if (status == "available") {
+				traslateStatus = "Disponible";
+			} else
+			if (status == "accepted") {
+				traslateStatus = "Aceptado";
+			} else
+			if (status == "in-transit") {
+				traslateStatus = "En tránsito";
+			} else
+			if (status == "returning") {
+				traslateStatus = "Volviendo";
+			} else
+			if (status == "returned") {
+				traslateStatus = "Finalizado";
+			} else
+			if (status == "delivered") {
+				traslateStatus = "Finalizado";
+
+			} else
+			if (status == "aborted") {
+				traslateStatus = "Abortado";
+
+			}
+			return traslateStatus;
+		};
 
 		init();
 
 		function init() {
 
-			model.getUser = function() {
-				/*console.log("ENTRO A DETALLES", $stateParams.id);*/
-				/*AlertsService.loading();*/
-                
-				UserDetailsService.getUser($stateParams.id, function(response) {
-					model.User = response.data;
-                    
-					/*console.log(model.User);*/
-					/*AlertsService.cancel();*/
-					if (!response.data) {
-						/*AlertsService.showAlert(response.msg, "");*/
 
-					} else if (model.User.length === 0) {
-						/*AlertsService.showAlert("No tienes servicios Activos en este momento", "");*/
-                        //$scope.BootstrapLoading.show("No tienes Servicios Activos en este momento", "");
-					}
-				});
-			};
 			model.getUser();
+			model.getLastFortnightInfo();
 
 
 			model.updateProfile = function() {

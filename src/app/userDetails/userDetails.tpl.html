@@ -59,7 +59,72 @@
         </div>
     </div>
 </div>
-
+<div class="row">
+    <div>
+        <div class="panel panel-yellow">
+            <div class="panel-heading">
+                Liquidacion Quincenal de Usuario
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="form-group col-lg-6">
+                        <label for="newName">
+                            Fecha Inicial: {{model.lastFortnightReportInfo.filters.startDate| date:'dd/MM/yyyy hh:mma'}}
+                        </label>
+                    </div>
+                    <div class="form-group col-lg-6">
+                        <label for="newLastname">
+                            Fecha Final: {{model.lastFortnightReportInfo.filters.endDate| date:'dd/MM/yyyy hh:mma'}}
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-lg-6">
+                        <label for="newName">
+                            Total Servicios: {{model.lastFortnightReportInfo.items.length}}
+                        </label>
+                    </div>
+                    <div class="form-group col-lg-6">
+                        <label for="newLastname">
+                            Total a Cobrar: {{model.lastFortnightReportInfo.totalToCharge|currency:"COP$"}}
+                        </label>
+                    </div>
+                </div>
+                <div class="panel panel-default" style="margin-bottom: 40px; width:100%">
+                    <div class="panel panel-default">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Pedido</th>
+                                <th>Usuario</th>
+                                <th>Estado</th>
+                                <th>Valor Servicio</th>
+                                <th>Valor Seguro</th>
+                                <th>Total a Pagar</th>
+                                <th>Detalle</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <!--<tr ng-repeat="bin in bins.all">-->
+                            <tr ng-repeat="(key, service) in model.lastFortnightReportInfo.items" >
+                                <td>{{service.item_name}}</td>
+                                <td>{{service.user_info.name}} {{service.user_info.lastname}}</td>
+                                <td>{{model.translateStatusToText(service.status)}}</td>
+                                <td>{{service.service_price|currency:"COP$"}}</td>
+                                <td>{{service.insurance_price|currency:"COP$"}}</td>
+                                <td ng-init="model.lastFortnightReportInfo.totalToCharge=model.lastFortnightReportInfo.totalToCharge+service.price_to_pay">{{service.price_to_pay|currency:"COP$"}}</td>
+                                <td><button type="button" class="btn btn-success btn-sm"
+                                            ng-click="model.goToServiceDetails(service._id)">Detalle
+                                </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 <div class="row">
     <div class="col-lg-6 col-sm-12 col-lg-offset-3 services-accordion">
         <accordion close-others="true">
