@@ -207,7 +207,13 @@
                     });
                 };
 
-
+                model.activateUser = function (userEmail) {
+                    return $http({
+                        method: 'PUT',
+                        headers: getHeader(),
+                        url: endpoint + 'User' + "/Active/" + userEmail,
+                    });
+                };
 
                 model.getActiveDeliveryItems = function (idUser) {
                     return $http({

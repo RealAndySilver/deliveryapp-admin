@@ -69,6 +69,7 @@
                                 <th>Apellidos</th>
                                 <th>Email</th>
                                 <th>Total Servicios</th>
+                                <th>Activo</th>
                                 <th>Detalle</th>
                                 <th>Eliminar</th>
                             </tr>
@@ -80,6 +81,10 @@
                                 <td>{{user.lastname}}</td>
                                 <td>{{user.email}}</td>
                                 <td align="middle">{{user.stats.created_services}}</td>
+                                <td>
+                                    <em ng-if="user.active"><span>Activo</span></em>
+                                    <em ng-if="!user.active"><span ng-click="model.activateUser(user.email)" class="label label-danger">Activar</span></em>
+                                </td>
                                 <td><button type="button" class="btn btn-success btn-sm"
                                             ng-click="model.goToUserDetails(user._id)">Detalle
                                 </button>

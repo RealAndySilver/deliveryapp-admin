@@ -36,11 +36,24 @@
             };
 
 
+            model.activateUser=function(userEmail){
+                GetUsersService.activateUser(userEmail, function (response) {
+                    console.log(response);
+                    if (response.response) {
+                        $scope.BootstrapModal.show("Usuario Actualizado Exitosamente", "");
+                        model.getUsers(model.pagingInfo.currentPage);
+                    }else{
+                        $scope.BootstrapModal.show("Ocurrio un error actualizando el usuario", "");
+                    }
+
+                });
+            };
+
             model.searchUser = function () {
                 RequestMessengerService.getUserEmail(model.emailSearchUser, function (response) {
                     model.userInformation = response.data;
-                    //console.log(response);
-                    //console.log(response.error);
+                    console.log(response);
+                    console.log(response.error);
                     if (response.response) {
                         model.errorSearch = '';
                     }else if(response.msg  == 'not found'){
