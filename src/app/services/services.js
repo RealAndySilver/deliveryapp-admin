@@ -27,7 +27,8 @@
                 if (!pageSelected){
                     pageSelected=model.pagingInfo.currentPage;
                 }
-                ServicesService.listByType(typeSelected, "", function(response){
+                var recordsToSkip=(pageSelected-1);
+                ServicesService.listByType(typeSelected,recordsToSkip, function(response){
                     if (response.response) {
                         model.currentServices = response.data;
                         updatePagingInfo(pageSelected,response.total);

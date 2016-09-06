@@ -223,12 +223,19 @@
                     });
                 };
 
-                model.getServicesByType = function(type,sort){
+                model.getServicesByType = function(type,skip){
+                    //skip: Number, limit: Number
+                    var limit = SORT_LIMIT;
+                    skip = skip * limit;
+                    var sort = {
+                        'skip': skip,
+                        'limit': limit
+                    };
                     return $http({
                         method : 'GET',
                         headers : getHeader(),
                         url : ( sort ?
-                            endpoint + 'DeliveryItems/Status/'+type+"/"+sort :
+                            endpoint + 'DeliveryItems/Status/'+type+"/"+ JSON.stringify(sort) :
                             endpoint + 'DeliveryItems/Status/'+type
                         )
                     });

@@ -6,8 +6,8 @@
         init();
 
         function init() {
-            model.listByType = function(type,sort,callback){
-                var listPromise  = ServerComunicator.getServicesByType(type,sort);
+            model.listByType = function(type,skip,callback){
+                var listPromise  = ServerComunicator.getServicesByType(type,skip);
                 listPromise.then(function(response){
                     /*console.log(response);*/
                     callback({
